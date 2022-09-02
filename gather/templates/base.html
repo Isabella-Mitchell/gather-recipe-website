@@ -14,8 +14,35 @@
     <title>Gather Recipe Website</title>
 </head>
 <body>
+    <header>
+        <!--top navbar - sourced from materialize-->
+        <nav>
+            <div class="nav-wrapper">
+              <a href="{{ url_for('get_recipes') }}" class="brand-logo">Gather</a>
+              <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="{{ url_for('get_recipes') }}">Dashboard</a></li>
+                <li><a href=#>Find Recipes</a></li>
+                <li><a href=#>Submit a Recipe</a></li>
+                <li><a href=#>Manage Categories</a></li>
+                <li><a href=#>Log In</a></li>
+                <li><a href=#>Sign Up</a></li>
+              </ul>
+            </div>
+          </nav>
+        
+          <!--mobile navbar - sourced from materialize-->
+          <ul class="sidenav" id="mobile-demo">
+            <li><h4>Gather</h4></li>
+            <li><a href=#>Dashboard</a></li>
+            <li><a href=#>Find Recipes</a></li>
+            <li><a href=#>Submit a Recipe</a></li>
+            <li><a href=#>Manage Categories</a></li>
+            <li><a href=#>Log In</a></li>
+            <li><a href=#>Sign Up</a></li>
+          </ul>  
+    </header>
 
-    <h1>I'm part of the base template</h1>
     {% block content %}
     {% endblock %}
 
