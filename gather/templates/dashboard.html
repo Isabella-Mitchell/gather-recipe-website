@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>I'm extending the base template</h2>
+
+    {% for recipe in recipes %}
+        {{recipe.recipe_name}}<br>
+        {{recipe.author}}<br>
+        {{recipe.tags}}<br>
+        {{recipe.ingrediant_list}}<br>
+        {{recipe.equipment_list}}<br>
+        {{recipe.serves}}<br>
+        {{recipe.cuisine}}<br>
+        {{recipe.duration}}<br>
+        {{recipe.difficulty}}<br>
+        {{recipe.instructions}}<br>
+        {{recipe.url}}<br>
+        {{recipe.timestamp}}<br>
+    {%  endfor %}
+
+{% endblock %}
