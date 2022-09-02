@@ -36,7 +36,7 @@ def register():
         # put the new user into 'session' cookie
         session["user"] = request.form.get("user_name").lower()
         flash("Registration Successful!")
-        return redirect(url_for("get_recipes", user_name=session["user"]))
+        return redirect(url_for("get_recipes"))
 
     return render_template("register.html")
 
@@ -56,7 +56,8 @@ def login():
                         session["user"] = request.form.get("user_name").lower()
                         flash("Welcome, {}".format(
                             request.form.get("user_name")))
-                        return redirect(url_for("get_recipes"))
+                        return redirect(url_for(
+                            "dashboard", user_name=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -70,13 +71,13 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/dashboard/<user_name>", methods=["GET", "POST"])
-def profile(user_name):
+# @app.route("/dashboard/<user_name>", methods=["GET", "POST"])
+# def profile(user_name):
         
-    if "user" in session:
-        return render_template("dashboard.html", user_name=session["user"])
+#     if "user" in session:
+#         return render_template("dashboard.html", user_name=session["user"])
 
-    return redirect(url_for("login"))
+#     return redirect(url_for("login"))
 
 
 @app.route("/logout")
