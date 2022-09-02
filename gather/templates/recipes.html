@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gather Recipe Website</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>I'm extending the base template</h2>
+
     {% for recipe in recipes %}
         {{recipe.recipe_name}}<br>
         {{recipe.author}}<br>
@@ -21,6 +17,5 @@
         {{recipe.url}}<br>
         {{recipe.timestamp}}<br>
     {%  endfor %}
-    
-</body>
-</html>
+
+{% endblock %}
