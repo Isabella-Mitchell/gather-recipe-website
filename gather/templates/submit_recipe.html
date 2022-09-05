@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Submit Recipe</h3>
+
+<div class="row">
+    <form class="col s12" method="POST" action="">
+        <!--Recipe Name-->
+        <div class="row">
+            <div class="input-field col s12">
+              <input id="recipe_name" type="text" class="validate" required>
+              <label for="recipe_name">Recipe Name</label>
+            </div>
+        </div>
+        <!--Author (take out)-->
+        <div class="row">
+            <div class="input-field col s12">
+              <input id="author" type="text" class="validate">
+              <label for="author">Author</label>
+            </div>
+        </div>
+        <!--Tags (Make into array)-->
+        <div class="row">
+            <div class="input-field col s12">
+              <input id="tags" type="text" class="validate">
+              <label for="tags">Tags</label>
+            </div>
+        </div>
+        <!--Ingrediant list-->
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="ingrediant_list" class="materialize-textarea"></textarea>
+                <label for="ingrediant_list">Ingrediant List</label>
+            </div>
+        </div>
+        <!--Equipment list-->
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="equipment_list" class="materialize-textarea"></textarea>
+                <label for="equipment_list">Equipment List</label>
+            </div>
+        </div>
+        <!--Instructions-->
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="instructions" class="materialize-textarea"></textarea>
+                <label for="instructions">Instructions</label>
+            </div>
+        </div>
+        <!--Difficulty (and smart select) and duration (and time picker)-->
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <input id="difficulty" type="text" class="validate">
+                <label for="difficulty">Difficulty</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="duration" type="number" class="validate">
+                <label for="duration">Duration</label>
+            </div>
+        </div>
+        <!--Serves (swap for number picker) and Cuisine-->
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <input id="serves" type="text" class="validate">
+                <label for="serves">Serves</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <input id="cuisine" type="text" class="validate">
+                <label for="cuisine">Cuisine</label>
+            </div>
+        </div>
+        <!--URL-->
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="url" type="text" class="validate">
+                <label for="url">URL</label>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -25,7 +25,7 @@
                 <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                 {% if session.user %}
                   <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">Dashboard</a></li>
-                  <li><a href=#>Submit a Recipe</a></li>
+                  <li><a href="{{ url_for('submit_recipe') }}">Submit a Recipe</a></li>
                   <li><a href=#>Manage Categories</a></li>
                   <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
@@ -43,7 +43,7 @@
             <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                 {% if session.user %}
                   <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">Dashboard</a></li>
-                  <li><a href=#>Submit a Recipe</a></li>
+                  <li><a href="{{ url_for('submit_recipe') }}">Submit a Recipe</a></li>
                   <li><a href=#>Manage Categories</a></li>
                   <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
@@ -68,10 +68,12 @@
       </div>
     </section>
     
-    <div class="container">
-      {% block content %}
-      {% endblock %}
-    </div>
+    <main>
+      <div class="container">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </main>
 
     <footer class="page-footer">
       <div class="container">
