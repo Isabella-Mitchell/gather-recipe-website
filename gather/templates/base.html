@@ -39,7 +39,7 @@
         
           <!--mobile navbar - sourced from materialize-->
           <ul class="sidenav" id="mobile-demo">
-            <li><h4>Gather</h4></li>
+            <li><h4 class="mobile-logo">Gather</h4></li>
             <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                 {% if session.user %}
                   <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">Dashboard</a></li>
