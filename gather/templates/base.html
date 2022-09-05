@@ -17,6 +17,7 @@
     <header>
         <!--top navbar - sourced from materialize-->
         <nav>
+          <div class="container">
             <div class="nav-wrapper">
               <a href="{{ url_for('get_recipes') }}" class="brand-logo">Gather</a>
               <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
@@ -33,7 +34,8 @@
                 {% endif %}
               </ul>
             </div>
-          </nav>
+          </div>
+        </nav>
         
           <!--mobile navbar - sourced from materialize-->
           <ul class="sidenav" id="mobile-demo">
@@ -52,20 +54,24 @@
     </header>
 
     <section>
-      <!--flash message-->
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for message in messages %}
-            <div class="row flashes">
-                <h4>{{ message }}</h4>
-            </div>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
+      <div class="container">
+        <!--flash message-->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="row flashes">
+                  <h4>{{ message }}</h4>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
     </section>
     
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
 
     <!-- jQuery script minified -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

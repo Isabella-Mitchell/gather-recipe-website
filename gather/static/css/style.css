@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka+One&family=Kalam:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+
+/* font-family: 'Abril Fatface', cursive;
+font-family: 'Fredoka One', cursive;
+font-family: 'Kalam', cursive;
+font-family: 'Roboto', sans-serif; */
+
+nav {
+    background-color: #93b2da;
+    box-shadow: none;
+}
+
+nav ul a {
+    color: #3e3d43;
+    font-weight: 400;
+}
+
+nav .brand-logo {
+    font-family: 'Fredoka One', cursive;
+    color: #d71a2c;
+}
+
+
+body {
+    background-color: #eceff1;
+    font-family: 'Roboto', sans-serif;
+    color: #3e3d43;
+}
