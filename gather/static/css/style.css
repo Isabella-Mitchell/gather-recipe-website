@@ -5,10 +5,20 @@ font-family: 'Fredoka One', cursive;
 font-family: 'Kalam', cursive;
 font-family: 'Roboto', sans-serif; */
 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
 
 nav {
-    background-color: #93b2da;
+    background-color: #eceff1;
     box-shadow: none;
+    border-bottom: 2px solid #d55d1c;
 }
 
 nav ul a {
@@ -34,3 +44,9 @@ body {
     font-family: 'Fredoka One', cursive;
     text-align: center;
  }
+
+.page-footer {
+    background-color: #eceff1;
+    border-top: 2px solid #93b2da;
+    color:#3e3d43;
+}
