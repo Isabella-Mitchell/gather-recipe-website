@@ -46,17 +46,18 @@ def login():
     if request.method == "POST":
         # check if username exists in db
         existing_user = User.query.filter(User.user_name == 
-        request.form.get("user_name").lower()).all()
+            request.form.get("user_name").lower()).all()
 
         if existing_user:
             print(request.form.get("user_name"))
             # ensure hashed password matches user input
             if check_password_hash(
                     existing_user[0].password, request.form.get("password")):
-                        session["user"] = request.form.get("user_name").lower()
-                        flash("Welcome, {}".format(
-                            request.form.get("user_name")))
-                        return redirect(url_for("get_recipes"))
+                session["user"] = request.form.get("user_name").lower()
+                flash("Welcome, {}".format(
+                    request.form.get("user_name")))
+                return redirect(url_for(
+                    "dashboard", user_name=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -68,6 +69,15 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
+
+    
+@app.route("/dashboard/<user_name>", methods=["GET", "POST"])
+def dashboard(user_name):
+        
+    if "user" in session:
+        return render_template("dashboard.html", user_name=session["user"])
+
+    return redirect(url_for("login"))
 
 
 @app.route("/logout")
