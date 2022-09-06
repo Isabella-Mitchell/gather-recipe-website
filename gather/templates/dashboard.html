@@ -30,7 +30,7 @@
                     <p>{{recipe.timestamp}}</p>
                 </div>
                 <div>
-                    <a class="waves-effect waves-light btn-small">Edit</a>
+                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small">Edit</a>
                     <a class="waves-effect waves-light btn-small">Delete</a>
                 </div>
               </div>

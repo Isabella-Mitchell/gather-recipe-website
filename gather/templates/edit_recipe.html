@@ -1,79 +1,87 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3>Submit Recipe</h3>
+<h3>Edit Recipe</h3>
 
 <div class="row">
-    <form class="col s12" method="POST" action="{{ url_for('submit_recipe') }}">
+    <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
         <!--Recipe Name-->
         <div class="row">
             <div class="input-field col s12">
-              <input id="recipe_name" name="recipe_name" type="text" class="validate" required>
+              <input id="recipe_name" name="recipe_name" value="{{ recipe.recipe_name }}" type="text" class="validate" required>
               <label for="recipe_name">Recipe Name</label>
             </div>
         </div>
         <!--Tags (Make into array)-->
         <div class="row">
             <div class="input-field col s12">
-              <input id="tags" name="tags" type="text" class="validate">
+              <input id="tags" name="tags" type="text" value="{{ recipe.tags }}"class="validate">
               <label for="tags">Tags</label>
             </div>
         </div>
         <!--Ingrediant list (Make into array?)-->
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea"></textarea>
+                <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea">
+                   {{- recipe.ingrediant_list -}}
+                </textarea>
                 <label for="ingrediant_list">Ingrediant List</label>
             </div>
         </div>
         <!--Equipment list (Make into array?)-->
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="equipment_list" name="equipment_list"class="materialize-textarea"></textarea>
+                <textarea id="equipment_list" name="equipment_list"class="materialize-textarea">
+                    {{- recipe.equipment_list -}}
+                </textarea>
                 <label for="equipment_list">Equipment List</label>
             </div>
         </div>
         <!--Instructions-->
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="instructions" name="instructions" class="materialize-textarea"></textarea>
+                <textarea id="instructions" name="instructions" class="materialize-textarea">
+                    {{- recipe.instructions -}}
+                </textarea>
                 <label for="instructions">Instructions</label>
             </div>
         </div>
-        <!--Difficulty (numbver select) and duration (and time picker)-->
+        <!--Difficulty (and smart select) and duration (and time picker)-->
         <div class="row">
             <div class="input-field col s12 m6">
-                <input id="difficulty" name="difficulty" type="text" class="validate">
+                <input id="difficulty" name="difficulty" value="{{ recipe.difficulty }}" type="text" class="validate">
                 <label for="difficulty">Difficulty</label>
             </div>
             <div class="input-field col s12 m6">
-                <input id="duration" name="duration" type="text" class="validate">
+                <input id="duration" name="duration" value="{{ recipe.duration }}" type="text" class="validate">
                 <label for="duration">Duration</label>
             </div>
         </div>
         <!--Serves (swap for number picker) and Cuisine-->
         <div class="row">
             <div class="input-field col s12 m6">
-                <input id="serves" name="serves" type="text" class="validate">
+                <input id="serves" name="serves" value="{{ recipe.serves }}" type="text" class="validate">
                 <label for="serves">Serves</label>
             </div>
             <div class="input-field col s12 m6">
-                <input id="cuisine" name="cuisine" type="text" class="validate">
+                <input id="cuisine" name="cuisine" value="{{ recipe.cuisine }}" type="text" class="validate">
                 <label for="cuisine">Cuisine</label>
             </div>
         </div>
         <!--URL-->
         <div class="row">
             <div class="input-field col s12">
-                <input id="url" name="url" type="text" class="validate">
+                <input id="url" name="url" value="{{ recipe.url }}" type="text" class="validate">
                 <label for="url">URL</label>
             </div>
         </div>
         <!--submit button-->
         <div class="row">
             <div class="col s12">
+                <!--cancel button-->
+                <a href="{{ url_for('dashboard', user_name=session['user']) }}" class="btn-large red text-shadow">Cancel</a>
                 <button class="btn waves-effect waves-light" type="submit">
-                    Submit Recipe
+                    Edit Recipe
                 </button>
             </div>
         </div>
