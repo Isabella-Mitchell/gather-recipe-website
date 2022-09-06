@@ -3,6 +3,40 @@
 
     <h3>{{ user_name }}'s Dashboard</h3>
 
+    <div class="row">
+        {% for recipe in user_recipes %}
+
+            <div class="col s12 m4">
+              <div class="card hoverable">
+                <div class="card-image">
+                  <img src="{{url_for('static', filename='images/small-banana-image.jpg')}}">
+                  <span class="card-title">{{recipe.recipe_name}}</span>
+                  <a class="btn-floating halfway-fab waves-effect waves-light red activator "><i class="fa-solid fa-plus"></i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">{{recipe.recipe_name}}</span>
+                  <p>By {{recipe.author}}. Tags: {{recipe.tags}}</p>
+                  <p>{{recipe.cuisine}}</p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>
+                    <p>{{recipe.ingrediant_list}}</p>
+                    <p>{{recipe.equipment_list}}</p>
+                    <p>{{recipe.serves}}</p>
+                    <p>{{recipe.duration}}</p>
+                    <p>{{recipe.difficulty}}</p>
+                    <p>{{recipe.url}}</p>
+                    <p>{{recipe.instructions}}</p>
+                    <p>{{recipe.timestamp}}</p>
+                </div>
+                <div>
+                    <a class="waves-effect waves-light btn-small">Edit</a>
+                    <a class="waves-effect waves-light btn-small">Delete</a>
+                </div>
+              </div>
+            </div>
+        {%  endfor %}
+    </div>
 
 
 {% endblock %}

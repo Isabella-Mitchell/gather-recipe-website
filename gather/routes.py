@@ -76,7 +76,9 @@ def login():
 def dashboard(user_name):
         
     if "user" in session:
-        return render_template("dashboard.html", user_name=session["user"])
+        user_recipes = mongo.db.recipes.find({"author": session["user"]})
+        return render_template(
+            "dashboard.html", user_name=session["user"], user_recipes=user_recipes)
 
     return redirect(url_for("login"))
 
