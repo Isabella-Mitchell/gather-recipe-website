@@ -105,7 +105,8 @@ def submit_recipe():
             "ingrediant_list": request.form.getlist("ingrediant_list"),
             "equipment_list": request.form.getlist("equipment_list"),
             "serves": request.form.get("serves"),
-            "cuisine": request.form.get("cuisine"),
+            #"cuisine": request.form.get("cuisine"),
+            "cuisine_id": request.form.get("cuisine_id"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
             "instructions": request.form.get("instructions"),
@@ -116,6 +117,7 @@ def submit_recipe():
         flash("Recipe successfully submitted")
         return redirect(url_for("get_recipes"))
 
+    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template("submit_recipe.html")
 
 
@@ -136,7 +138,8 @@ def edit_recipe(recipe_id):
             "ingrediant_list": request.form.getlist("ingrediant_list"),
             "equipment_list": request.form.getlist("equipment_list"),
             "serves": request.form.get("serves"),
-            "cuisine": request.form.get("cuisine"),
+            #"cuisine": request.form.get("cuisine"),
+            "cuisine_id": request.form.get("cuisine_id"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
             "instructions": request.form.get("instructions"),
@@ -146,6 +149,7 @@ def edit_recipe(recipe_id):
         mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
         flash("Recipe successfully edited")
 
+    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template("edit_recipe.html", recipe=recipe)
 
 
@@ -161,3 +165,35 @@ def delete_recipe(recipe_id):
     mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
     flash("Recipe successfully deleted")
     return redirect(url_for("dashboard", user_name=session["user"]))
+
+
+@app.route("/manage_cuisines")
+def manage_cuisines():
+
+    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+    return render_template("cuisines.html", cuisines=cuisines)
+
+
+@app.route("/add_cuisine", methods=["GET", "POST"])
+def add_cuisine():
+
+    if request.method == "POST":
+        # checks if cuisine already exists
+        existing_cuisine = Cuisine.query.filter(
+            Cuisine.cuisine_name == request.form.get(
+                "cuisine_name").lower()).all()
+
+        if existing_cuisine:
+            flash("Cuisine already exists")
+            return redirect(url_for("add_cuisine"))
+    
+        cuisine = Cuisine(cuisine_name=request.form.get("cuisine_name"))
+
+        db.session.add(cuisine)
+        db.session.commit()
+        flash("New cuisine added")
+        return redirect(url_for("manage_cuisines"))
+
+    return render_template("add_cuisine.html")
+
+

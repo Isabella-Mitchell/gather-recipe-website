@@ -19,6 +19,18 @@
               <label for="tags">Tags</label>
             </div>
         </div>
+        <!-- Cuisine selection -->
+        <div class="row">
+            <div class="input-field col s12">
+                <select id="cuisine_id" name="cuisine_id" class="validate" required>
+                    <option value="" disabled selected>Choose Cuisine</option>
+                    {% for cuisine in cuisines %}
+                        <option value="{{ cuisine.id }}">{{ cuisine.cuisine_name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="cuisine_id">Cuisine</label>
+            </div>
+        </div>
         <!--Ingrediant list (Make into array?)-->
         <div class="row">
             <div class="input-field col s12">
