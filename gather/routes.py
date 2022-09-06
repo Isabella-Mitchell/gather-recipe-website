@@ -2,7 +2,7 @@ from flask import flash, render_template, request, redirect, session, url_for
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from gather import app, db, mongo
-from gather.models import Category, User
+from gather.models import Category, Cuisine, User
 import datetime
 
 
@@ -93,6 +93,10 @@ def logout():
 
 @app.route("/submit_recipe", methods=["GET", "POST"])
 def submit_recipe():
+    if "user" not in session:
+        flash("You need to be logged in to submit a recipe")
+        return redirect(url_for("get_recipes"))
+    
     if request.method == "POST":
         recipe = {
             "author": session["user"],
@@ -117,6 +121,13 @@ def submit_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
+
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    
+    if "user" not in session or session["user"] != recipe["author"]:
+        flash("You can only edit your own recipes!")
+        return redirect(url_for("get_recipes"))
+    
     if request.method == "POST":
         edit = {
             "author": session["user"],
@@ -135,12 +146,18 @@ def edit_recipe(recipe_id):
         mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
         flash("Recipe successfully edited")
 
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template("edit_recipe.html", recipe=recipe)
 
 
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
+
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+
+    if "user" not in session or session["user"] != recipe["author"]:
+        flash("You can only delete your own recipes!")
+        return redirect(url_for("get_recipes"))
+
     mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
-    flash("Task successfully deleted")
+    flash("Recipe successfully deleted")
     return redirect(url_for("dashboard", user_name=session["user"]))

@@ -13,6 +13,16 @@ class Category(db.Model):
         return self.category_name
 
 
+class Cuisine(db.Model):
+    # schema for the Cuisine model
+    id = db.Column(db.Integer, primary_key=True)
+    cuisine_name = db.Column(db.String(40), unique=True, nullable=False)
+
+    def __repr__(self):
+        # __repr__ to represent itself in the form of a string
+        return self.cuisine_name
+
+
 class User(db.Model):
     # schema for the User model
     id = db.Column(db.Integer, primary_key=True)
