@@ -4,19 +4,12 @@
 <h3>Submit Recipe</h3>
 
 <div class="row">
-    <form class="col s12" method="POST" action="">
+    <form class="col s12" method="POST" action="{{ url_for('submit_recipe') }}">
         <!--Recipe Name-->
         <div class="row">
             <div class="input-field col s12">
               <input id="recipe_name" name="recipe_name" type="text" class="validate" required>
               <label for="recipe_name">Recipe Name</label>
-            </div>
-        </div>
-        <!--Author (take out)-->
-        <div class="row">
-            <div class="input-field col s12">
-              <input id="author" name="author" type="text" class="validate">
-              <label for="author">Author</label>
             </div>
         </div>
         <!--Tags (Make into array)-->
@@ -26,14 +19,14 @@
               <label for="tags">Tags</label>
             </div>
         </div>
-        <!--Ingrediant list-->
+        <!--Ingrediant list (Make into array?)-->
         <div class="row">
             <div class="input-field col s12">
                 <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea"></textarea>
                 <label for="ingrediant_list">Ingrediant List</label>
             </div>
         </div>
-        <!--Equipment list-->
+        <!--Equipment list (Make into array?)-->
         <div class="row">
             <div class="input-field col s12">
                 <textarea id="equipment_list" name="equipment_list"class="materialize-textarea"></textarea>
@@ -74,6 +67,14 @@
             <div class="input-field col s12">
                 <input id="url" name="url" type="text" class="validate">
                 <label for="url">URL</label>
+            </div>
+        </div>
+        <!--submit button-->
+        <div class="row">
+            <div class="col s12">
+                <button class="btn waves-effect waves-light" type="submit">
+                    Submit Recipe
+                </button>
             </div>
         </div>
     </form>

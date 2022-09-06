@@ -3,6 +3,7 @@ from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from gather import app, db, mongo
 from gather.models import Category, User
+import datetime
 
 
 @app.route("/")
@@ -88,6 +89,25 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/submit_recipe")
+@app.route("/submit_recipe", methods=["GET", "POST"])
 def submit_recipe():
+    if request.method == "POST":
+        recipe = {
+            "author": session["user"],
+            "recipe_name": request.form.get("recipe_name"),
+            "tags": request.form.getlist("tags"),
+            "ingrediant_list": request.form.getlist("ingrediant_list"),
+            "equipment_list": request.form.getlist("equipment_list"),
+            "serves": request.form.get("serves"),
+            "cuisine": request.form.get("cuisine"),
+            "duration": request.form.get("recipe_name"),
+            "difficulty": request.form.get("difficulty"),
+            "instructions": request.form.get("instructions"),
+            "url": request.form.get("url"),
+            "timestamp": datetime.datetime.utcnow()
+        }
+        mongo.db.recipes.insert_one(recipe)
+        flash("Recipe successfully submitted")
+        return redirect(url_for("get_recipes"))
+
     return render_template("submit_recipe.html")
