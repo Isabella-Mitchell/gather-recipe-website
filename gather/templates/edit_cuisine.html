@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3>Edit Cuisine</h3>
+
+    <div class="row">
+        <form class="col s12" method="POST" action="{{ url_for('edit_cuisine', cuisine_id=cuisine.id) }}">
+            <!-- cuisine name -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="cuisine_name" name="cuisine_name" minlength="3" maxlength="25"
+                        type="text" value="{{ cuisine.cuisine_name }}" class="validate" required>
+                    <label for="cuisine_name">Cuisine Name</label>
+                </div>
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a href="{{ url_for('manage_cuisines') }}" class="btn-large red">
+                        Cancel <i class="fas fa-times-circle right"></i>
+                    </a>
+                    <button type="submit" class="btn-large">
+                        Edit Cuisine
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

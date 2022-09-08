@@ -197,3 +197,15 @@ def add_cuisine():
     return render_template("add_cuisine.html")
 
 
+@app.route("/edit_cuisine/<int:cuisine_id>", methods=["GET", "POST"])
+def edit_cuisine(cuisine_id):
+    # if "user" not in session or session["user"] != "admin":
+    #     flash("You must be admin to manage cuisines!")
+    #     return redirect(url_for("get_recipes"))
+    
+    cuisine = Cuisine.query.get_or_404(cuisine_id)
+    if request.method == "POST":
+        cuisine.cuisine_name = request.form.get("cuisine_name")
+        db.session.commit()
+        return redirect(url_for("manage_cuisines"))
+    return render_template("edit_cuisine.html", cuisine=cuisine)
