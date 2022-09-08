@@ -2,7 +2,7 @@ from flask import flash, render_template, request, redirect, session, url_for
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from gather import app, db, mongo
-from gather.models import Category, Cuisine, User
+from gather.models import Cuisine, User
 import datetime
 
 
@@ -102,11 +102,10 @@ def submit_recipe():
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
             "tags": request.form.getlist("tags"),
+            "cuisine_id": request.form.get("cuisine_id"),
             "ingrediant_list": request.form.getlist("ingrediant_list"),
             "equipment_list": request.form.getlist("equipment_list"),
             "serves": request.form.get("serves"),
-            #"cuisine": request.form.get("cuisine"),
-            "cuisine_id": request.form.get("cuisine_id"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
             "instructions": request.form.get("instructions"),
@@ -118,7 +117,7 @@ def submit_recipe():
         return redirect(url_for("get_recipes"))
 
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    return render_template("submit_recipe.html")
+    return render_template("submit_recipe.html", cuisines=cuisines)
 
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
@@ -135,11 +134,10 @@ def edit_recipe(recipe_id):
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
             "tags": request.form.getlist("tags"),
+            "cuisine_id": request.form.get("cuisine_id"),
             "ingrediant_list": request.form.getlist("ingrediant_list"),
             "equipment_list": request.form.getlist("equipment_list"),
             "serves": request.form.get("serves"),
-            #"cuisine": request.form.get("cuisine"),
-            "cuisine_id": request.form.get("cuisine_id"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
             "instructions": request.form.get("instructions"),
@@ -150,7 +148,8 @@ def edit_recipe(recipe_id):
         flash("Recipe successfully edited")
 
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    return render_template("edit_recipe.html", recipe=recipe)
+    return render_template(
+        "edit_recipe.html", recipe=recipe, cuisines=cuisines)
 
 
 @app.route("/delete_recipe/<recipe_id>")
