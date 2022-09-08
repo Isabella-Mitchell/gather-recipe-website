@@ -209,3 +209,16 @@ def edit_cuisine(cuisine_id):
         db.session.commit()
         return redirect(url_for("manage_cuisines"))
     return render_template("edit_cuisine.html", cuisine=cuisine)
+
+
+@app.route("/delete_cuisine/<int:cuisine_id>")
+def delete_cuisine(cuisine_id):
+    # if session["user"] != "admin":
+    #     flash("You must be admin to manage cuisine!")
+    #     return redirect(url_for("get_recipes"))
+
+    cuisine = Cuisine.query.get_or_404(cuisine_id)
+    db.session.delete(cuisine)
+    db.session.commit()
+    # mongo.db.Cuisine.delete_many({"cuisine_id": str(cuisine_id)})
+    return redirect(url_for("manage_cuisines"))
