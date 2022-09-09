@@ -221,3 +221,24 @@ def delete_cuisine(cuisine_id):
     db.session.commit()
     # mongo.db.Cuisine.delete_many({"cuisine_id": str(cuisine_id)})
     return redirect(url_for("manage_cuisines"))
+
+
+@app.route("/add_favourite/<recipe_id>", methods=["GET", "POST"])
+def add_favourite(recipe_id):
+
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    
+    if request.method == "POST":
+	
+        favourite = Favourite(
+            user_name=session["user"],
+            recipe_id=recipe_id
+            )
+
+        db.session.add(favourite)
+        db.session.commit()
+
+        flash("New favourite added")
+        return redirect(url_for("get_recipes"))
+
+    return render_template("add_favourite.html", recipe=recipe)

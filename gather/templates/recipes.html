@@ -30,6 +30,9 @@
                     <p>{{recipe.instructions}}</p>
                     <p>{{recipe.timestamp}}</p>
                   </div>
+                  {% if session.user %}
+                    <a href="{{ url_for('add_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small">Add to favourites</a>
+                  {% endif %}
               </div>
             </div>
           
