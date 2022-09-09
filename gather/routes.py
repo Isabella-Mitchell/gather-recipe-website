@@ -98,13 +98,17 @@ def submit_recipe():
         return redirect(url_for("get_recipes"))
     
     if request.method == "POST":
+
+        ingrediant_list_entry = request.form.get("ingrediant_list")
+        # ingrediant_list_split = ingrediant_list_entry.split(',')
+
         recipe = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
-            "tags": request.form.getlist("tags"),
+            "tags": request.form.get("tags"),
             "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": request.form.getlist("ingrediant_list"),
-            "equipment_list": request.form.getlist("equipment_list"),
+            "ingrediant_list": ingrediant_list_entry,
+            "equipment_list": request.form.get("equipment_list"),
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
@@ -130,13 +134,18 @@ def edit_recipe(recipe_id):
         return redirect(url_for("get_recipes"))
     
     if request.method == "POST":
+
+        # ingrediant_list_entry = 
+        # ingrediant_list_remove_array = ''.join(map(str, ingrediant_list_entry))
+        # ingrediant_list_split = ingrediant_list_remove_array.split(',')
+
         edit = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
-            "tags": request.form.getlist("tags"),
+            "tags": request.form.get("tags"),
             "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": request.form.getlist("ingrediant_list"),
-            "equipment_list": request.form.getlist("equipment_list"),
+            "ingrediant_list": request.form.get("ingrediant_list"),
+            "equipment_list": request.form.get("equipment_list"),
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
@@ -231,7 +240,7 @@ def add_favourite(recipe_id):
     if request.method == "POST":
 	
         favourite = Favourite(
-            user_name=session["user"],
+            user_name=session["user"].lower(),
             recipe_id=recipe_id
             )
 
