@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3>Edit Recipe</h3>
+<h3 class="page-title">Edit Recipe</h3>
 
 <div class="row">
     <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
@@ -80,8 +80,8 @@
                 <label for="serves">Serves</label>
             </div>
             <div class="input-field col s12 m6">
-                <input id="cuisine" name="cuisine" value="{{ recipe.cuisine }}" type="text" class="validate">
-                <label for="cuisine">Cuisine</label>
+                <input id="colour_code" name="colour_code" value="{{ recipe.colour_code }}" type="text" class="validate">
+                <label for="colour_code">Colour</label>
             </div>
         </div>
         <!--URL-->

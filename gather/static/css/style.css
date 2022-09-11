@@ -51,6 +51,11 @@ body {
     color:#3e3d43;
 }
 
+.footer-title {
+    font-family: 'Fredoka One', cursive;
+    color: #d71a2c;
+ }
+
 .card {
     height: 400px;
 }
