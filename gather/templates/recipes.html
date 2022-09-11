@@ -10,7 +10,9 @@
             <div class="col s12 m4">
               <div class="card hoverable">
                 <div class="card-image">
-                  <img src="{{url_for('static', filename='images/blue-swatch.jpg')}}">
+                  <div class="card-image-colour">
+                    <span class="colour-code">{{recipe.colour_code}}</span>
+                  </div>
                   <span class="card-title">{{recipe.recipe_name}}</span>
                   <a class="btn-floating halfway-fab waves-effect waves-light red activator "><i class="fa-solid fa-plus"></i></a>
                 </div>
@@ -39,5 +41,6 @@
           
       {%  endfor %}
     </div>
+
 
 {% endblock %}

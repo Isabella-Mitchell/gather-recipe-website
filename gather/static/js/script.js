@@ -1,3 +1,14 @@
+ function setRecipeColourImage() {
+    let colourCodes = document.getElementsByClassName("colour-code");
+    let parent
+    let colourCode
+    for(let i = 0; i < colourCodes.length; i++) {
+        parent = colourCodes[i].parentNode;
+        colourCode = colourCodes[i].textContent;
+        parent.style.backgroundColor = colourCode;
+    }
+};
+
 $(document).ready(function(){
     $('.sidenav').sidenav();
     $('select').formSelect();
@@ -29,5 +40,7 @@ $(document).ready(function(){
             }
         });
     }
+
+    setRecipeColourImage();
 
 });

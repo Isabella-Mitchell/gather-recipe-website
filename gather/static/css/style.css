@@ -55,6 +55,14 @@ body {
     height: 400px;
 }
 
+.card-image-colour {
+    height: 150px;
+}
+
+.colour-code {
+    display: none;
+}
+
 /*!
 *
 * ColorPick jQuery plugin
