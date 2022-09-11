@@ -260,3 +260,10 @@ def add_favourite(recipe_id):
         return redirect(url_for("get_recipes"))
 
     return render_template("add_favourite.html", recipe=recipe)
+
+
+
+@app.route("/colour_picker")
+#colour picker (test)
+def colour_picker():
+    return render_template("colour_picker.html")
