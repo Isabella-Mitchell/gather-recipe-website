@@ -57,7 +57,10 @@ body {
  }
 
 .card {
-    height: 400px;
+    height: 350px;
+    display: flex; 
+    flex-direction: column; 
+    flex: 1;
 }
 
 .card-image-colour {
@@ -67,6 +70,21 @@ body {
 .colour-code {
     display: none;
 }
+
+.recipe-buttons {
+    margin-top: auto;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.gather-colour, 
+.btn-black:hover {
+    background-color: #d71a2c;
+}
+
+.btn-floating:hover, 
+.btn-black {
+    background-color: #3e3d43;
 
 /*!
 *

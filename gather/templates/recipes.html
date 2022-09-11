@@ -14,11 +14,11 @@
                     <span class="colour-code">{{recipe.colour_code}}</span>
                   </div>
                   <span class="card-title">{{recipe.recipe_name}}</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light red activator "><i class="fa-solid fa-plus"></i></a>
+                  <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator "><i class="fa-solid fa-plus"></i></a>
                 </div>
                 <div class="card-content">
-                    <span class="card-title">{{recipe.recipe_name}}</span>
-                  <p>By {{recipe.author}}. Tags: {{recipe.tags}}</p>
+                  <p>By {{recipe.author}}.</p>
+                  <p>Tags: {{recipe.tags}}</p>
                   <p>Put in cuisine here?</p>
                 </div>
                 <div class="card-reveal">
@@ -32,10 +32,12 @@
                     <p>{{recipe.instructions}}</p>
                     <p>{{recipe.timestamp}}</p>
                   </div>
-                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small">View Recipe</a>
+                  <div class="recipe-buttons">
+                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe"><i class="fa-solid fa-magnifying-glass"></i></a>
                   {% if session.user %}
-                    <a href="{{ url_for('add_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small">Add to favourites</a>
+                    <a href="{{ url_for('add_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe"><i class="fa-regular fa-star"></i></a>
                   {% endif %}
+                </div>
               </div>
             </div>
           

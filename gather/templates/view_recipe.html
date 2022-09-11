@@ -1,17 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="page-title">View Recipe</h3>
+<h3 class="page-title">{{recipe.recipe_name}}</h3>
 
 <button onclick="history.back()">Go Back</button>
 
 <div class="row">
         <div class="col s12">
-                  <span class="card-title">{{recipe.recipe_name}}</span>
-                    <span class="card-title">{{recipe.recipe_name}}</span>
-                  <p>By {{recipe.author}}. Tags: {{recipe.tags}}</p>
-                  <p>Put in cuisine here?</p>
-                    <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>
+                  <p>By {{recipe.author}}.</p>
+                    <p>Tags: {{recipe.tags}}</p>
+                    <p>Put in cuisine here?</p>
                     <p>{{recipe.ingrediant_list}}</p>
                     <p>{{recipe.equipment_list}}</p>
                     <p>{{recipe.serves}}</p>
