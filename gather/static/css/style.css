@@ -50,3 +50,7 @@ body {
     border-top: 2px solid #93b2da;
     color:#3e3d43;
 }
+
+.card {
+    height: 400px;
+}
