@@ -170,6 +170,8 @@ def edit_recipe(recipe_id):
         }
         mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
         flash("Recipe successfully edited")
+        return redirect(url_for(
+                    "dashboard", user_name=session["user"]))
     
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template(
