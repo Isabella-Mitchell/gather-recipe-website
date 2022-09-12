@@ -102,13 +102,13 @@ def submit_recipe():
     if request.method == "POST":
 
         ingrediant_string = request.form.get("ingrediant_list")
-        ingrediant_list = ingrediant_string.split(",")
+        ingrediant_list = ingrediant_string.split(", ")
         equipment_string = request.form.get("equipment_list")
-        equipment_list = equipment_string.split(",")
+        equipment_list = equipment_string.split(", ")
         tags_string = request.form.get("tags")
-        tags_list = tags_string.split(",")
+        tags_list = tags_string.split(", ")
         instructions_string = request.form.get("instructions")
-        instructions_list = instructions_string.split(",")
+        instructions_list = instructions_string.split("\r\n")
 
         recipe = {
             "author": session["user"],
@@ -151,7 +151,7 @@ def edit_recipe(recipe_id):
         tags_string = request.form.get("tags")
         tags_list = tags_string.split(",")
         instructions_string = request.form.get("instructions")
-        instructions_list = instructions_string.split(",")
+        instructions_list = instructions_string.split("\r\n")
 
         edit = {
             "author": session["user"],

@@ -11,9 +11,9 @@
 
 function turnArrayIntoString() {
     let arrayContainers = document.getElementsByClassName("array-string");
-    let array
-    let removeBrackets
-    let string
+    let array;
+    let removeBrackets;
+    let string;
     for(let i = 0; i < arrayContainers.length; i++) {
         array = arrayContainers[i].textContent;  
         removeBrackets = array.replace(/\[|\]/g, '');
@@ -23,12 +23,47 @@ function turnArrayIntoString() {
     }
 };
 
+function turnStepsArrayIntoString() {
+    let arrayContainers = document.getElementsByClassName("array-steps-string");
+    let array;
+    let removeBrackets;
+    let replaceCommas;
+    let removeColons;
+    let string;
+    for(let i = 0; i < arrayContainers.length; i++) {
+        array = arrayContainers[i].textContent;  
+        removeBrackets = array.replace(/\[|\]/g, '');
+        string = removeBrackets.replace(/['"]+/g, ';');
+        replaceCommas = string.replaceAll(";, ;", '\r\n');
+        removeColons = replaceCommas.replaceAll(";", '')
+        console.log(removeColons);
+        arrayContainers[i].textContent = removeColons;
+    }
+};
+
+function turnStringIntoArray() {
+    let stringContainers = document.getElementsByClassName("string-to-array")
+    let string;
+    let removeBrackets;
+    let removeQuotes;
+    let array;
+    for(let i=0; i<stringContainers.length; i++) {
+        string = stringContainers[i].textContent;
+        removeBrackets = string.replace(/\[|\]/g, '');
+        removeQuotes = removeBrackets.replace(/['"]+/g, '')
+        array = removeQuotes.split(", ");
+        console.log(string);
+        console.log(removeBrackets);
+        console.log(removeQuotes);
+        console.log(array);
+    }
+};
+
 $(document).ready(function(){
     $('.sidenav').sidenav();
     $('select').formSelect();
     $('.tooltipped').tooltip();
     $('.modal').modal();
-    $('.chips').chips();
 
     validateMaterializeSelect();
     function validateMaterializeSelect() {
@@ -60,4 +95,6 @@ $(document).ready(function(){
 
     setRecipeColourImage();
     turnArrayIntoString();
+    turnStringIntoArray();
+    turnStepsArrayIntoString()
 });
