@@ -102,25 +102,29 @@ def submit_recipe():
     if request.method == "POST":
 
         ingrediant_string = request.form.get("ingrediant_list")
-        ingrediant_list = ingrediant_string.split(", ")
+        ingrediant_list = ingrediant_string.split(",")
+        ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
         equipment_string = request.form.get("equipment_list")
-        equipment_list = equipment_string.split(", ")
+        equipment_list = equipment_string.split(",")
+        equipment_list_stripped = [i.lstrip() for i in equipment_list]
         tags_string = request.form.get("tags")
-        tags_list = tags_string.split(", ")
+        tags_list = tags_string.split(",")
+        tags_list_stripped = [i.lstrip() for i in tags_list]
         instructions_string = request.form.get("instructions")
         instructions_list = instructions_string.split("\r\n")
+        instructions_list_stripped = [i.lstrip() for i in instructions_list]
 
         recipe = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
-            "tags": tags_list,
+            "tags": tags_list_stripped,
             "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": ingrediant_list,
-            "equipment_list": equipment_list,
+            "ingrediant_list": ingrediant_list_stripped,
+            "equipment_list": equipment_list_stripped,
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
-            "instructions": instructions_list,
+            "instructions": instructions_list_stripped,
             "colour_code": request.form.get("colour_code"),
             "url": request.form.get("url"),
             "timestamp": datetime.datetime.utcnow()
@@ -146,24 +150,28 @@ def edit_recipe(recipe_id):
 
         ingrediant_string = request.form.get("ingrediant_list")
         ingrediant_list = ingrediant_string.split(",")
+        ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
         equipment_string = request.form.get("equipment_list")
         equipment_list = equipment_string.split(",")
+        equipment_list_stripped = [i.lstrip() for i in equipment_list]
         tags_string = request.form.get("tags")
         tags_list = tags_string.split(",")
+        tags_list_stripped = [i.lstrip() for i in tags_list]
         instructions_string = request.form.get("instructions")
         instructions_list = instructions_string.split("\r\n")
+        instructions_list_stripped = [i.lstrip() for i in instructions_list]
 
         edit = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
-            "tags": tags_list,
+            "tags": tags_list_stripped,
             "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": ingrediant_list,
-            "equipment_list": equipment_list,
+            "ingrediant_list": ingrediant_list_stripped,
+            "equipment_list": equipment_list_stripped,
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
-            "instructions": instructions_list,
+            "instructions": instructions_list_stripped,
             "colour_code": request.form.get("colour_code"),
             "url": request.form.get("url"),
             "timestamp": datetime.datetime.utcnow()
