@@ -22,26 +22,28 @@
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>
+                    <h6>Ingrediants</h6>
                     <div class="string-to-array">{{recipe.ingrediant_list}}</div>
+                    <h6>Equipment Needed:</h6>
                     <div class="string-to-array">{{recipe.equipment_list}}</div>
-                    <p>{{recipe.serves}}</p>
-                    <p>{{recipe.duration}}</p>
-                    <p>{{recipe.difficulty}}</p>
-                    <p>{{recipe.url}}</p>
+                    <p>Servings: {{recipe.serves}}</p>
+                    <p>Takes: {{recipe.duration}}</p>
+                    <p>Difficulty Level: {{recipe.difficulty}}</p>
+                    <h6>Steps:</h6>
                     <div class="string-to-array">{{recipe.instructions}}</div>
-                    <p>{{recipe.timestamp}}</p>
+                    <p>URL: {{recipe.url}}</p>
                 </div>
                   <div class="recipe-buttons">
                   {% if session.user|lower == recipe.author|lower %}
                     <a href="{{ url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small">Edit</a>
                     <a href="{{ url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small">Delete</a>
                       <!-- Modal Trigger -->
-                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal{{recipe.id}}">Modal</a>
                     <!-- Modal Structure -->
-                    <div id="modal1" class="modal">
+                    <div id="modal{{recipe.id}}" class="modal">
                       <div class="modal-content">
                         <h4>Modal Header</h4>
-                        <p>A bunch of text</p>
+                        <p>Deleting Recipe {{recipe.id}}}</p>
                       </div>
                       <div class="modal-footer">
                         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
