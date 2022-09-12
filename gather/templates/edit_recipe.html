@@ -15,8 +15,10 @@
         <!--Tags (Make into array)-->
         <div class="row">
             <div class="input-field col s12">
-              <input id="tags" name="tags" type="text" value="{{ recipe.tags }}"class="validate">
-              <label for="tags">Tags</label>
+                <textarea id="tags" name="tags" type="text" class="materialize-textarea array-string">
+                    {{- recipe.tags -}}
+                </textarea>
+                <label for="tags">Tags</label>
             </div>
         </div>
          <!-- category selection -->
@@ -47,7 +49,7 @@
         <!--Equipment list (Make into array?)-->
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="equipment_list" name="equipment_list"class="materialize-textarea">
+                <textarea id="equipment_list" name="equipment_list"class="materialize-textarea array-string">
                     {{- recipe.equipment_list -}}
                 </textarea>
                 <label for="equipment_list">Equipment List</label>
@@ -56,7 +58,7 @@
         <!--Instructions-->
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="instructions" name="instructions" class="materialize-textarea">
+                <textarea id="instructions" name="instructions" class="materialize-textarea array-string">
                     {{- recipe.instructions -}}
                 </textarea>
                 <label for="instructions">Instructions</label>

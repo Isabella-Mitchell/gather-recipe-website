@@ -15,13 +15,13 @@ function turnArrayIntoString() {
     let removeBrackets
     let string
     for(let i = 0; i < arrayContainers.length; i++) {
-        array = arrayContainers[i].textContent;
+        array = arrayContainers[i].textContent;  
         removeBrackets = array.replace(/\[|\]/g, '');
         string = removeBrackets.replace(/['"]+/g, '')
         console.log(string);
         arrayContainers[i].textContent = string
     }
-}
+};
 
 $(document).ready(function(){
     $('.sidenav').sidenav();

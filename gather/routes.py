@@ -103,18 +103,25 @@ def submit_recipe():
 
         ingrediant_string = request.form.get("ingrediant_list")
         ingrediant_list = ingrediant_string.split(",")
+        equipment_string = request.form.get("equipment_list")
+        equipment_list = equipment_string.split(",")
+        tags_string = request.form.get("tags")
+        tags_list = tags_string.split(",")
+        instructions_string = request.form.get("instructions")
+        instructions_list = instructions_string.split(",")
 
         recipe = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
-            "tags": request.form.get("tags"),
+            "tags": tags_list,
             "cuisine_id": request.form.get("cuisine_id"),
             "ingrediant_list": ingrediant_list,
-            "equipment_list": request.form.get("equipment_list"),
+            "equipment_list": equipment_list,
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
-            "instructions": request.form.get("instructions"),
+            "instructions": instructions_list,
+            "colour_code": request.form.get("colour_code"),
             "url": request.form.get("url"),
             "timestamp": datetime.datetime.utcnow()
         }
@@ -139,18 +146,25 @@ def edit_recipe(recipe_id):
 
         ingrediant_string = request.form.get("ingrediant_list")
         ingrediant_list = ingrediant_string.split(",")
+        equipment_string = request.form.get("equipment_list")
+        equipment_list = equipment_string.split(",")
+        tags_string = request.form.get("tags")
+        tags_list = tags_string.split(",")
+        instructions_string = request.form.get("instructions")
+        instructions_list = instructions_string.split(",")
 
         edit = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
-            "tags": request.form.get("tags"),
+            "tags": tags_list,
             "cuisine_id": request.form.get("cuisine_id"),
             "ingrediant_list": ingrediant_list,
-            "equipment_list": request.form.get("equipment_list"),
+            "equipment_list": equipment_list,
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
-            "instructions": request.form.get("instructions"),
+            "instructions": instructions_list,
+            "colour_code": request.form.get("colour_code"),
             "url": request.form.get("url"),
             "timestamp": datetime.datetime.utcnow()
         }
