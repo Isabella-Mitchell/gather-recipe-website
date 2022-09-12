@@ -9,6 +9,7 @@
     }
 };
 
+// Reformate to include following function with if else statement
 function turnArrayIntoString() {
     let arrayContainers = document.getElementsByClassName("array-string");
     let array;
@@ -23,6 +24,7 @@ function turnArrayIntoString() {
     }
 };
 
+// Reformate to include following function with if else statement
 function turnStepsArrayIntoString() {
     let arrayContainers = document.getElementsByClassName("array-steps-string");
     let array;
@@ -41,6 +43,25 @@ function turnStepsArrayIntoString() {
     }
 };
 
+function makeUL(array) {
+    // Create the list element:
+    let list = document.createElement('ul');
+
+    for (let i = 0; i < array.length; i++) {
+        // Create the list item:
+        let item = document.createElement('li');
+
+        // Set its contents:
+        item.appendChild(document.createTextNode(array[i]));
+
+        // Add it to the list:
+        list.appendChild(item);
+    }
+
+    // Finally, return the constructed list:
+    return list;
+}
+
 function turnStringIntoArray() {
     let stringContainers = document.getElementsByClassName("string-to-array")
     let string;
@@ -52,12 +73,12 @@ function turnStringIntoArray() {
         removeBrackets = string.replace(/\[|\]/g, '');
         removeQuotes = removeBrackets.replace(/['"]+/g, '')
         array = removeQuotes.split(", ");
-        console.log(string);
-        console.log(removeBrackets);
-        console.log(removeQuotes);
-        console.log(array);
+        // Add the contents
+        stringContainers[i].textContent = ""
+        stringContainers[i].appendChild(makeUL(array));
     }
 };
+
 
 $(document).ready(function(){
     $('.sidenav').sidenav();

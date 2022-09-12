@@ -17,18 +17,18 @@
                 </div>
                 <div class="card-content">
                   <p>By {{recipe.author}}.</p>
-                  <p class="string-to-array">Tags: {{recipe.tags}}</p>
+                  <div class="array-string">Tags: {{recipe.tags}}</div>
                   <p>Put in cuisine here?</p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>
-                    <p>{{recipe.ingrediant_list}}</p>
-                    <p>{{recipe.equipment_list}}</p>
+                    <div class="string-to-array">{{recipe.ingrediant_list}}</div>
+                    <div class="string-to-array">{{recipe.equipment_list}}</div>
                     <p>{{recipe.serves}}</p>
                     <p>{{recipe.duration}}</p>
                     <p>{{recipe.difficulty}}</p>
                     <p>{{recipe.url}}</p>
-                    <p>{{recipe.instructions}}</p>
+                    <div class="string-to-array">{{recipe.instructions}}</div>
                     <p>{{recipe.timestamp}}</p>
                 </div>
                   <div class="recipe-buttons">
