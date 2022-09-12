@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from gather import app, db, mongo
 from gather.models import Cuisine, User, Favourite
 import datetime
+import re
 
 
 @app.route("/")
@@ -78,7 +79,8 @@ def dashboard(user_name):
     if "user" in session:
         user_recipes = mongo.db.recipes.find({"author": session["user"]})
         return render_template(
-            "dashboard.html", user_name=session["user"], user_recipes=user_recipes)
+            "dashboard.html", user_name=session["user"], 
+            user_recipes=user_recipes)
 
     return redirect(url_for("login"))
 
@@ -99,15 +101,15 @@ def submit_recipe():
     
     if request.method == "POST":
 
-        ingrediant_list_entry = request.form.get("ingrediant_list")
-        # ingrediant_list_split = ingrediant_list_entry.split(',')
+        ingrediant_string = request.form.get("ingrediant_list")
+        ingrediant_list = ingrediant_string.split(",")
 
         recipe = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
             "tags": request.form.get("tags"),
             "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": ingrediant_list_entry,
+            "ingrediant_list": ingrediant_list,
             "equipment_list": request.form.get("equipment_list"),
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
@@ -135,16 +137,15 @@ def edit_recipe(recipe_id):
     
     if request.method == "POST":
 
-        # ingrediant_list_entry = 
-        # ingrediant_list_remove_array = ''.join(map(str, ingrediant_list_entry))
-        # ingrediant_list_split = ingrediant_list_remove_array.split(',')
+        ingrediant_string = request.form.get("ingrediant_list")
+        ingrediant_list = ingrediant_string.split(",")
 
         edit = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
             "tags": request.form.get("tags"),
             "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": request.form.get("ingrediant_list"),
+            "ingrediant_list": ingrediant_list,
             "equipment_list": request.form.get("equipment_list"),
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
@@ -155,7 +156,7 @@ def edit_recipe(recipe_id):
         }
         mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
         flash("Recipe successfully edited")
-
+    
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template(
         "edit_recipe.html", recipe=recipe, cuisines=cuisines)

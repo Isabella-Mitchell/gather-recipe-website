@@ -9,10 +9,26 @@
     }
 };
 
+function turnArrayIntoString() {
+    let arrayContainers = document.getElementsByClassName("array-string");
+    let array
+    let removeBrackets
+    let string
+    for(let i = 0; i < arrayContainers.length; i++) {
+        array = arrayContainers[i].textContent;
+        removeBrackets = array.replace(/\[|\]/g, '');
+        string = removeBrackets.replace(/['"]+/g, '')
+        console.log(string);
+        arrayContainers[i].textContent = string
+    }
+}
+
 $(document).ready(function(){
     $('.sidenav').sidenav();
     $('select').formSelect();
     $('.tooltipped').tooltip();
+    $('.modal').modal();
+    $('.chips').chips();
 
     validateMaterializeSelect();
     function validateMaterializeSelect() {
@@ -43,5 +59,5 @@ $(document).ready(function(){
     }
 
     setRecipeColourImage();
-
+    turnArrayIntoString();
 });
