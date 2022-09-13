@@ -34,7 +34,7 @@
         <!--Ingrediant list (Make into array?)-->
         <div class="row">
             <div class="input-field col s12">
-                <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea"></textarea>
+                <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea" placeholder="Use a comma to seperate items. E.g. 50g flour, 50g butter, ..."></textarea>
                 <label for="ingrediant_list">Ingrediant List</label>
             </div>
         </div>
@@ -59,15 +59,17 @@
                 <label for="difficulty">Difficulty</label>
             </div>
             <div class="input-field col s12 m6">
-                <input id="duration" name="duration" type="text" class="validate">
+                <input id="duration" name="duration" type="text" class="validate" placeholder="e.g. 1 hour 30 mins">
                 <label for="duration">Duration</label>
             </div>
         </div>
         <!--Serves (swap for number picker) and colour picker-->
         <div class="row">
-            <div class="input-field col s12 m6">
-                <input id="serves" name="serves" type="text" class="validate">
+            <div class="col s12 m6">
                 <label for="serves">Serves</label>
+                <p class="range-field">
+                    <input id="serves" name="serves" type="range" id="test5" min="0" max="12" class="validate"/>
+                </p>
             </div>
             <div class="input-field col s12 m6">
                 <input id="colour_code" name="colour_code" type="text" class="validate">

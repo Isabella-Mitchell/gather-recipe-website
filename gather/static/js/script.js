@@ -38,6 +38,9 @@ function turnStepsArrayIntoString() {
         string = removeBrackets.replace(/['"]+/g, ';');
         replaceCommas = string.replaceAll(";, ;", '\r\n');
         removeColons = replaceCommas.replaceAll(";", '')
+        console.log(removeBrackets);
+        console.log(string);
+        console.log(replaceCommas);
         console.log(removeColons);
         arrayContainers[i].textContent = removeColons;
     }
@@ -70,6 +73,7 @@ function turnStringIntoArray() {
     let array;
     for(let i=0; i<stringContainers.length; i++) {
         string = stringContainers[i].textContent;
+        console.log(string)
         removeBrackets = string.replace(/\[|\]/g, '');
         removeQuotes = removeBrackets.replace(/['"]+/g, '')
         array = removeQuotes.split(", ");
@@ -78,6 +82,24 @@ function turnStringIntoArray() {
         stringContainers[i].appendChild(makeUL(array));
     }
 };
+
+function turnStepsStringIntoArray() {
+    let stringContainers = document.getElementsByClassName("steps-string-to-array")
+    let string;
+    let removeBrackets;
+    let removeQuotes;
+    let array;
+    for(let i=0; i<stringContainers.length; i++) {
+        string = stringContainers[i].textContent;
+        console.log(string)
+        removeBrackets = string.replace(/\[|\]/g, '');
+        array = removeBrackets.split("', '");
+        // Add the contents
+        stringContainers[i].textContent = ""
+        stringContainers[i].appendChild(makeUL(array));
+    }
+};
+
 
 
 $(document).ready(function(){
@@ -117,5 +139,6 @@ $(document).ready(function(){
     setRecipeColourImage();
     turnArrayIntoString();
     turnStringIntoArray();
-    turnStepsArrayIntoString()
+    turnStepsArrayIntoString();
+    turnStepsStringIntoArray();
 });

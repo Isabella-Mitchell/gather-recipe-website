@@ -18,7 +18,7 @@
             <p>Takes: {{recipe.duration}}</p>
             <p>Difficulty Level: {{recipe.difficulty}}</p>
             <h6>Steps:</h6>
-            <div class="string-to-array">{{recipe.instructions}}</div>
+            <div class="steps-string-to-array">{{recipe.instructions}}</div>
             <p>URL: {{recipe.url}}</p>
             {% if session.user|lower == recipe.author|lower %}
               <a href="{{ url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small">Edit</a>
