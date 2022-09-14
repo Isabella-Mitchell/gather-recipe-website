@@ -19,7 +19,6 @@ function turnArrayIntoString() {
         array = arrayContainers[i].textContent;  
         removeBrackets = array.replace(/\[|\]/g, '');
         string = removeBrackets.replace(/['"]+/g, '')
-        console.log(string);
         arrayContainers[i].textContent = string
     }
 };
@@ -38,10 +37,6 @@ function turnStepsArrayIntoString() {
         string = removeBrackets.replace(/['"]+/g, ';');
         replaceCommas = string.replaceAll(";, ;", '\r\n');
         removeColons = replaceCommas.replaceAll(";", '')
-        console.log(removeBrackets);
-        console.log(string);
-        console.log(replaceCommas);
-        console.log(removeColons);
         arrayContainers[i].textContent = removeColons;
     }
 };
@@ -92,7 +87,6 @@ function turnStringIntoArray() {
     let array;
     for(let i=0; i<stringContainers.length; i++) {
         string = stringContainers[i].textContent;
-        console.log(string)
         removeBrackets = string.replace(/\[|\]/g, '');
         removeQuotes = removeBrackets.replace(/['"]+/g, '')
         array = removeQuotes.split(", ");
@@ -110,11 +104,8 @@ function turnStepsStringIntoArray() {
     let array;
     for(let i=0; i<stringContainers.length; i++) {
         string = stringContainers[i].textContent;
-        console.log(string)
         removeBrackets = string.replace(/\[|\]/g, '');
-        console.log(removeBrackets);
         removeQuotes = removeBrackets.slice(1, -1)
-        console.log(removeQuotes);
         array = removeQuotes.split("', '");
         // Add the contents
         stringContainers[i].textContent = ""
@@ -128,8 +119,6 @@ function colourSwatch() {
         let colour = selected[2];
         let colourCode = selected[2].textContent;
         let colourTextNode = colour.children[0];
-        console.log(colourCode);
-        console.log(colourTextNode);
         let newSwatch = document.createElement("span");
         newSwatch.id = ("swatch");
         newSwatch.style.backgroundColor = colourCode;
@@ -183,7 +172,6 @@ $(document).ready(function(){
     $('#ingrediant_list').keypress(function (e) {
         if (e.which == 13) {
             e.preventDefault();
-            console.log("button pressed")
         }
     });
 });

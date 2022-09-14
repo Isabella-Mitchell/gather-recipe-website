@@ -4,8 +4,9 @@
     <h3 class="page-title">Add Cuisine</h3>
 
     <div class="row">
-        <form class="col s12" method="POST" action="{{ url_for('add_cuisine') }}">
-            <!-- category name -->
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('add_cuisine') }}">
+            <div class="class-panel">
+            <!-- cuisine name -->
             <div class="row">
                 <div class="input-field col s12">
                     <input id="cuisine_name" name="cuisine_name" minlength="3" maxlength="25"
@@ -16,11 +17,12 @@
             <!-- submit button -->
             <div class="row">
                 <div class="col s12 center-align">
-                    <button type="submit" class="btn-large">
+                    <button type="submit" class="btn-large waves-effect waves-light full-width gather-colour">
                         Add Cuisine
                     </button>
                 </div>
             </div>
+        </div>
         </form>
     </div>
 

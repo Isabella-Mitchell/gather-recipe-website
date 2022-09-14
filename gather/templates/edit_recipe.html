@@ -4,7 +4,8 @@
 <h3 class="page-title">Edit Recipe</h3>
 
 <div class="row">
-    <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+        <div class="card-panel">
         <!--Recipe Name-->
         <div class="row">
             <div class="input-field col s12">
@@ -98,13 +99,14 @@
         </div>
         <!--submit button-->
         <div class="row">
-            <div class="col s12">
+            <div class="col s12 recipe-buttons">
                 <!--cancel button-->
-                <a href="{{ url_for('dashboard', user_name=session['user']) }}" class="btn-large red text-shadow">Cancel</a>
-                <button class="btn waves-effect waves-light" type="submit">
-                    Edit Recipe
+                <a href="{{ url_for('dashboard', user_name=session['user']) }}" class="btn waves-effect waves-light btn-black">Cancel  <i class="fa-solid fa-xmark"></i></a>
+                <button class="btn waves-effect waves-light gather-colour" type="submit">
+                    Edit Recipe  <i class="fa-solid fa-pen-to-square"></i>
                 </button>
             </div>
+        </div>
         </div>
     </form>
 </div>

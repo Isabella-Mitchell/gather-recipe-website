@@ -4,7 +4,8 @@
     <h3 class="page-title">Edit Cuisine</h3>
 
     <div class="row">
-        <form class="col s12" method="POST" action="{{ url_for('edit_cuisine', cuisine_id=cuisine.id) }}">
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('edit_cuisine', cuisine_id=cuisine.id) }}">
+            <div class="card-panel">
             <!-- cuisine name -->
             <div class="row">
                 <div class="input-field col s12">
@@ -16,14 +17,15 @@
             <!-- submit button -->
             <div class="row">
                 <div class="col s12 center-align">
-                    <a href="{{ url_for('manage_cuisines') }}" class="btn-large red">
-                        Cancel <i class="fas fa-times-circle right"></i>
+                    <a href="{{ url_for('manage_cuisines') }}" class="btn-large waves-effect waves-light btn-black">
+                        Cancel <i class="fa-solid fa-xmark"></i></i>
                     </a>
-                    <button type="submit" class="btn-large">
-                        Edit Cuisine
+                    <button type="submit" class="btn-large waves-effect waves-light gather-colour">
+                        Edit Cuisine <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                 </div>
             </div>
+        </div>
         </form>
     </div>
 
