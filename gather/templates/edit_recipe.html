@@ -30,7 +30,7 @@
             <!--Ingrediant list (Saved as an array on Mongo DB)-->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea array-string">
+                    <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea array-string" required>
                    {{- recipe.ingrediant_list -}}
 
                     </textarea>
@@ -40,7 +40,7 @@
             <!--Instructions/ Steps (Saved as an array on Mongo DB)-->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="instructions" name="instructions" class="materialize-textarea array-steps-string">
+                    <textarea id="instructions" name="instructions" class="materialize-textarea array-steps-string" required>
                     {{- recipe.instructions -}}
 
                     </textarea>

@@ -1,3 +1,8 @@
+ //Functions
+
+/**
+ * Sets the background colour of the recipe card image based on the recipe's colour code 
+ * */
  function setRecipeColourImage() {
     let colourCodes = document.getElementsByClassName("colour-code");
     let parent
@@ -9,7 +14,11 @@
     }
 };
 
-// Reformate to include following function with if else statement
+/**
+ * Used in Edit Recipe form. Takes data stored as an array in MongoDB and presents it as a string.
+ * Uses , to seperate list items
+ * TO DO - Refactor array/ string functions. Or change to use JSON
+ * */
 function turnArrayIntoString() {
     let arrayContainers = document.getElementsByClassName("array-string");
     let array;
@@ -23,7 +32,11 @@ function turnArrayIntoString() {
     }
 };
 
-// Reformate to include following function with if else statement
+/**
+ * Used in Edit Recipe form. Takes instructions data stored as an array in MongoDB and presents it as a string.
+ * Uses \r\n to seperate steps
+ * TO DO - Refactor array/ string functions. Or change to use JSON
+ * */
 function turnStepsArrayIntoString() {
     let arrayContainers = document.getElementsByClassName("array-steps-string");
     let array;
@@ -41,17 +54,19 @@ function turnStepsArrayIntoString() {
     }
 };
 
+
+/**
+ * Makes an Ul out of array passed into the function
+ * returns the list
+ * */
 function makeUL(array) {
     // Create the list element:
     let list = document.createElement('ul');
-
     for (let i = 0; i < array.length; i++) {
         // Create the list item:
         let item = document.createElement('li');
-
         // Set its contents:
         item.appendChild(document.createTextNode(array[i]));
-
         // Add it to the list:
         list.appendChild(item);
     }
@@ -60,25 +75,33 @@ function makeUL(array) {
     return list;
 }
 
+/**
+ * Makes an Ol out of array passed into the function
+ * returns the list
+ * */
 function makeOL(array) {
     // Create the list element:
     let list = document.createElement('ol');
-
     for (let i = 0; i < array.length; i++) {
         // Create the list item:
         let item = document.createElement('li');
-
         // Set its contents:
         item.appendChild(document.createTextNode(array[i]));
-
         // Add it to the list:
         list.appendChild(item);
     }
-
     // Finally, return the constructed list:
     return list;
 }
 
+
+/**
+ * Used on Find Recipes, Dashboard and View Recipes. 
+ * Takes data stored as an array in MongoDB, removes formatting and turns it into an JS array.
+ * Uses , to seperate list items
+ * Calls makeUL function to show array as an unordered list
+ * TO DO - Refactor array/ string functions. Or change to use JSON
+ * */
 function turnStringIntoArray() {
     let stringContainers = document.getElementsByClassName("string-to-array")
     let string;
@@ -96,6 +119,13 @@ function turnStringIntoArray() {
     }
 };
 
+/**
+ * Used on Find Recipes, Dashboard and View Recipes. 
+ * Takes data stored as an array in MongoDB, removes formatting and turns it into an JS array.
+ * Uses ', ' to seperate steps
+ * Calls makeOIL function to show array as an ordered list
+ * TO DO - Refactor array/ string functions. Or change to use JSON
+ * */
 function turnStepsStringIntoArray() {
     let stringContainers = document.getElementsByClassName("steps-string-to-array")
     let string;
@@ -105,6 +135,7 @@ function turnStepsStringIntoArray() {
     for(let i=0; i<stringContainers.length; i++) {
         string = stringContainers[i].textContent;
         removeBrackets = string.replace(/\[|\]/g, '');
+        // removes outer quotes that still appear
         removeQuotes = removeBrackets.slice(1, -1)
         array = removeQuotes.split("', '");
         // Add the contents
@@ -113,8 +144,12 @@ function turnStepsStringIntoArray() {
     }
 };
 
+/**
+ * Used in Edit Recipe form. Shows colour swatch of selected colour in drop down.
+ * */
 function colourSwatch() {
     let selected = document.getElementsByClassName("selected");
+    //stops error showing on pages that do not contain edit form
     if(selected.length > 0){
         let colour = selected[2];
         let colourCode = selected[2].textContent;
@@ -169,6 +204,7 @@ $(document).ready(function(){
     turnStepsStringIntoArray();
     colourSwatch();
 
+    //To stop people entering instead of using commas.
     $('#ingrediant_list').keypress(function (e) {
         if (e.which == 13) {
             e.preventDefault();

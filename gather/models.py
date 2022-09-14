@@ -2,11 +2,9 @@ from gather import db
 
 
 class Category(db.Model):
-    # schema for the Category model
+    # schema for the Category model - to be removed
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(40), unique=True, nullable=False)
-    # recipes = db.relationship(
-    # "recipe", backref="category", cascade="all, delete", lazy=True)
 
     def __repr__(self):
         # __repr__ to represent itself in the form of a string
@@ -39,7 +37,9 @@ class User(db.Model):
 
 
 class Favourite(db.Model):
-    # schema for the Favourite model. want to make user_name into foreign key
+    # schema for the Favourite model. wanted to make user_name into foreign key but this caused bug. 
+    # This hasn't pulled into Heroku properly yet
+    # Also could set up cascade delete so if user is deleted, so are all favourites
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(50), nullable=False)
     recipe_id = db.Column(db.String(50), nullable=False)
@@ -49,16 +49,3 @@ class Favourite(db.Model):
         return "#{0} - User Name: {1} | Recipe ID: {2}".format(
             self.id, self.user_name, self.recipe_id
         )
-
-
-    # favourites = db.relationship(
-    #     "Favourite", backref="user", cascade="all, delete", lazy=True)
-# user_name = db.Column(
-#        db.Integer, db.ForeignKey("user.user_name", ondelete="CASCADE"), nullable=False)
-# db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False)
-# class Favourites(db.Model):
-    # schema for the Favourites model
-    # id = db.Column(db.Integer, primary_key=True)
-    # category_id = db.Column(db.Integer, db.ForeignKey(), nullable=False)
-    # in postgres task field - one to many relationship. 
-    # Walkthrough > creating the database

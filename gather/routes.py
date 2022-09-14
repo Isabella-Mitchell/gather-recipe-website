@@ -103,7 +103,10 @@ def submit_recipe():
     
     if request.method == "POST":
 
+        # refactor to reduce repition
+        # takes user data and turns it into an array to be stored in MongoDB
         ingrediant_string = request.form.get("ingrediant_list")
+        # in case user C+V's in instructions
         ingrediant_remove_new_lines = ingrediant_string.replace("\r\n", ",")
         ingrediant_list = ingrediant_remove_new_lines.split(",")
         ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
@@ -147,7 +150,10 @@ def edit_recipe(recipe_id):
     
     if request.method == "POST":
 
+        # refactor to reduce repition
+        # takes user data and turns it into an array to be stored in MongoDB
         ingrediant_string = request.form.get("ingrediant_list")
+        # in case user C+V's in instructions
         ingrediant_remove_new_lines = ingrediant_string.replace("\r\n", "")
         ingrediant_list = ingrediant_remove_new_lines.split(",")
         ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
@@ -281,10 +287,3 @@ def add_favourite(recipe_id):
         return redirect(url_for("get_recipes"))
 
     return render_template("add_favourite.html", recipe=recipe)
-
-
-
-@app.route("/colour_picker")
-#colour picker (test)
-def colour_picker():
-    return render_template("colour_picker.html")
