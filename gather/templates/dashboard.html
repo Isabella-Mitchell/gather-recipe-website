@@ -3,6 +3,14 @@
 
     <h3 class="page-title">{{ user_name }}'s dashboard</h3>
 
+    
+
+    <div class="row">
+      <div class="col s12 center-align">
+        <a href="{{ url_for('submit_recipe') }}" class="btn-large gather-colour">Submit a Recipe  <i class="fa-solid fa-plus"></i></a>
+      </div>
+    </div>
+
     <div class="row">
         {% for recipe in user_recipes %}
 
@@ -25,7 +33,7 @@
                   {% endfor %}
                 </div>
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>
+                    <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
                     <p>Servings: {{recipe.serves}}</p>
                     <p>Takes: {{recipe.duration}}</p>
                     <p>Difficulty Level: {{recipe.difficulty}}</p>

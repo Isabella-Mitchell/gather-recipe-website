@@ -24,8 +24,7 @@
               <ul class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                 {% if session.user %}
-                  <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">Dashboard</a></li>
-                  <li><a href="{{ url_for('submit_recipe') }}">Submit a Recipe</a></li>
+                  <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">My Dashboard</a></li>
                   <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
                   <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
@@ -42,8 +41,7 @@
             <li><h4 class="mobile-logo">Gather</h4></li>
             <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                 {% if session.user %}
-                  <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">Dashboard</a></li>
-                  <li><a href="{{ url_for('submit_recipe') }}">Submit a Recipe</a></li>
+                  <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">My Dashboard</a></li>
                   <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
                   <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
