@@ -100,7 +100,22 @@ function turnStepsStringIntoArray() {
     }
 };
 
-
+function colourSwatch() {
+    let selected = document.getElementsByClassName("selected");
+    let colour = selected[1];
+    let colourCode = selected[1].textContent;
+    let colourTextNode = colour.children[0];
+    console.log(colourCode);
+    console.log(colourTextNode);
+    //let swatch = document.getElementById("swatch");
+    //swatch.style.backgroundColor = colour;
+    let newSwatch = document.createElement("span");
+    newSwatch.id = ("swatch");
+    newSwatch.style.backgroundColor = colourCode;
+    newSwatch.textContent = `Current Colour: ${colourCode}`;
+    colour.removeChild(colourTextNode);
+    colour.appendChild(newSwatch);
+}
 
 $(document).ready(function(){
     $('.sidenav').sidenav();
@@ -141,4 +156,5 @@ $(document).ready(function(){
     turnStringIntoArray();
     turnStepsArrayIntoString();
     turnStepsStringIntoArray();
+    colourSwatch();
 });

@@ -1,8 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
-	<div class="picker" id="picker1"></div>
-    <div class="picker" id="picker2"></div>
+	<div class="picker input-field" name=colour_pick id="picker1"></div>
+	<label for="colour_pick">Pick Colour</label>
+    
+	<!--<div class="picker" id="picker2"></div>-->
+
+	<div class="input-field col s12 m6">
+		<select class="icons">
+		  <option value="" disabled selected>Choose your option</option>
+		  <option value="" data-icon="{{ url_for('static', filename='images/black-swatch.jpg') }}">Black Swatch</option>
+		  <option value="" data-icon="images/office.jpg">example 2</option>
+		  <option value="" data-icon="images/yuna.jpg">example 3</option>
+		</select>
+		<label>Images in select</label>
+	  </div>
 
 	<script>
 

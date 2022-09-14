@@ -85,7 +85,12 @@ body {
 .btn-floating:hover, 
 .btn-black {
     background-color: #3e3d43;
+}
 
+#swatch {
+  height: 40px;
+  color: white;
+}
 /*!
 *
 * ColorPick jQuery plugin

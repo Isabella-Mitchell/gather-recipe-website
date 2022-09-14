@@ -82,9 +82,16 @@
                 <label for="serves">Serves</label>
             </div>
             <div class="input-field col s12 m6">
-                <input id="colour_code" name="colour_code" value="{{ recipe.colour_code }}" type="text" class="validate">
+                <select class="icons" id="colour_code" name="colour_code" class="validate">
+                        <option value="{{ recipe.colour_code }}" data-icon="" selected>{{ recipe.colour_code }}</option>
+                        <option value="#3e3d43" data-icon="{{ url_for('static', filename='images/black-swatch.jpg') }}">Black #3e3d43</option>
+                        <option value="#93b2da" data-icon="{{ url_for('static', filename='images/blue-swatch.jpg') }}">Blue #93b2da</option>
+                        <option value="#cd832e" data-icon="{{ url_for('static', filename='images/yellow-swatch.jpg') }}">Yellow #cd832e</option>
+                        <option value="#d55d1c" data-icon="{{ url_for('static', filename='images/orange-swatch.jpg') }}">Orange #d55d1c</option>
+                        <option value="#d71a2c" data-icon="{{ url_for('static', filename='images/red-swatch.jpg') }}">Red #d71a2c</option>
+                </select>
                 <label for="colour_code">Colour</label>
-            </div>
+              </div>
         </div>
         <!--URL-->
         <div class="row">
