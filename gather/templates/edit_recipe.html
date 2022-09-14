@@ -66,10 +66,15 @@
         </div>
         <!--Difficulty (and smart select) and duration (and time picker)-->
         <div class="row">
-            <div class="input-field col s12 m6">
-                <input id="difficulty" name="difficulty" value="{{ recipe.difficulty }}" type="text" class="validate">
-                <label for="difficulty">Difficulty</label>
-            </div>
+                <div class="input-field col s12 m6">
+                    <select id="difficulty" name="difficulty" class="validate">
+                        <option value="{{ recipe.difficulty }}" selected>Currently Selected: {{ recipe.difficulty }}</option>
+                        <option value="Easy">Easy</option>
+                        <option value="More Effort">More Effort</option>
+                        <option value="A Challenge">A Challenge</option>
+                    </select>
+                    <label for="difficulty">Difficulty</label>
+                </div>
             <div class="input-field col s12 m6">
                 <input id="duration" name="duration" value="{{ recipe.duration }}" type="text" class="validate">
                 <label for="duration">Duration</label>
@@ -78,8 +83,11 @@
         <!--Serves (swap for number picker) and Cuisine-->
         <div class="row">
             <div class="input-field col s12 m6">
-                <input id="serves" name="serves" value="{{ recipe.serves }}" type="text" class="validate">
+                <!--<input id="serves" name="serves" value="{{ recipe.serves }}" type="text" class="validate">-->
                 <label for="serves">Serves</label>
+                <p class="range-field">
+                    <input id="serves test5" name="serves" type="range" min="1" max="12" value="{{ recipe.serves }}" class="validate"/>
+                </p>
             </div>
             <div class="input-field col s12 m6">
                 <select class="icons" id="colour_code" name="colour_code" class="validate">

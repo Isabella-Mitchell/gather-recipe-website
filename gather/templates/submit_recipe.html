@@ -54,10 +54,15 @@
         </div>
         <!--Difficulty (numbver select) and duration (and time picker)-->
         <div class="row">
-            <div class="input-field col s12 m6">
-                <input id="difficulty" name="difficulty" type="text" class="validate">
-                <label for="difficulty">Difficulty</label>
-            </div>
+                <div class="input-field col s12 m6">
+                    <select id="difficulty" name="difficulty" class="validate">
+                        <option value="" disabled selected>Select Difficulty</option>
+                        <option value="Easy">Easy</option>
+                        <option value="More Effort">More Effort</option>
+                        <option value="A Challenge">A Challenge</option>
+                    </select>
+                    <label for="difficulty">Difficulty</label>
+                </div>
             <div class="input-field col s12 m6">
                 <input id="duration" name="duration" type="text" class="validate" placeholder="e.g. 1 hour 30 mins">
                 <label for="duration">Duration</label>
@@ -68,7 +73,7 @@
             <div class="col s12 m6">
                 <label for="serves">Serves</label>
                 <p class="range-field">
-                    <input id="serves test5" name="serves" type="range" min="0" max="12" class="validate"/>
+                    <input id="serves test5" name="serves" type="range" min="1" max="12" class="validate"/>
                 </p>
             </div>
             <div class="input-field col s12 m6">
