@@ -19,7 +19,11 @@
                 <div class="card-content">
                   <p>By {{recipe.author}}.</p>
                   <p>Tags: {{recipe.tags}}</p>
-                  <p>Put in cuisine here?</p>
+                  {% for cuisine in cuisines %}
+                    {% if cuisine.id == recipe.cuisine_id | int %}
+                        <p>{{ cuisine.cuisine_name }}</p>
+                    {% endif %}
+                  {% endfor %}
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>

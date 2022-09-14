@@ -11,7 +11,8 @@ import re
 @app.route("/get_recipes")
 def get_recipes():
     recipes = mongo.db.recipes.find()
-    return render_template("recipes.html", recipes=recipes)
+    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+    return render_template("recipes.html", recipes=recipes, cuisines=cuisines)
 
 
 @app.route("/register", methods=["GET", "POST"])
