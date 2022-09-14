@@ -79,9 +79,10 @@ def dashboard(user_name):
         
     if "user" in session:
         user_recipes = mongo.db.recipes.find({"author": session["user"]})
+        cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
         return render_template(
             "dashboard.html", user_name=session["user"], 
-            user_recipes=user_recipes)
+            user_recipes=user_recipes, cuisines=cuisines)
 
     return redirect(url_for("login"))
 
