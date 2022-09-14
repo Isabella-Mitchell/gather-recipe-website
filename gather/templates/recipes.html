@@ -17,24 +17,25 @@
                   <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator "><i class="fa-solid fa-plus"></i></a>
                 </div>
                 <div class="card-content">
-                  <p>By {{recipe.author}}.</p>
-                  <p>Tags: {{recipe.tags}}</p>
+                  <p class="card-preview">By {{recipe.author}}.</p>
+                  <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
                   {% for cuisine in cuisines %}
                     {% if cuisine.id == recipe.cuisine_id | int %}
-                        <p>{{ cuisine.cuisine_name }}</p>
+                        <p class="card-preview">{{ cuisine.cuisine_name }}</p>
                     {% endif %}
                   {% endfor %}
                 </div>
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>
-                    <p>{{recipe.ingrediant_list}}</p>
-                    <p>{{recipe.serves}}</p>
-                    <p>{{recipe.duration}}</p>
-                    <p>{{recipe.difficulty}}</p>
-                    <p>{{recipe.url}}</p>
-                    <p>{{recipe.instructions}}</p>
-                    <p>{{recipe.timestamp}}</p>
-                  </div>
+                  <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>
+                  <p>Servings: {{recipe.serves}}</p>
+                  <p>Takes: {{recipe.duration}}</p>
+                  <p>Difficulty Level: {{recipe.difficulty}}</p>
+                  <h6>Ingrediants</h6>
+                  <div class="string-to-array">{{recipe.ingrediant_list}}</div>
+                  <h6>Steps:</h6>
+                  <div class="steps-string-to-array">{{recipe.instructions}}</div>
+                  <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
+                </div>
                   <div class="recipe-buttons">
                     <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe"><i class="fa-solid fa-magnifying-glass"></i></a>
                   {% if session.user %}
