@@ -106,9 +106,6 @@ def submit_recipe():
         ingrediant_string = request.form.get("ingrediant_list")
         ingrediant_list = ingrediant_string.split(",")
         ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
-        equipment_string = request.form.get("equipment_list")
-        equipment_list = equipment_string.split(",")
-        equipment_list_stripped = [i.lstrip() for i in equipment_list]
         tags_string = request.form.get("tags")
         tags_list = tags_string.split(",")
         tags_list_stripped = [i.lstrip() for i in tags_list]
@@ -122,7 +119,6 @@ def submit_recipe():
             "tags": tags_list_stripped,
             "cuisine_id": request.form.get("cuisine_id"),
             "ingrediant_list": ingrediant_list_stripped,
-            "equipment_list": equipment_list_stripped,
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
@@ -153,9 +149,6 @@ def edit_recipe(recipe_id):
         ingrediant_string = request.form.get("ingrediant_list")
         ingrediant_list = ingrediant_string.split(",")
         ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
-        equipment_string = request.form.get("equipment_list")
-        equipment_list = equipment_string.split(",")
-        equipment_list_stripped = [i.lstrip() for i in equipment_list]
         tags_string = request.form.get("tags")
         tags_list = tags_string.split(",")
         tags_list_stripped = [i.lstrip() for i in tags_list]
@@ -169,7 +162,6 @@ def edit_recipe(recipe_id):
             "tags": tags_list_stripped,
             "cuisine_id": request.form.get("cuisine_id"),
             "ingrediant_list": ingrediant_list_stripped,
-            "equipment_list": equipment_list_stripped,
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),

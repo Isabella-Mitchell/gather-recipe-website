@@ -65,6 +65,25 @@ function makeUL(array) {
     return list;
 }
 
+function makeOL(array) {
+    // Create the list element:
+    let list = document.createElement('ol');
+
+    for (let i = 0; i < array.length; i++) {
+        // Create the list item:
+        let item = document.createElement('li');
+
+        // Set its contents:
+        item.appendChild(document.createTextNode(array[i]));
+
+        // Add it to the list:
+        list.appendChild(item);
+    }
+
+    // Finally, return the constructed list:
+    return list;
+}
+
 function turnStringIntoArray() {
     let stringContainers = document.getElementsByClassName("string-to-array")
     let string;
@@ -93,10 +112,13 @@ function turnStepsStringIntoArray() {
         string = stringContainers[i].textContent;
         console.log(string)
         removeBrackets = string.replace(/\[|\]/g, '');
-        array = removeBrackets.split("', '");
+        console.log(removeBrackets);
+        removeQuotes = removeBrackets.slice(1, -1)
+        console.log(removeQuotes);
+        array = removeQuotes.split("', '");
         // Add the contents
         stringContainers[i].textContent = ""
-        stringContainers[i].appendChild(makeUL(array));
+        stringContainers[i].appendChild(makeOL(array));
     }
 };
 

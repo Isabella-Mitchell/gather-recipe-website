@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="page-title">Hey {{ user_name }}, welcome to your dashboard</h3>
+    <h3 class="page-title">{{ user_name }}'s dashboard</h3>
 
     <div class="row">
         {% for recipe in user_recipes %}
@@ -16,26 +16,24 @@
                   <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator "><i class="fa-solid fa-plus"></i></a>
                 </div>
                 <div class="card-content">
-                  <p>By {{recipe.author}}.</p>
-                  <div class="array-string">Tags: {{recipe.tags}}</div>
+                  <p class="card-preview">By {{recipe.author}}.</p>
+                  <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
                   {% for cuisine in cuisines %}
                     {% if cuisine.id == recipe.cuisine_id | int %}
-                        <p>{{ cuisine.cuisine_name }}</p>
+                        <p class="card-preview">{{ cuisine.cuisine_name }}</p>
                     {% endif %}
                   {% endfor %}
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{recipe.recipe_name}}<i class="fa-solid fa-xmark"></i></span>
-                    <h6>Ingrediants</h6>
-                    <div class="string-to-array">{{recipe.ingrediant_list}}</div>
-                    <h6>Equipment Needed:</h6>
-                    <div class="string-to-array">{{recipe.equipment_list}}</div>
                     <p>Servings: {{recipe.serves}}</p>
                     <p>Takes: {{recipe.duration}}</p>
                     <p>Difficulty Level: {{recipe.difficulty}}</p>
+                    <h6>Ingrediants</h6>
+                    <div class="string-to-array">{{recipe.ingrediant_list}}</div>
                     <h6>Steps:</h6>
-                    <div class="string-to-array">{{recipe.instructions}}</div>
-                    <p>URL: {{recipe.url}}</p>
+                    <div class="steps-string-to-array">{{recipe.instructions}}</div>
+                    <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
                 </div>
                   <div class="recipe-buttons">
                   {% if session.user|lower == recipe.author|lower %}

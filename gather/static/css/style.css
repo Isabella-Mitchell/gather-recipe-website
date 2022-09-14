@@ -71,19 +71,24 @@ body {
 /*--------------------- Cards --------------------*/
 
 .card {
-    height: 350px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
 .card-image-colour {
-    height: 150px;
+    height: 175px;
 }
 
-/*.colour-code {
+/*Hidden code displayed on colour top on card*/
+.colour-code {
     display: none;
-}*/
+}
+
+.card-preview {
+  padding: 4px 0 4px 0;
+}
 
 /*--------------------- Buttons --------------------*/
 
@@ -108,4 +113,21 @@ body {
 #swatch {
     height: 40px;
     color: white;
+}
+
+/*--------------------- Lists --------------------*/
+
+.string-to-array ul:not(.browser-default)>li {
+  list-style-type: circle;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.string-to-array ul:not(.browser-default) {
+  padding-left: 40px;
+}
+
+ol li {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
