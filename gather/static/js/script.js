@@ -179,4 +179,11 @@ $(document).ready(function(){
     turnStepsArrayIntoString();
     turnStepsStringIntoArray();
     colourSwatch();
+
+    $('#ingrediant_list').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            console.log("button pressed")
+        }
+    });
 });

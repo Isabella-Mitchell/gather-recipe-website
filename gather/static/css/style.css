@@ -104,8 +104,13 @@ body {
 }
 
 .btn-floating:hover,
-.btn-black {
+.btn-black,
+.gather-colour:hover {
     background-color: #3e3d43;
+}
+
+.full-width {
+    width: 100%;
 }
 
 /*--------------------- Form Componants --------------------*/

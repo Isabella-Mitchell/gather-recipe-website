@@ -104,7 +104,8 @@ def submit_recipe():
     if request.method == "POST":
 
         ingrediant_string = request.form.get("ingrediant_list")
-        ingrediant_list = ingrediant_string.split(",")
+        ingrediant_remove_new_lines = ingrediant_string.replace("\r\n", ",")
+        ingrediant_list = ingrediant_remove_new_lines.split(",")
         ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
         tags_string = request.form.get("tags")
         tags_list = tags_string.split(",")
@@ -147,7 +148,8 @@ def edit_recipe(recipe_id):
     if request.method == "POST":
 
         ingrediant_string = request.form.get("ingrediant_list")
-        ingrediant_list = ingrediant_string.split(",")
+        ingrediant_remove_new_lines = ingrediant_string.replace("\r\n", "")
+        ingrediant_list = ingrediant_remove_new_lines.split(",")
         ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
         tags_string = request.form.get("tags")
         tags_list = tags_string.split(",")

@@ -4,96 +4,98 @@
 <h3 class="page-title">Submit Recipe</h3>
 
 <div class="row">
-    <form class="col s12" method="POST" action="{{ url_for('submit_recipe') }}">
-        <!--Recipe Name-->
-        <div class="row">
-            <div class="input-field col s12">
-              <input id="recipe_name" name="recipe_name" type="text" class="validate" required>
-              <label for="recipe_name">Recipe Name</label>
-            </div>
-        </div>
-        <!--Tags (Make into array)-->
-        <div class="row">
-            <div class="input-field col s12">
-              <input id="tags" name="tags" type="text" class="validate">
-              <label for="tags">Tags</label>
-            </div>
-        </div>
-        <!-- Cuisine selection -->
-        <div class="row">
-            <div class="input-field col s12">
-                <select id="cuisine_id" name="cuisine_id" class="validate" required>
-                    <option value="" disabled selected>Choose Cuisine</option>
-                    {% for cuisine in cuisines %}
-                        <option value="{{ cuisine.id }}">{{ cuisine.cuisine_name }}</option>
-                    {% endfor %}
-                </select>
-                <label for="cuisine_id">Cuisine</label>
-            </div>
-        </div>
-        <!--Ingrediant list (Make into array?)-->
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea" placeholder="Use a comma to seperate items. E.g. 50g flour, 50g butter, ..."></textarea>
-                <label for="ingrediant_list">Ingrediant List</label>
-            </div>
-        </div>
-        <!--Instructions-->
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea id="instructions" name="instructions" class="materialize-textarea"></textarea>
-                <label for="instructions">Instructions</label>
-            </div>
-        </div>
-        <!--Difficulty (numbver select) and duration (and time picker)-->
-        <div class="row">
-                <div class="input-field col s12 m6">
-                    <select id="difficulty" name="difficulty" class="validate">
-                        <option value="" disabled selected>Select Difficulty</option>
-                        <option value="Easy">Easy</option>
-                        <option value="More Effort">More Effort</option>
-                        <option value="A Challenge">A Challenge</option>
-                    </select>
-                    <label for="difficulty">Difficulty</label>
+    <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('submit_recipe') }}">
+        <div class="card-panel">
+            <!--Recipe Name-->
+            <div class="row">
+                <div class="input-field col s12">
+                <input id="recipe_name" name="recipe_name" type="text" class="validate" required>
+                <label for="recipe_name">Recipe Name</label>
                 </div>
-            <div class="input-field col s12 m6">
-                <input id="duration" name="duration" type="text" class="validate" placeholder="e.g. 1 hour 30 mins">
-                <label for="duration">Duration</label>
             </div>
-        </div>
-        <!--Serves (swap for number picker) and colour picker-->
-        <div class="row">
-            <div class="col s12 m6">
-                <input id="serves" name="serves" placeholder="e.g. 4" type="number" class="validate">
-                <label for="serves">Serves</label>
+            <!-- Cuisine selection -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="cuisine_id" name="cuisine_id" class="validate" required>
+                        <option value="" disabled selected>Choose Cuisine</option>
+                        {% for cuisine in cuisines %}
+                            <option value="{{ cuisine.id }}">{{ cuisine.cuisine_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="cuisine_id">Cuisine</label>
+                </div>
             </div>
-            <div class="input-field col s12 m6">
-                <select class="icons" id="colour_code" name="colour_code" class="validate">
-                  <option value="" disabled selected>Choose your option</option>
-                  <option value="#3e3d43" data-icon="{{ url_for('static', filename='images/black-swatch.jpg') }}">Black #3e3d43</option>
-                  <option value="#93b2da" data-icon="{{ url_for('static', filename='images/blue-swatch.jpg') }}">Blue #93b2da</option>
-                  <option value="#cd832e" data-icon="{{ url_for('static', filename='images/yellow-swatch.jpg') }}">Yellow #cd832e</option>
-                  <option value="#d55d1c" data-icon="{{ url_for('static', filename='images/orange-swatch.jpg') }}">Orange #d55d1c</option>
-                  <option value="#d71a2c" data-icon="{{ url_for('static', filename='images/red-swatch.jpg') }}">Red #d71a2c</option>
-                </select>
-                <label for="colour_code">Colour</label>
-              </div>
-        </div>
-        <!--URL-->
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="url" name="url" type="text" class="validate">
-                <label for="url">URL</label>
+            <!--Ingrediant list (Make into array?)-->
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="ingrediant_list" name="ingrediant_list" class="materialize-textarea" placeholder="Use a comma to seperate items. E.g. 50g flour, 50g butter, ..."></textarea>
+                    <label for="ingrediant_list">Ingrediant List</label>
+                </div>
             </div>
-        </div>
-        <!--submit button-->
-        <div class="row">
-            <div class="col s12">
-                <button id="submit-recipe" class="btn waves-effect waves-light" type="submit">
-                    Submit Recipe
-                </button>
+            <!--Instructions-->
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="instructions" name="instructions" class="materialize-textarea" placeholder="Use a new line to seperate steps"></textarea>
+                    <label for="instructions">Instructions</label>
+                </div>
             </div>
-        </div>
+            <!--Difficulty (numbver select) and duration (and time picker)-->
+            <div class="row">
+                    <div class="input-field col s12 m6">
+                        <select id="difficulty" name="difficulty" class="validate">
+                            <option value="" disabled selected>Select Difficulty</option>
+                            <option value="Easy">Easy</option>
+                            <option value="More Effort">More Effort</option>
+                            <option value="A Challenge">A Challenge</option>
+                        </select>
+                        <label for="difficulty">Difficulty</label>
+                    </div>
+                <div class="input-field col s12 m6">
+                    <input id="duration" name="duration" type="text" class="validate" placeholder="e.g. 1 hour 30 mins">
+                    <label for="duration">Duration</label>
+                </div>
+            </div>
+            <!--Serves (swap for number picker) and colour picker-->
+            <div class="row">
+                <div class=" input-field col s12 m6">
+                    <input id="serves" name="serves" placeholder="e.g. 4" type="number" class="validate">
+                    <label for="serves">Serves</label>
+                </div>
+                    <div class="input-field col s12 m6">
+                        <select class="icons" id="colour_code" name="colour_code" class="validate">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="#3e3d43" data-icon="{{ url_for('static', filename='images/black-swatch.jpg') }}">Black #3e3d43</option>
+                            <option value="#93b2da" data-icon="{{ url_for('static', filename='images/blue-swatch.jpg') }}">Blue #93b2da</option>
+                            <option value="#cd832e" data-icon="{{ url_for('static', filename='images/yellow-swatch.jpg') }}">Yellow #cd832e</option>
+                            <option value="#d55d1c" data-icon="{{ url_for('static', filename='images/orange-swatch.jpg') }}">Orange #d55d1c</option>
+                            <option value="#d71a2c" data-icon="{{ url_for('static', filename='images/red-swatch.jpg') }}">Red #d71a2c</option>
+                        </select>
+                        <label for="colour_code">Colour</label>
+                </div>
+            </div>
+            <!--Tags (Make into array)-->
+            <div class="row">
+                <div class="input-field col s12">
+                <input id="tags" name="tags" type="text"  placeholder="Use a comma to seperate items. E.g. Vegetarian, Vegan, Gluten Free, Dessert, Starter" class="validate">
+                <label for="tags">Tags</label>
+                </div>
+            </div>
+            <!--URL-->
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="url" name="url" type="text" class="validate">
+                    <label for="url">URL</label>
+                </div>
+            </div>
+            <!--submit button-->
+            <div class="row">
+                <div class="col s12">
+                    <button id="submit-recipe" class="btn waves-effect waves-light full-width gather-colour" type="submit">
+                        Submit Recipe
+                    </button>
+                </div>
+            </div>
+        </div>  
     </form>
 </div>
 
