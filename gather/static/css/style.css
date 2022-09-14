@@ -1,19 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka+One&family=Kalam:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+/*--------------------- Google Fonts Import --------------------*/
+
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka+One&family=Kalam:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap");
+
+/*--------------------- Font Options (To be deleted) --------------------*/
 
 /* font-family: 'Abril Fatface', cursive;
 font-family: 'Fredoka One', cursive;
 font-family: 'Kalam', cursive;
 font-family: 'Roboto', sans-serif; */
 
+/*--------------------- Base Template Styles --------------------*/
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+}
 
-  main {
+main {
     flex: 1 0 auto;
-  }
+}
 
 nav {
     background-color: #eceff1;
@@ -26,8 +32,9 @@ nav ul a {
     font-weight: 400;
 }
 
-nav .brand-logo, .mobile-logo {
-    font-family: 'Fredoka One', cursive;
+nav .brand-logo,
+.mobile-logo {
+    font-family: "Fredoka One", cursive;
     color: #d71a2c;
 }
 
@@ -37,29 +44,36 @@ nav .brand-logo, .mobile-logo {
 
 body {
     background-color: #eceff1;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     color: #3e3d43;
 }
- .page-title {
-    font-family: 'Fredoka One', cursive;
-    text-align: center;
- }
+
+/*--------------------- Footer Styles --------------------*/
 
 .page-footer {
     background-color: #eceff1;
     border-top: 2px solid #93b2da;
-    color:#3e3d43;
+    color: #3e3d43;
 }
 
 .footer-title {
-    font-family: 'Fredoka One', cursive;
+    font-family: "Fredoka One", cursive;
     color: #d71a2c;
- }
+}
+
+/*--------------------- Page Titles --------------------*/
+
+.page-title {
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+}
+
+/*--------------------- Cards --------------------*/
 
 .card {
     height: 350px;
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     flex: 1;
 }
 
@@ -67,9 +81,11 @@ body {
     height: 150px;
 }
 
-.colour-code {
+/*.colour-code {
     display: none;
-}
+}*/
+
+/*--------------------- Buttons --------------------*/
 
 .recipe-buttons {
     margin-top: auto;
@@ -77,17 +93,19 @@ body {
     padding-bottom: 10px;
 }
 
-.gather-colour, 
+.gather-colour,
 .btn-black:hover {
     background-color: #d71a2c;
 }
 
-.btn-floating:hover, 
+.btn-floating:hover,
 .btn-black {
     background-color: #3e3d43;
 }
 
+/*--------------------- Form Componants --------------------*/
+
 #swatch {
-  height: 40px;
-  color: white;
+    height: 40px;
+    color: white;
 }
