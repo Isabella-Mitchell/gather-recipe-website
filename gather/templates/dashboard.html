@@ -3,34 +3,30 @@
 
     <h3 class="page-title">{{ user_name }}'s dashboard</h3>
 
-    
-
     <div class="row">
-      <div class="col s12 center-align">
-        <a href="{{ url_for('submit_recipe') }}" class="btn-large gather-colour">Submit a Recipe  <i class="fa-solid fa-plus"></i></a>
-      </div>
+        <div class="col s12 center-align">
+            <a href="{{ url_for('submit_recipe') }}" class="btn-large gather-colour">Submit a Recipe <i class="fa-solid fa-plus"></i></a>
+        </div>
     </div>
 
     <div class="row">
         {% for recipe in user_recipes %}
 
-            <div class="col s12 m4">
-              <div class="card hoverable">
+        <div class="col s12 m4">
+            <div class="card hoverable">
                 <div class="card-image">
-                  <div class="card-image-colour">
-                    <span class="colour-code">{{recipe.colour_code}}</span>
-                  </div>
-                  <span class="card-title">{{recipe.recipe_name}}</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-plus"></i></a>
+                    <div class="card-image-colour">
+                        <span class="colour-code">{{recipe.colour_code}}</span>
+                    </div>
+                    <span class="card-title">{{recipe.recipe_name}}</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-plus"></i></a>
                 </div>
                 <div class="card-content">
-                  <p class="card-preview">By {{recipe.author}}.</p>
-                  <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
-                  {% for cuisine in cuisines %}
-                    {% if cuisine.id == recipe.cuisine_id | int %}
-                        <p class="card-preview">{{ cuisine.cuisine_name }}</p>
-                    {% endif %}
-                  {% endfor %}
+                    <p class="card-preview">By {{recipe.author}}.</p>
+                    <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
+                    {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
+                    <p class="card-preview">{{ cuisine.cuisine_name }}</p>
+                    {% endif %} {% endfor %}
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
@@ -43,18 +39,17 @@
                     <div class="steps-string-to-array">{{recipe.instructions}}</div>
                     <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
                 </div>
-                  <div class="recipe-buttons">
-                  {% if session.user|lower == recipe.author|lower %}
+                <div class="recipe-buttons">
+                    {% if session.user|lower == recipe.author|lower %}
                     <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe"><i class="fa-solid fa-magnifying-glass"></i></a>
                     <a href="{{ url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="Edit Recipe"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a href="{{ url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="Delete Recipe"><i class="fa-solid fa-trash-can"></i></a>
-                  {% endif %}
-                  </div>
-              </div>
+                    {% endif %}
+                </div>
             </div>
-            
-        {%  endfor %}
-    </div>
+        </div>
 
+        {% endfor %}
+    </div>
 
 {% endblock %}

@@ -1,105 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/e4ffee1eee.js" crossorigin="anonymous"></script>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    {% block styles %}
-    {% endblock %}
-    <title>Gather Recipe Website</title>
-</head>
-<body>
-    <header>
-        <!--top navbar - sourced from materialize-->
-        <nav>
-          <div class="container">
-            <div class="nav-wrapper">
-              <a href="{{ url_for('get_recipes') }}" class="brand-logo">Gather</a>
-              <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-              <ul class="right hide-on-med-and-down">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/e4ffee1eee.js" crossorigin="anonymous"></script>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
+        {% block styles %} {% endblock %}
+        <title>Gather Recipe Website</title>
+    </head>
+    <body>
+        <header>
+            <!--top navbar - sourced from materialize-->
+            <nav>
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <a href="{{ url_for('get_recipes') }}" class="brand-logo">Gather</a>
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
+                            {% if session.user %}
+                            <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">My Dashboard</a></li>
+                            <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
+                            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                            {% else %}
+                            <li><a href="{{ url_for('login') }}">Log In</a></li>
+                            <li><a href="{{ url_for('register') }}">Sign Up</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!--mobile navbar - sourced from materialize-->
+            <ul class="sidenav" id="mobile-demo">
+                <li><h4 class="mobile-logo">Gather</h4></li>
                 <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                 {% if session.user %}
-                  <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">My Dashboard</a></li>
-                  <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
-                  <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">My Dashboard</a></li>
+                <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
-                  <li><a href="{{ url_for('login') }}">Log In</a></li>
-                  <li><a href="{{ url_for('register') }}">Sign Up</a></li>
+                <li><a href="{{ url_for('login') }}">Log In</a></li>
+                <li><a href="{{ url_for('register') }}">Sign Up</a></li>
                 {% endif %}
-              </ul>
-            </div>
-          </div>
-        </nav>
-        
-          <!--mobile navbar - sourced from materialize-->
-          <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="mobile-logo">Gather</h4></li>
-            <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
-                {% if session.user %}
-                  <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">My Dashboard</a></li>
-                  <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
-                  <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-                {% else %}
-                  <li><a href="{{ url_for('login') }}">Log In</a></li>
-                  <li><a href="{{ url_for('register') }}">Sign Up</a></li>
-                {% endif %}
-          </ul>  
-    </header>
-
-    <section>
-      <div class="container">
-        <!--flash message-->
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class="row flashes">
-                  <h4>{{ message }}</h4>
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-      </div>
-    </section>
-    
-    <main>
-      <div class="container">
-        {% block content %}
-        {% endblock %}
-      </div>
-    </main>
-
-    <footer class="page-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="footer-title">Gather</h5>
-            <p>Submit, share and save your favourite recipes.</p>
-          </div>
-          <div class="col l4 offset-l2 s12">
-            <ul>
-              <li><a href="#!">Link 1</a></li>
-              <li><a href="#!">Link 1</a></li>
-              <li><a href="#!">Link 1</a></li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
+        </header>
 
-    <!-- jQuery script minified -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- JS external code -->
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-  
-    {% block scripts %}
-    {% endblock %}
-    
-</body>
+        <section>
+            <div class="container">
+                <!--flash message-->
+                {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+                <div class="row flashes">
+                    <h4>{{ message }}</h4>
+                </div>
+                {% endfor %} {% endif %} {% endwith %}
+            </div>
+        </section>
+
+        <main>
+            <div class="container">
+                {% block content %} {% endblock %}
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="footer-title">Gather</h5>
+                        <p>Submit, share and save your favourite recipes.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <ul>
+                            <li><a href="#!">Link 1</a></li>
+                            <li><a href="#!">Link 1</a></li>
+                            <li><a href="#!">Link 1</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- jQuery script minified -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- JS external code -->
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+        {% block scripts %} 
+      	{% endblock %}
+    </body>
 </html>

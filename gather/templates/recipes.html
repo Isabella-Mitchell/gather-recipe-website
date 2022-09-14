@@ -1,55 +1,49 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 {% block content %}
 
-    <h3 class="page-title">Hey good looking, what you got cooking?</h3>
+<h3 class="page-title">Hey good looking, what you got cooking?</h3>
 
-    <div class="row">
-      {% for recipe in recipes %}
+<div class="row">
+    {% for recipe in recipes %}
 
-        
-            <div class="col s12 m4">
-              <div class="card hoverable">
-                <div class="card-image">
-                  <div class="card-image-colour">
+    <div class="col s12 m4">
+        <div class="card hoverable">
+            <div class="card-image">
+                <div class="card-image-colour">
                     <span class="colour-code">{{recipe.colour_code}}</span>
-                  </div>
-                  <span class="card-title">{{recipe.recipe_name}}</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator "><i class="fa-solid fa-plus"></i></a>
                 </div>
-                <div class="card-content">
-                  <p class="card-preview">By {{recipe.author}}.</p>
-                  <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
-                  {% for cuisine in cuisines %}
-                    {% if cuisine.id == recipe.cuisine_id | int %}
-                        <p class="card-preview">{{ cuisine.cuisine_name }}</p>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
-                  <p>Servings: {{recipe.serves}}</p>
-                  <p>Takes: {{recipe.duration}}</p>
-                  <p>Difficulty Level: {{recipe.difficulty}}</p>
-                  <h6>Ingrediants</h6>
-                  <div class="string-to-array">{{recipe.ingrediant_list}}</div>
-                  <h6>Steps:</h6>
-                  <div class="steps-string-to-array">{{recipe.instructions}}</div>
-                  <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
-                </div>
-                  <div class="recipe-buttons">
-                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe"><i class="fa-solid fa-magnifying-glass"></i></a>
-                  {% if session.user %}
-                    <a href="{{ url_for('add_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe"><i class="fa-regular fa-star"></i></a>
-                  {% endif %}
-                </div>
-              </div>
+                <span class="card-title">{{recipe.recipe_name}}</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator"><i class="fa-solid fa-plus"></i></a>
             </div>
-          
-      {%  endfor %}
+            <div class="card-content">
+                <p class="card-preview">By {{recipe.author}}.</p>
+                <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
+                {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
+                <p class="card-preview">{{ cuisine.cuisine_name }}</p>
+                {% endif %} {% endfor %}
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
+                <p>Servings: {{recipe.serves}}</p>
+                <p>Takes: {{recipe.duration}}</p>
+                <p>Difficulty Level: {{recipe.difficulty}}</p>
+                <h6>Ingrediants</h6>
+                <div class="string-to-array">{{recipe.ingrediant_list}}</div>
+                <h6>Steps:</h6>
+                <div class="steps-string-to-array">{{recipe.instructions}}</div>
+                <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
+            </div>
+            <div class="recipe-buttons">
+                <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe"><i class="fa-solid fa-magnifying-glass"></i></a>
+                {% if session.user %}
+                <a href="{{ url_for('add_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe"><i class="fa-regular fa-star"></i></a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
-
-
-
+    {% endfor %}
+</div>
 
 {% endblock %}
+
