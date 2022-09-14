@@ -23,8 +23,6 @@
               <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
               <ul class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
-                <!-- Test colour picker -->
-                <li><a href="{{ url_for('colour_picker') }}">Colour Picker</a></li>
                 {% if session.user %}
                   <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">Dashboard</a></li>
                   <li><a href="{{ url_for('submit_recipe') }}">Submit a Recipe</a></li>
@@ -99,8 +97,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Colour picker JS external code -->
-    <script src="{{ url_for('static', filename='js/colorPick.js') }}"></script>
+    <!-- JS external code -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   
     {% block scripts %}

@@ -107,8 +107,6 @@ function colourSwatch() {
     let colourTextNode = colour.children[0];
     console.log(colourCode);
     console.log(colourTextNode);
-    //let swatch = document.getElementById("swatch");
-    //swatch.style.backgroundColor = colour;
     let newSwatch = document.createElement("span");
     newSwatch.id = ("swatch");
     newSwatch.style.backgroundColor = colourCode;
