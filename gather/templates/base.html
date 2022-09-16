@@ -23,8 +23,10 @@
                         <ul class="right hide-on-med-and-down">
                             <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                             {% if session.user %}
-                            <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">My Dashboard</a></li>
-                            <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
+                            <li><a href="{{ url_for('dashboard') }}">My Dashboard</a></li>
+                                {% if session.user|lower == "mit"|lower %}
+                                <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
+                                {% endif %}
                             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                             {% else %}
                             <li><a href="{{ url_for('login') }}">Log In</a></li>
@@ -40,8 +42,10 @@
                 <li><h4 class="mobile-logo">Gather</h4></li>
                 <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                 {% if session.user %}
-                <li><a href="{{ url_for('dashboard', user_name=session['user']) }}">My Dashboard</a></li>
-                <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
+                <li><a href="{{ url_for('dashboard') }}">My Dashboard</a></li>
+                    {% if session.user|lower == "mit"|lower %}
+                        <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
+                    {% endif %}
                 <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
                 <li><a href="{{ url_for('login') }}">Log In</a></li>

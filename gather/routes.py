@@ -78,14 +78,14 @@ def login():
     return render_template("login.html")
 
     
-@app.route("/dashboard/<user_name>", methods=["GET", "POST"])
-def dashboard(user_name):        
+@app.route("/dashboard", methods=["GET", "POST"])
+def dashboard():        
     if "user" in session:
         user_recipes = mongo.db.recipes.find({"author": session["user"]})
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
         return render_template(
-            "dashboard.html", user_name=session["user"], 
-            user_recipes=user_recipes, cuisines=cuisines)
+            "dashboard.html", user_recipes=user_recipes, 
+            cuisines=cuisines)
 
     return redirect(url_for("login"))
 
