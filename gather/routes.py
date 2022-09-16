@@ -149,39 +149,42 @@ def submit_recipe():
 @app.route("/recipe/<recipe_id>/edit", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
 
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    
-    if "user" not in session or session["user"] != recipe["author"]:
-        flash("You can only edit your own recipes!")
+    try:
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        
+        if "user" not in session or session["user"] != recipe["author"]:
+            flash("You can only edit your own recipes!")
+            return redirect(url_for("get_recipes"))
+        
+        if request.method == "POST":
+
+            # takes user data and turns it into an array to be stored in MongoDB
+            ingrediant_string = request.form.get("ingrediant_list")
+            ingrediant_list = format_string_to_list(ingrediant_string)
+            tags_string = request.form.get("tags")
+            tags_list = format_string_to_list(tags_string)
+            instructions_string = request.form.get("instructions")
+            instructions_list = format_string_to_list(instructions_string, False)
+
+            edit = {
+                "author": session["user"],
+                "recipe_name": request.form.get("recipe_name"),
+                "tags": tags_list,
+                "cuisine_id": request.form.get("cuisine_id"),
+                "ingrediant_list": ingrediant_list,
+                "serves": request.form.get("serves"),
+                "duration": request.form.get("duration"),
+                "difficulty": request.form.get("difficulty"),
+                "instructions": instructions_list,
+                "colour_code": request.form.get("colour_code"),
+                "url": request.form.get("url"),
+                "timestamp": datetime.datetime.utcnow()
+            }
+            mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
+            flash("Recipe successfully edited")
+            return redirect(url_for("dashboard"))
+    except:
         return redirect(url_for("get_recipes"))
-    
-    if request.method == "POST":
-
-        # takes user data and turns it into an array to be stored in MongoDB
-        ingrediant_string = request.form.get("ingrediant_list")
-        ingrediant_list = format_string_to_list(ingrediant_string)
-        tags_string = request.form.get("tags")
-        tags_list = format_string_to_list(tags_string)
-        instructions_string = request.form.get("instructions")
-        instructions_list = format_string_to_list(instructions_string, False)
-
-        edit = {
-            "author": session["user"],
-            "recipe_name": request.form.get("recipe_name"),
-            "tags": tags_list,
-            "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": ingrediant_list,
-            "serves": request.form.get("serves"),
-            "duration": request.form.get("duration"),
-            "difficulty": request.form.get("difficulty"),
-            "instructions": instructions_list,
-            "colour_code": request.form.get("colour_code"),
-            "url": request.form.get("url"),
-            "timestamp": datetime.datetime.utcnow()
-        }
-        mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
-        flash("Recipe successfully edited")
-        return redirect(url_for("dashboard"))
     
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template(
@@ -202,15 +205,18 @@ def view_recipe(recipe_id):
 @app.route("/recipe/<recipe_id>/delete")
 def delete_recipe(recipe_id):
 
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    try:
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
 
-    if "user" not in session or session["user"] != recipe["author"]:
-        flash("You can only delete your own recipes!")
+        if "user" not in session or session["user"] != recipe["author"]:
+            flash("You can only delete your own recipes!")
+            return redirect(url_for("get_recipes"))
+
+        mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
+        flash("Recipe successfully deleted")
+        return redirect(url_for("dashboard"))
+    except:
         return redirect(url_for("get_recipes"))
-
-    mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
-    flash("Recipe successfully deleted")
-    return redirect(url_for("dashboard"))
 
 
 @app.route("/cuisines")
@@ -248,12 +254,15 @@ def edit_cuisine(cuisine_id):
          flash("You must be admin to manage cuisines!")
          return redirect(url_for("get_recipes"))
     
-    cuisine = Cuisine.query.get_or_404(cuisine_id)
-    if request.method == "POST":
-        cuisine.cuisine_name = request.form.get("cuisine_name")
-        db.session.commit()
-        return redirect(url_for("manage_cuisines"))
-    return render_template("edit_cuisine.html", cuisine=cuisine)
+    try:
+        cuisine = Cuisine.query.get_or_404(cuisine_id)
+        if request.method == "POST":
+            cuisine.cuisine_name = request.form.get("cuisine_name")
+            db.session.commit()
+            return redirect(url_for("manage_cuisines"))
+        return render_template("edit_cuisine.html", cuisine=cuisine)
+    except:
+        return redirect(url_for("get_recipes"))
 
 
 @app.route("/cuisine/<int:cuisine_id>/delete")
@@ -262,11 +271,14 @@ def delete_cuisine(cuisine_id):
          flash("You must be admin to manage cuisines!")
          return redirect(url_for("get_recipes"))
 
-    cuisine = Cuisine.query.get_or_404(cuisine_id)
-    db.session.delete(cuisine)
-    db.session.commit()
-    # mongo.db.Cuisine.delete_many({"cuisine_id": str(cuisine_id)})
-    return redirect(url_for("manage_cuisines"))
+    try:
+        cuisine = Cuisine.query.get_or_404(cuisine_id)
+        db.session.delete(cuisine)
+        db.session.commit()
+        # mongo.db.Cuisine.delete_many({"cuisine_id": str(cuisine_id)})
+        return redirect(url_for("manage_cuisines"))
+    except:
+        return redirect(url_for("get_recipes"))
 
 
 @app.route("/recipe/<recipe_id>/favourite", methods=["GET", "POST"])
@@ -278,8 +290,7 @@ def add_favourite(recipe_id):
 	
         favourite = Favourite(
             user_name=session["user"].lower(),
-            recipe_id=recipe_id
-            )
+            recipe_id=recipe_id)
 
         db.session.add(favourite)
         db.session.commit()
