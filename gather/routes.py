@@ -7,8 +7,12 @@ import datetime
 import re
 
 
+def is_admin(username):
+    return username in ["admin", "mit"]
+
+
 @app.route("/")
-@app.route("/get_recipes")
+@app.route("/recipes")
 def get_recipes():
     recipes = mongo.db.recipes.find()
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
@@ -75,8 +79,7 @@ def login():
 
     
 @app.route("/dashboard/<user_name>", methods=["GET", "POST"])
-def dashboard(user_name):
-        
+def dashboard(user_name):        
     if "user" in session:
         user_recipes = mongo.db.recipes.find({"author": session["user"]})
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
@@ -95,7 +98,7 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/submit_recipe", methods=["GET", "POST"])
+@app.route("/recipe/add", methods=["GET", "POST"])
 def submit_recipe():
     if "user" not in session:
         flash("You need to be logged in to submit a recipe")
@@ -139,7 +142,7 @@ def submit_recipe():
     return render_template("submit_recipe.html", cuisines=cuisines)
 
 
-@app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
+@app.route("/recipe/<recipe_id>/edit", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -188,16 +191,18 @@ def edit_recipe(recipe_id):
         "edit_recipe.html", recipe=recipe, cuisines=cuisines)
 
 
-@app.route("/view_recipe/<recipe_id>", methods=["GET"])
+@app.route("/recipe/<recipe_id>/view", methods=["GET"])
 def view_recipe(recipe_id):
+    try:
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+        return render_template(
+            "view_recipe.html", recipe=recipe, cuisines=cuisines)
+    except:
+        return redirect(url_for("get_recipes"))
 
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    return render_template(
-        "view_recipe.html", recipe=recipe, cuisines=cuisines)
 
-
-@app.route("/delete_recipe/<recipe_id>")
+@app.route("/recipe/<recipe_id>/delete")
 def delete_recipe(recipe_id):
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -211,14 +216,13 @@ def delete_recipe(recipe_id):
     return redirect(url_for("dashboard", user_name=session["user"]))
 
 
-@app.route("/manage_cuisines")
+@app.route("/cuisines")
 def manage_cuisines():
-
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template("cuisines.html", cuisines=cuisines)
 
 
-@app.route("/add_cuisine", methods=["GET", "POST"])
+@app.route("/cuisine/add", methods=["GET", "POST"])
 def add_cuisine():
 
     if request.method == "POST":
@@ -241,11 +245,11 @@ def add_cuisine():
     return render_template("add_cuisine.html")
 
 
-@app.route("/edit_cuisine/<int:cuisine_id>", methods=["GET", "POST"])
+@app.route("/cuisine/<int:cuisine_id>/edit", methods=["GET", "POST"])
 def edit_cuisine(cuisine_id):
-    # if "user" not in session or session["user"] != "admin":
-    #     flash("You must be admin to manage cuisines!")
-    #     return redirect(url_for("get_recipes"))
+    if "user" not in session or not is_admin(session["user"]):
+         flash("You must be admin to manage cuisines!")
+         return redirect(url_for("get_recipes"))
     
     cuisine = Cuisine.query.get_or_404(cuisine_id)
     if request.method == "POST":
@@ -255,11 +259,11 @@ def edit_cuisine(cuisine_id):
     return render_template("edit_cuisine.html", cuisine=cuisine)
 
 
-@app.route("/delete_cuisine/<int:cuisine_id>")
+@app.route("/cuisine/<int:cuisine_id>/delete")
 def delete_cuisine(cuisine_id):
-    # if session["user"] != "admin":
-    #     flash("You must be admin to manage cuisine!")
-    #     return redirect(url_for("get_recipes"))
+    if "user" not in session or not is_admin(session["user"]):
+         flash("You must be admin to manage cuisines!")
+         return redirect(url_for("get_recipes"))
 
     cuisine = Cuisine.query.get_or_404(cuisine_id)
     db.session.delete(cuisine)
@@ -268,7 +272,7 @@ def delete_cuisine(cuisine_id):
     return redirect(url_for("manage_cuisines"))
 
 
-@app.route("/add_favourite/<recipe_id>", methods=["GET", "POST"])
+@app.route("/recipe/<recipe_id>/favourite", methods=["GET", "POST"])
 def add_favourite(recipe_id):
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
