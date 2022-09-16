@@ -51,11 +51,13 @@
             <div class="row">
                 <div class="input-field col s12 m6">
                     <select id="difficulty" name="difficulty" class="validate">
-                        <option value="{{ recipe.difficulty }}" selected>Currently Selected: {{ recipe.difficulty }}</option>
-                        <option value="Easy">Easy</option>
-                        <option value="More Effort">More Effort</option>
-                        <option value="A Challenge">A Challenge</option>
-                    </select>
+                        <option value="" disabled>Choose Difficulty Level</option>
+                        {% for difficulty_level in difficulty_levels %} {% if difficulty_level == recipe.difficulty %}
+                        <option value="{{ difficulty_level }}" selected>{{ difficulty_level }}</option>
+                        {% else %}
+                        <option value="{{ difficulty_level }}">{{ difficulty_level }}</option>
+                        {% endif %} {% endfor %}
+                      </select>
                     <label for="difficulty">Difficulty</label>
                 </div>
                 <div class="input-field col s12 m6">

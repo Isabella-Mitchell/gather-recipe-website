@@ -7,6 +7,9 @@ import datetime
 import re
 
 
+difficulty_levels = ["Easy", "More effort", "A Challenge"]
+
+
 def is_admin(username):
     return username in ["admin", "mit"]
 
@@ -143,7 +146,8 @@ def submit_recipe():
         return redirect(url_for("get_recipes"))
 
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    return render_template("submit_recipe.html", cuisines=cuisines)
+    return render_template("submit_recipe.html", 
+    cuisines=cuisines, difficulty_levels=difficulty_levels)
 
 
 @app.route("/recipe/<recipe_id>/edit", methods=["GET", "POST"])
@@ -188,7 +192,8 @@ def edit_recipe(recipe_id):
     
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template(
-        "edit_recipe.html", recipe=recipe, cuisines=cuisines)
+        "edit_recipe.html", recipe=recipe, cuisines=cuisines, 
+        difficulty_levels=difficulty_levels)
 
 
 @app.route("/recipe/<recipe_id>/view", methods=["GET"])

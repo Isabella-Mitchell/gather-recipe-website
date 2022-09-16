@@ -43,12 +43,12 @@
             <div class="row">
                 <div class="input-field col s12 m6">
                     <select id="difficulty" name="difficulty" class="validate">
-                        <option value="" disabled selected>Select Difficulty</option>
-                        <option value="Easy">Easy</option>
-                        <option value="More Effort">More Effort</option>
-                        <option value="A Challenge">A Challenge</option>
-                    </select>
-                    <label for="difficulty">Difficulty</label>
+                        <option value="" disabled selected>Choose Difficulty Level</option>
+                        {% for difficulty_level in difficulty_levels %}
+                          <option value="{{ difficulty_level }}">{{ difficulty_level }}</option>
+                        {% endfor %}
+                      </select>
+                      <label for="difficulty">Difficulty</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <input id="duration" name="duration" type="text" class="validate" placeholder="e.g. 1 hour 30 mins" />
