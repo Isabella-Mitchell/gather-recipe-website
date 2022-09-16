@@ -64,7 +64,7 @@ def login():
                 flash("Welcome, {}".format(
                     request.form.get("user_name")))
                 return redirect(url_for(
-                    "dashboard", user_name=session["user"]))
+                    "dashboard"))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -98,6 +98,16 @@ def logout():
     return redirect(url_for("login"))
 
 
+def format_string_to_list(input, has_comma_separator=True):
+    if has_comma_separator:
+        input_remove_new_lines = input.replace("\r\n", ",")
+        input_list = input_remove_new_lines.split(",")
+    else:
+        input_list = input.split("\r\n")
+    input_list_stripped = [i.lstrip() for i in input_list]
+    return input_list_stripped
+
+
 @app.route("/recipe/add", methods=["GET", "POST"])
 def submit_recipe():
     if "user" not in session:
@@ -106,30 +116,24 @@ def submit_recipe():
     
     if request.method == "POST":
 
-        # refactor to reduce repition
         # takes user data and turns it into an array to be stored in MongoDB
         ingrediant_string = request.form.get("ingrediant_list")
-        # in case user C+V's in instructions
-        ingrediant_remove_new_lines = ingrediant_string.replace("\r\n", ",")
-        ingrediant_list = ingrediant_remove_new_lines.split(",")
-        ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
+        ingrediant_list = format_string_to_list(ingrediant_string)
         tags_string = request.form.get("tags")
-        tags_list = tags_string.split(",")
-        tags_list_stripped = [i.lstrip() for i in tags_list]
+        tags_list = format_string_to_list(tags_string)
         instructions_string = request.form.get("instructions")
-        instructions_list = instructions_string.split("\r\n")
-        instructions_list_stripped = [i.lstrip() for i in instructions_list]
+        instructions_list = format_string_to_list(instructions_string, False)
 
         recipe = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
-            "tags": tags_list_stripped,
+            "tags": tags_list,
             "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": ingrediant_list_stripped,
+            "ingrediant_list": ingrediant_list,
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
-            "instructions": instructions_list_stripped,
+            "instructions": instructions_list,
             "colour_code": request.form.get("colour_code"),
             "url": request.form.get("url"),
             "timestamp": datetime.datetime.utcnow()
@@ -153,38 +157,31 @@ def edit_recipe(recipe_id):
     
     if request.method == "POST":
 
-        # refactor to reduce repition
         # takes user data and turns it into an array to be stored in MongoDB
         ingrediant_string = request.form.get("ingrediant_list")
-        # in case user C+V's in instructions
-        ingrediant_remove_new_lines = ingrediant_string.replace("\r\n", "")
-        ingrediant_list = ingrediant_remove_new_lines.split(",")
-        ingrediant_list_stripped = [i.lstrip() for i in ingrediant_list]
+        ingrediant_list = format_string_to_list(ingrediant_string)
         tags_string = request.form.get("tags")
-        tags_list = tags_string.split(",")
-        tags_list_stripped = [i.lstrip() for i in tags_list]
+        tags_list = format_string_to_list(tags_string)
         instructions_string = request.form.get("instructions")
-        instructions_list = instructions_string.split("\r\n")
-        instructions_list_stripped = [i.lstrip() for i in instructions_list]
+        instructions_list = format_string_to_list(instructions_string, False)
 
         edit = {
             "author": session["user"],
             "recipe_name": request.form.get("recipe_name"),
-            "tags": tags_list_stripped,
+            "tags": tags_list,
             "cuisine_id": request.form.get("cuisine_id"),
-            "ingrediant_list": ingrediant_list_stripped,
+            "ingrediant_list": ingrediant_list,
             "serves": request.form.get("serves"),
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
-            "instructions": instructions_list_stripped,
+            "instructions": instructions_list,
             "colour_code": request.form.get("colour_code"),
             "url": request.form.get("url"),
             "timestamp": datetime.datetime.utcnow()
         }
         mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
         flash("Recipe successfully edited")
-        return redirect(url_for(
-                    "dashboard", user_name=session["user"]))
+        return redirect(url_for("dashboard"))
     
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template(
@@ -213,7 +210,7 @@ def delete_recipe(recipe_id):
 
     mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
     flash("Recipe successfully deleted")
-    return redirect(url_for("dashboard", user_name=session["user"]))
+    return redirect(url_for("dashboard"))
 
 
 @app.route("/cuisines")
