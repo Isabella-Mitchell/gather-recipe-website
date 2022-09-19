@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="row">
-    <div class="col s12 s12 m8 offset-m2">
+    <div class="col s12 m8 offset-m2">
         <div class="card-panel">
             <div class="card-image-url">
                 <span class="image-url">{{recipe.image_url}}</span>
@@ -14,7 +14,7 @@
             <h6>Ingrediants</h6>
             <div class="string-to-array">{{recipe.ingrediant_list}}</div>
             <p>Servings: {{recipe.serves}}</p>
-            <p>Takes: {{recipe.duration}}</p>
+            <p>Takes: {{recipe.duration}} minutes</p>
             <p>Difficulty Level: {{recipe.difficulty}}</p>
             <h6>Steps:</h6>
             <div class="steps-string-to-array">{{recipe.instructions}}</div>

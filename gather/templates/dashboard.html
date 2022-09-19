@@ -12,7 +12,7 @@
     <div class="row">
         {% for recipe in user_recipes %}
 
-        <div class="col s12 m4">
+        <div class="col s12 m6 xl4">
             <div class="card hoverable">
                 <div class="card-image">
                     <div class="card-image-url">
@@ -31,7 +31,7 @@
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
                     <p>Servings: {{recipe.serves}}</p>
-                    <p>Takes: {{recipe.duration}}</p>
+                    <p>Takes: {{recipe.duration}} minutes</p>
                     <p>Difficulty Level: {{recipe.difficulty}}</p>
                     <h6>Ingrediants</h6>
                     <div class="string-to-array">{{recipe.ingrediant_list}}</div>
