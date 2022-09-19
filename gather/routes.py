@@ -137,7 +137,7 @@ def submit_recipe():
             "duration": request.form.get("duration"),
             "difficulty": request.form.get("difficulty"),
             "instructions": instructions_list,
-            "colour_code": request.form.get("colour_code"),
+            "image_url": request.form.get("image_url"),
             "url": request.form.get("url"),
             "timestamp": datetime.datetime.utcnow()
         }
@@ -180,7 +180,7 @@ def edit_recipe(recipe_id):
                 "duration": request.form.get("duration"),
                 "difficulty": request.form.get("difficulty"),
                 "instructions": instructions_list,
-                "colour_code": request.form.get("colour_code"),
+                "image_url": request.form.get("image_url"),
                 "url": request.form.get("url"),
                 "timestamp": datetime.datetime.utcnow()
             }

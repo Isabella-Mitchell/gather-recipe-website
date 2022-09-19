@@ -1,16 +1,21 @@
  //Functions
 
+
 /**
  * Sets the background colour of the recipe card image based on the recipe's colour code 
  * */
- function setRecipeColourImage() {
-    let colourCodes = document.getElementsByClassName("colour-code");
+ function setRecipeImage() {
+    let recipeImages = document.getElementsByClassName("image-url");
+    console.log(recipeImages)
     let parent
-    let colourCode
-    for(let i = 0; i < colourCodes.length; i++) {
-        parent = colourCodes[i].parentNode;
-        colourCode = colourCodes[i].textContent;
-        parent.style.backgroundColor = colourCode;
+    let imageUrl
+    for(let i = 0; i < recipeImages.length; i++) {
+        parent = recipeImages[i].parentNode;
+        imageUrl = recipeImages[i].textContent;
+        console.log(imageUrl);
+        parent.style.backgroundImage = "url(" + imageUrl + ")";
+        parent.style.backgroundRepeat = "no-repeat";
+        parent.style.backgroundSize = "cover";
     }
 };
 
@@ -144,25 +149,6 @@ function turnStepsStringIntoArray() {
     }
 };
 
-/**
- * Used in Edit Recipe form. Shows colour swatch of selected colour in drop down.
- * */
-function colourSwatch() {
-    let selected = document.getElementsByClassName("selected");
-    //stops error showing on pages that do not contain edit form
-    if(selected.length > 0){
-        let colour = selected[2];
-        let colourCode = selected[2].textContent;
-        let colourTextNode = colour.children[0];
-        let newSwatch = document.createElement("span");
-        newSwatch.id = ("swatch");
-        newSwatch.style.backgroundColor = colourCode;
-        newSwatch.textContent = `Currently Selected: ${colourCode}`;
-        colour.removeChild(colourTextNode);
-        colour.appendChild(newSwatch);
-    }
-};
-
 $(document).ready(function(){
     $('.sidenav').sidenav();
     $('select').formSelect();
@@ -197,12 +183,11 @@ $(document).ready(function(){
         });
     }
 
-    setRecipeColourImage();
     turnArrayIntoString();
     turnStringIntoArray();
     turnStepsArrayIntoString();
     turnStepsStringIntoArray();
-    colourSwatch();
+    setRecipeImage();
 
     //To stop people entering instead of using commas.
     $('#ingrediant_list').keypress(function (e) {

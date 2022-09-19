@@ -15,13 +15,13 @@
         <div class="col s12 m4">
             <div class="card hoverable">
                 <div class="card-image">
-                    <div class="card-image-colour">
-                        <span class="colour-code">{{recipe.colour_code}}</span>
+                    <div class="card-image-url">
+                        <span class="image-url">{{recipe.image_url}}</span>
                     </div>
-                    <span class="card-title">{{recipe.recipe_name}}</span>
                     <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-plus"></i></a>
                 </div>
                 <div class="card-content">
+                    <span class="card-title">{{recipe.recipe_name}}</span>
                     <p class="card-preview">By {{recipe.author}}.</p>
                     <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
                     {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}

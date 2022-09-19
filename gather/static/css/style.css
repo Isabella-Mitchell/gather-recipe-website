@@ -71,7 +71,7 @@ body {
 /*--------------------- Cards --------------------*/
 
 .card {
-    height: 400px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -82,12 +82,12 @@ body {
     height: 200px;
 }
 
-.card-image-colour {
+.card-image-url {
     height: 175px;
 }
 
 /*Hidden code displayed on colour top on card*/
-.colour-code {
+.image-url {
     display: none;
 }
 
