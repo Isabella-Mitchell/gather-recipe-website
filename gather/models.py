@@ -1,16 +1,6 @@
 from gather import db
 
 
-class Category(db.Model):
-    # schema for the Category model - to be removed
-    id = db.Column(db.Integer, primary_key=True)
-    category_name = db.Column(db.String(40), unique=True, nullable=False)
-
-    def __repr__(self):
-        # __repr__ to represent itself in the form of a string
-        return self.category_name
-
-
 class Cuisine(db.Model):
     # schema for the Cuisine model
     id = db.Column(db.Integer, primary_key=True)
@@ -37,9 +27,7 @@ class User(db.Model):
 
 
 class Favourite(db.Model):
-    # schema for the Favourite model. wanted to make user_name into foreign key but this caused bug. 
-    # This hasn't pulled into Heroku properly yet
-    # Also could set up cascade delete so if user is deleted, so are all favourites
+    # schema for the Favourite model.
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(50), nullable=False)
     recipe_id = db.Column(db.String(50), nullable=False)
