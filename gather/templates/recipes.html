@@ -12,7 +12,7 @@
                 <div class="card-image-url">
                     <span class="image-url">{{recipe.image_url}}</span>
                 </div>
-                <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator"><i class="fa-solid fa-plus"></i></a>
+                <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
             </div>
             <div class="card-content">
                 <span class="card-title">{{recipe.recipe_name}}</span>
@@ -34,9 +34,9 @@
                 <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
             </div>
             <div class="recipe-buttons">
-                <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file"></i></a>
                 {% if session.user %}
-                <a href="{{ url_for('add_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe"><i class="fa-regular fa-star"></i></a>
+                <a href="{{ url_for('add_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe">Favourite <i class="fa-regular fa-star"></i></a>
                 {% endif %}
             </div>
         </div>
