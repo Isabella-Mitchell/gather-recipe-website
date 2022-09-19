@@ -13,7 +13,6 @@ difficulty_levels = ["Easy", "More effort", "A Challenge"]
 def is_admin(username):
     return username in ["admin", "mit"]
 
-
 @app.route("/")
 @app.route("/recipes")
 def get_recipes():
@@ -85,10 +84,12 @@ def login():
 def dashboard():        
     if "user" in session:
         user_recipes = mongo.db.recipes.find({"author": session["user"]})
+        user_favourites = list(Favourite.query.order_by(Favourite.user_name).all())
+        print(user_favourites)
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
         return render_template(
             "dashboard.html", user_recipes=user_recipes, 
-            cuisines=cuisines)
+            cuisines=cuisines, useer_favourites=user_favourites)
 
     return redirect(url_for("login"))
 
