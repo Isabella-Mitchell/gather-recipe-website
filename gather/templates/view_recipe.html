@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="s12 m8 offset-m2 center-align">
-    <h3 class="page-title">View Recipe</h3>
-    <button class="btn waves-effect waves-light btn-black" onclick="history.back()"><i class="fa-solid fa-angle-left"></i> Go Back</button>
-</div>
 
 <div class="row">
     <div class="col s12 s12 m8 offset-m2">
         <div class="card-panel">
-            <h4>{{recipe.recipe_name}}</h4>
+            <div class="card-image-url">
+                <span class="image-url">{{recipe.image_url}}</span>
+            </div>
+            <h3 class="page-title">{{recipe.recipe_name}}</h3>
             <p>By {{recipe.author}}.</p>
             <div class="array-string">Tags: {{recipe.tags}}</div>
             <p>Put in cuisine here?</p>

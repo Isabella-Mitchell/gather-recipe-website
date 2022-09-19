@@ -12,10 +12,16 @@
     for(let i = 0; i < recipeImages.length; i++) {
         parent = recipeImages[i].parentNode;
         imageUrl = recipeImages[i].textContent;
-        console.log(imageUrl);
-        parent.style.backgroundImage = "url(" + imageUrl + ")";
-        parent.style.backgroundRepeat = "no-repeat";
-        parent.style.backgroundSize = "cover";
+        if (imageUrl != ""){
+            console.log(imageUrl);
+            parent.style.backgroundImage = "url(" + imageUrl + ")";
+            parent.style.backgroundRepeat = "no-repeat";
+            parent.style.backgroundSize = "cover";
+            parent.style.backgroundPosition = "center";
+        } else {
+            console.log(parent);
+            parent.classList.add("holding-image")
+        }
     }
 };
 
