@@ -1,0 +1,14 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<h3 class="page-title">User Favourites</h3>
+
+<div class="row">
+
+    {% for favourite_recipe in favourite_recipes %} 
+    <p>{{favourite_recipe.recipe_name}}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
+

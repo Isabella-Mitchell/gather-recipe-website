@@ -10,7 +10,9 @@
             <h3 class="page-title">{{recipe.recipe_name}}</h3>
             <p>By {{recipe.author}}.</p>
             <div class="array-string">Tags: {{recipe.tags}}</div>
-            <p>Put in cuisine here?</p>
+            {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
+            <p class="card-preview">{{ cuisine.cuisine_name }}</p>
+            {% endif %} {% endfor %}
             <h6>Ingrediants</h6>
             <div class="string-to-array">{{recipe.ingrediant_list}}</div>
             <p>Servings: {{recipe.serves}}</p>

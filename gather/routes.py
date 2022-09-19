@@ -303,3 +303,16 @@ def add_favourite(recipe_id):
         return redirect(url_for("get_recipes"))
 
     return render_template("add_favourite.html", recipe=recipe)
+
+
+@app.route("/recipes/favourites")
+def favourite_recipes():
+    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+    user_favourite_recipes = list(Favourite.query.filter(Favourite.user_name == session["user"]))
+    favourite_recipes = []
+    for item in user_favourite_recipes:
+        print(item.recipe_id)
+        favourite_recipe = mongo.db.recipes.find_one({"_id": ObjectId(item.recipe_id)})
+        favourite_recipes.append(favourite_recipe)
+    print(favourite_recipes)
+    return render_template("favourite_recipes.html", favourite_recipes=favourite_recipes, cuisines=cuisines)
