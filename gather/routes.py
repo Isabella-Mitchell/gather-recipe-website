@@ -13,6 +13,16 @@ difficulty_levels = ["Easy", "More effort", "A Challenge"]
 def is_admin(username):
     return username in ["admin", "mit"]
 
+
+def get_favourite_recipes(username):
+    user_favourite_recipes = list(Favourite.query.filter(Favourite.user_name == username))
+    favourite_recipes = []
+    for item in user_favourite_recipes:
+        favourite_recipe = mongo.db.recipes.find_one({"_id": ObjectId(item.recipe_id)})
+        favourite_recipes.append(favourite_recipe)
+    return favourite_recipes
+
+
 @app.route("/")
 @app.route("/recipes")
 def get_recipes():
@@ -85,9 +95,10 @@ def dashboard():
     if "user" in session:
         user_recipes = mongo.db.recipes.find({"author": session["user"]})
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+        favourite_recipes = get_favourite_recipes(session["user"])
         return render_template(
             "dashboard.html", user_recipes=user_recipes, 
-            cuisines=cuisines)
+            cuisines=cuisines, favourite_recipes=favourite_recipes)
 
     return redirect(url_for("login"))
 
@@ -307,12 +318,7 @@ def add_favourite(recipe_id):
 
 @app.route("/recipes/favourites")
 def favourite_recipes():
-    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    user_favourite_recipes = list(Favourite.query.filter(Favourite.user_name == session["user"]))
-    favourite_recipes = []
-    for item in user_favourite_recipes:
-        print(item.recipe_id)
-        favourite_recipe = mongo.db.recipes.find_one({"_id": ObjectId(item.recipe_id)})
-        favourite_recipes.append(favourite_recipe)
-    print(favourite_recipes)
+    if "user" in session:
+        cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+        favourite_recipes = get_favourite_recipes(session["user"])
     return render_template("favourite_recipes.html", favourite_recipes=favourite_recipes, cuisines=cuisines)
