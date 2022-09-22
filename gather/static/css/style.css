@@ -76,6 +76,10 @@ body {
     z-index: 2;
 }
 
+.three-across {
+    min-height: 300px;
+}
+
 /*--------------------- Footer Styles --------------------*/
 
 .page-footer {
