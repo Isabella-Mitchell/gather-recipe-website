@@ -6,24 +6,39 @@
 <div class="jumbotron">
     <div class="jumbatron-overlay"></div>
     <div class="jumbatron-content">
-        <h2 class="page-title">Gather Your Favourite Recipes</h2>
-        <button>Start Now</button>
+        <h2 class="page-title-responsive">All your favourite recipes</h2>
+        <h3 class="page-subtitle">Gathered in one place</h3>
+        {% if session.user %}
+        <a href="{{ url_for('get_recipes') }}" class="btn waves-effect waves-light gather-colour">Discover Recipes</a>
+        {% else %}
+        <a href="{{ url_for('register') }}" class="btn waves-effect waves-light gather-colour">Get Started</a>
+        {% endif %}
     </div>
 </div>
 
 <div class="container">
-    <div class="three-across">
-        <div class="row">
-            <div class="col s12 m6 l4">
-                <p>box one</p>
+        <div class="row three-across">
+            <div class="col s12 m6 l4 center-align offset-m2">
+                <div class="card-panel">
+                <h4><i class="fa-solid fa-layer-group gather-red-text"></i></h4>
+                <h4 class="page-title gather-red-text">Submit</h4>
+                <p>Condense your cookbooks and upload recipes to your profile.</p>
+                </div>
             </div>
-            <div class="col s12 m6 l4">
-                <p>box two</p>
+            <div class="col s12 m6 l4 center-align offset-m2">
+                <div class="card-panel">
+                <h4><i class="fa-solid fa-users gather-red-text"></i></h4>
+                <h4 class="page-title gather-red-text">Share</h4>
+                <p>Join the Gather community and discover recipes from other users.</p>
             </div>
-            <div class="col s12 m6 l4">
-                <p>box three</p>
             </div>
-        </div>
+            <div class="col s12 m6 l4 center-align offset-m2">
+                <div class="card-panel">
+                <h4><i class="fa-solid fa-star gather-red-text"></i></h4>
+                <h4 class="page-title gather-red-text">Save</h4>
+                <p>Add to favourites and easily access your go-to recipes.</p>
+            </div>
+            </div>
     </div>
 
     <h4 class="page-title">Recently Added Recipes</h4>

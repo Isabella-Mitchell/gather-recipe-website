@@ -21,10 +21,11 @@
                         <a href="{{ url_for('index') }}" class="brand-logo">Gather</a>
                         <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                             {% if session.user %}
-                            <li><a href="{{ url_for('dashboard') }}">My Dashboard</a></li>
-                            <li><a href="{{ url_for('favourite_recipes') }}">Favourite Recipes</a></li>
+                            <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
+                            <li><a href="{{ url_for('dashboard') }}">My Recipes</a></li>
+                            <li><a href="{{ url_for('favourite_recipes') }}">My Favourites</a></li>
+                            <!--change so not just mit-->
                                 {% if session.user|lower == "mit"|lower %}
                                 <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
                                 {% endif %}

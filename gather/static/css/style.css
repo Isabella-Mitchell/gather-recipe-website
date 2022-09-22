@@ -74,10 +74,16 @@ body {
 
 .jumbatron-content {
     z-index: 2;
+    text-align: center;
 }
 
 .three-across {
-    min-height: 300px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.gather-red-text {
+    color: #d71a2c;
 }
 
 /*--------------------- Footer Styles --------------------*/
@@ -98,6 +104,18 @@ body {
 .page-title {
     font-family: "Fredoka One", cursive;
     text-align: center;
+}
+
+.page-title-responsive {
+    font-size: xx-large;
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+}
+
+.page-subtitle {
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+    font-size: x-large;
 }
 
 /*--------------------- Cards --------------------*/
@@ -155,6 +173,10 @@ body {
 
 .full-width {
     width: 100%;
+}
+
+.icon-padding {
+    padding-left: 2px;
 }
 
 /*--------------------- Form Componants --------------------*/
