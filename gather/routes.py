@@ -24,6 +24,12 @@ def get_favourite_recipes(username):
 
 
 @app.route("/")
+def index():
+    recipes = mongo.db.recipes.find()
+    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+    return render_template("index.html", recipes=recipes, cuisines=cuisines)
+
+
 @app.route("/recipes")
 def get_recipes():
     recipes = mongo.db.recipes.find()
