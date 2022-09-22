@@ -176,7 +176,11 @@ body {
 }
 
 .icon-padding {
-    padding-left: 2px;
+    padding-left: 4px;
+}
+
+.icon-padding-right {
+    padding-right: 4px;
 }
 
 /*--------------------- Form Componants --------------------*/
