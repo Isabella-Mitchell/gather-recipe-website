@@ -26,8 +26,10 @@ def get_favourite_recipes(username):
 @app.route("/")
 def index():
     recipes = mongo.db.recipes.find()
+    recently_added_recipes = recipes.sort("timestamp").limit(3)
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    return render_template("index.html", recipes=recipes, cuisines=cuisines)
+    return render_template("index.html", recipes=recipes, cuisines=cuisines, 
+    recently_added_recipes=recently_added_recipes)
 
 
 @app.route("/recipes")
@@ -151,7 +153,7 @@ def submit_recipe():
             "cuisine_id": request.form.get("cuisine_id"),
             "ingrediant_list": ingrediant_list,
             "serves": request.form.get("serves"),
-            "duration": request.form.get("duration"),
+            "duration": request.form.get("duration", type=int),
             "difficulty": request.form.get("difficulty"),
             "instructions": instructions_list,
             "image_url": request.form.get("image_url"),
@@ -194,7 +196,7 @@ def edit_recipe(recipe_id):
                 "cuisine_id": request.form.get("cuisine_id"),
                 "ingrediant_list": ingrediant_list,
                 "serves": request.form.get("serves"),
-                "duration": request.form.get("duration"),
+                "duration": request.form.get("duration", type=int),
                 "difficulty": request.form.get("difficulty"),
                 "instructions": instructions_list,
                 "image_url": request.form.get("image_url"),
