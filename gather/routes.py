@@ -34,7 +34,8 @@ def index():
 def get_recipes():
     recipes = mongo.db.recipes.find()
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    return render_template("recipes.html", recipes=recipes, cuisines=cuisines)
+    favourite_recipes = get_favourite_recipes(session["user"])
+    return render_template("recipes.html", recipes=recipes, cuisines=cuisines, favourite_recipes=favourite_recipes)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -320,6 +321,19 @@ def add_favourite(recipe_id):
         return redirect(url_for("get_recipes"))
 
     return render_template("add_favourite.html", recipe=recipe)
+
+
+@app.route("/recipe/<recipe_id>/unfavourite")
+def remove_favourite(recipe_id):
+
+    try:
+        favourite = Favourite.query.get_or_404(recipe_id)
+        db.session.delete(favourite)
+        db.session.commit()
+        return redirect(url_for("get_recipes"))
+    except:
+        return redirect(url_for("get_recipes"))
+
 
 
 @app.route("/recipes/favourites")

@@ -203,11 +203,10 @@ body {
     padding-right: 4px;
 }
 
-/*--------------------- Form Componants --------------------*/
+/*--------------------- Forms --------------------*/
 
-#swatch {
-    height: 40px;
-    color: white;
+.inline-inform {
+    display: inline;
 }
 
 /*--------------------- Lists --------------------*/
