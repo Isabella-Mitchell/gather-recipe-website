@@ -1,12 +1,46 @@
 {% extends "base.html" %} 
 {% block content %}
 
-<h3 class="page-title">User Favourites</h3>
+<h3 class="page-title-responsive">{{ session['user'] }}'s favourite recipes</h3>
 
 <div class="row">
 
     {% for favourite_recipe in favourite_recipes %} 
-    <p>{{favourite_recipe.recipe_name}}</p>
+
+    <div class="col s12 m6 xl4">
+        <div class="card hoverable">
+            <div class="card-image">
+                <div class="card-image-url">
+                    <span class="image-url">{{favourite_recipe.image_url}}</span>
+                </div>
+                <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
+            <div class="card-content">
+                <span class="card-title">{{favourite_recipe.recipe_name}}</span>
+                <p class="card-preview">By {{favourite_recipe.author}}.</p>
+                <div class="array-string card-preview">Tags: {{favourite_recipe.tags}}</div>
+                {% for cuisine in cuisines %} {% if cuisine.id == favourite_recipe.cuisine_id | int %}
+                <p class="card-preview">{{ cuisine.cuisine_name }}</p>
+                {% endif %} {% endfor %}
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{favourite_recipe.recipe_name}}</span>
+                <p>Servings: {{favourite_recipe.serves}}</p>
+                <p>Takes: {{favourite_recipe.duration}} minutes</p>
+                <p>Difficulty Level: {{favourite_recipe.difficulty}}</p>
+                <h6>Ingrediants</h6>
+                <div class="string-to-array">{{favourite_recipe.ingrediant_list}}</div>
+                <h6>Steps:</h6>
+                <div class="steps-string-to-array">{{favourite_recipe.instructions}}</div>
+                <p>URL: <a href="{{favourite_recipe.url}}" target="_blank">{{favourite_recipe.url}}</a></p>
+            </div>
+            <div class="recipe-buttons">
+                <a href="{{ url_for('view_recipe', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-solid fa-magnifying-glass icon-padding"></i></a>
+                <a href="{{ url_for('add_favourite', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></a>
+            </div>
+        </div>
+    </div>
+    
     {% endfor %}
 </div>
 
