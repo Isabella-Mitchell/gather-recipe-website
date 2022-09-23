@@ -326,14 +326,18 @@ def add_favourite(recipe_id):
 @app.route("/recipe/<recipe_id>/unfavourite")
 def remove_favourite(recipe_id):
 
-    try:
-        favourite = Favourite.query.get_or_404(recipe_id)
+    find_favourite = Favourite.query.filter(
+    Favourite.recipe_id == (recipe_id)).first()
+
+    if find_favourite:
+        favourite = Favourite.query.get_or_404(find_favourite.id)
         db.session.delete(favourite)
         db.session.commit()
-        return redirect(url_for("get_recipes"))
-    except:
-        return redirect(url_for("get_recipes"))
 
+        flash("Favourite Removed")
+        return redirect(url_for("get_recipes"))
+    else:
+        return redirect(url_for("get_recipes"))
 
 
 @app.route("/recipes/favourites")
