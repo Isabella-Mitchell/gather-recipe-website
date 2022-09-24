@@ -9,6 +9,7 @@
         </div>
     </div>
 
+    {% if user_recipes|length > 0 %}
     <div class="row">
         {% for recipe in user_recipes %}
 
@@ -51,5 +52,11 @@
 
         {% endfor %}
     </div>
+    {% else %}
+    <div class="row">
+        <p>Add some recipes!</p>
+    </div>
+    {% endif %}
+
 
 {% endblock %}

@@ -118,7 +118,7 @@ def login():
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():        
     if "user" in session:
-        user_recipes = mongo.db.recipes.find({"author": session["user"]})
+        user_recipes = list(mongo.db.recipes.find({"author": session["user"]}))
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
         favourite_recipes = get_favourite_recipes(session["user"])
         return render_template(
@@ -360,5 +360,5 @@ def remove_favourite(recipe_id):
 def favourite_recipes():
     if "user" in session:
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-        favourite_recipes = get_favourite_recipes(session["user"])
+        favourite_recipes = list(get_favourite_recipes(session["user"]))
     return render_template("favourite_recipes.html", favourite_recipes=favourite_recipes, cuisines=cuisines)
