@@ -35,8 +35,8 @@
                 <p>URL: <a href="{{favourite_recipe.url}}" target="_blank">{{favourite_recipe.url}}</a></p>
             </div>
             <div class="recipe-buttons">
-                <a href="{{ url_for('view_recipe', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-solid fa-magnifying-glass icon-padding"></i></a>
-                <a href="{{ url_for('add_favourite', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></a>
+                <a href="{{ url_for('view_recipe', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file icon-padding"></i></a>
+                <a href="{{ url_for('remove_favourite', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
             </div>
         </div>
     </div>

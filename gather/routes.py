@@ -27,9 +27,16 @@ def get_favourite_recipes(username):
 def index():
     recipes = mongo.db.recipes.find()
     recently_added_recipes = recipes.sort("timestamp").limit(3)
+    quick_recipes = mongo.db.recipes.find().sort("duration").limit(3)
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    return render_template("index.html", recipes=recipes, cuisines=cuisines, 
-    recently_added_recipes=recently_added_recipes)
+    if "user" in session:
+        favourite_recipes = get_favourite_recipes(session["user"])
+        return render_template("index.html", recipes=recipes, cuisines=cuisines, 
+        recently_added_recipes=recently_added_recipes, quick_recipes=quick_recipes,
+        favourite_recipes=favourite_recipes)
+    else:
+        return render_template("index.html", recipes=recipes, cuisines=cuisines, 
+        recently_added_recipes=recently_added_recipes, quick_recipes=quick_recipes)
 
 
 @app.route("/recipes")
@@ -85,7 +92,7 @@ def login():
                 flash("Welcome, {}".format(
                     request.form.get("user_name")))
                 return redirect(url_for(
-                    "dashboard"))
+                    "get_recipes"))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")

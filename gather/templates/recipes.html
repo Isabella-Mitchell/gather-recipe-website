@@ -35,14 +35,15 @@
             </div>
             <div class="recipe-buttons">
                 <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file icon-padding"></i></a>
-                {% for favourite_recipe in favourite_recipes if favourite_recipe._id == recipe._id %}
-                    <p>Checking if {{favourite_recipe._id}} is a match to {{recipe._id}}</p>
-                    <a href="{{ url_for('remove_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
-                    {% else %}
-                        <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id) }}" class="inline-inform">
-                            <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
-                        </form>
-                {% endfor %}
+                {% if session.user %}
+                    {% for favourite_recipe in favourite_recipes if favourite_recipe._id == recipe._id %}
+                        <a href="{{ url_for('remove_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
+                        {% else %}
+                            <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id) }}" class="inline-inform">
+                                <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
+                            </form>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

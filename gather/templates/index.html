@@ -9,9 +9,9 @@
         <h2 class="page-title-responsive">All your favourite recipes</h2>
         <h3 class="page-subtitle">Gathered in one place</h3>
         {% if session.user %}
-        <a href="{{ url_for('get_recipes') }}" class="btn waves-effect waves-light gather-colour">Discover Recipes</a>
+        <a href="{{ url_for('get_recipes') }}" class="btn waves-effect waves-light gather-colour btn-large">Discover Recipes</a>
         {% else %}
-        <a href="{{ url_for('register') }}" class="btn waves-effect waves-light gather-colour">Get Started</a>
+        <a href="{{ url_for('register') }}" class="btn waves-effect waves-light gather-colour btn-large">Get Started</a>
         {% endif %}
     </div>
 </div>
@@ -23,6 +23,9 @@
                 <h4><i class="fa-solid fa-layer-group gather-red-text"></i></h4>
                 <h4 class="page-title gather-red-text">Submit</h4>
                 <p>Condense your cookbooks and upload recipes to your profile.</p>
+                {% if session.user %}
+                    <a href="{{ url_for('dashboard') }}" class="btn waves-effect waves-light gather-colour">View My Recipes</a>
+                {% endif %}
                 </div>
             </div>
             <div class="col s12 m6 l4 center-align offset-m2">
@@ -30,6 +33,9 @@
                 <h4><i class="fa-solid fa-users gather-red-text"></i></h4>
                 <h4 class="page-title gather-red-text">Share</h4>
                 <p>Join the Gather community and discover recipes from other users.</p>
+                {% if session.user %}
+                    <a href="{{ url_for('get_recipes') }}" class="btn waves-effect waves-light gather-colour">Browse All Recipes</a>
+                {% endif %}
             </div>
             </div>
             <div class="col s12 m6 l4 center-align offset-m2">
@@ -37,6 +43,9 @@
                 <h4><i class="fa-solid fa-star gather-red-text"></i></h4>
                 <h4 class="page-title gather-red-text">Save</h4>
                 <p>Add to favourites and easily access your go-to recipes.</p>
+                {% if session.user %}
+                <a href="{{ url_for('favourite_recipes') }}" class="btn waves-effect waves-light gather-colour">Go To My Favourites</a>
+                {% endif %}
             </div>
             </div>
     </div>
@@ -73,15 +82,83 @@
                     <p>URL: <a href="{{recently_added_recipe.url}}" target="_blank">{{recently_added_recipe.url}}</a></p>
                 </div>
                 <div class="recipe-buttons">
-                    <a href="{{ url_for('view_recipe', recipe_id=recently_added_recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file"></i></a>
+                    <a href="{{ url_for('view_recipe', recipe_id=recently_added_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file"></i></a>
                     {% if session.user %}
-                    <a href="{{ url_for('add_favourite', recipe_id=recently_added_recipe._id)}}" class="waves-effect waves-light btn-small btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe">Favourite <i class="fa-regular fa-star"></i></a>
+                        {% for favourite_recipe in favourite_recipes if favourite_recipe._id == recently_added_recipe._id %}
+                        <a href="{{ url_for('remove_favourite', recipe_id=recently_added_recipe_id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
+                            {% else %}
+                            <form method="POST" action="{{ url_for('add_favourite', recipe_id=recently_added_recipe._id) }}" class="inline-inform">
+                                <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
+                            </form>
+                        {% endfor %}
+                    {% else %}
+                    <a href="{{ url_for('register') }}" class="waves-effect waves-light btn btn-black">Sign in to Favourite</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    <h4 class="page-title">Quick Recipes</h4>
+    <div class="row">
+        {% for quick_recipe in quick_recipes %}
+
+        <div class="col s12 m6 xl4">
+            <div class="card hoverable">
+                <div class="card-image">
+                    <div class="card-image-url">
+                        <span class="image-url">{{quick_recipe.image_url}}</span>
+                    </div>
+                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">{{quick_recipe.recipe_name}}</span>
+                    <p class="card-preview">By {{quick_recipe.author}}.</p>
+                    <div class="array-string card-preview">Tags: {{quick_recipe.tags}}</div>
+                    {% for cuisine in cuisines %} {% if cuisine.id == quick_recipe.cuisine_id | int %}
+                    <p class="card-preview">{{ cuisine.cuisine_name }}</p>
+                    {% endif %} {% endfor %}
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{quick_recipe.recipe_name}}</span>
+                    <p>Servings: {{quick_recipe.serves}}</p>
+                    <p>Takes: {{quick_recipe.duration}} minutes</p>
+                    <p>Difficulty Level: {{quick_recipe.difficulty}}</p>
+                    <h6>Ingrediants</h6>
+                    <div class="string-to-array">{{quick_recipe.ingrediant_list}}</div>
+                    <h6>Steps:</h6>
+                    <div class="steps-string-to-array">{{quick_recipe.instructions}}</div>
+                    <p>URL: <a href="{{quick_recipe.url}}" target="_blank">{{quick_recipe.url}}</a></p>
+                </div>
+                <div class="recipe-buttons">
+                    <a href="{{ url_for('view_recipe', recipe_id=quick_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file"></i></a>
+                    {% if session.user %}
+                        {% for favourite_recipe in favourite_recipes if favourite_recipe._id == quick_recipe._id %}
+                        <a href="{{ url_for('remove_favourite', recipe_id=quick_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
+                            {% else %}
+                            <form method="POST" action="{{ url_for('add_favourite', recipe_id=quick_recipe._id) }}" class="inline-inform">
+                                <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
+                            </form>
+                        {% endfor %}
+                    {% else %}
+                    <a href="{{ url_for('register') }}" class="waves-effect waves-light btn btn-black">Sign in to Favourite</a>
                     {% endif %}
                 </div>
             </div>
         </div>
 
         {% endfor %}
+    </div>
+
+    <div class="row center-align">
+        {% if session.user %}
+        <a href="{{ url_for('get_recipes') }}" class="btn waves-effect waves-light gather-colour btn-large">View All Recipes</a>
+        {% else %}
+        <a href="{{ url_for('register') }}" class="btn waves-effect waves-light gather-colour btn-large">Sign Up Now</a>
+        {% endif %}
     </div>
 
 </div>
