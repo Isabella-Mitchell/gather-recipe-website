@@ -240,6 +240,14 @@ ol li {
 
 }
 
+@media screen and (min-width: 768px) {
+
+    .search-buttons div {
+        padding-top: 30px;
+    }
+
+}
+
 @media screen and (max-width: 768px) {
     
     .page-footer {

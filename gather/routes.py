@@ -41,7 +41,16 @@ def index():
 
 @app.route("/recipes")
 def get_recipes():
-    recipes = mongo.db.recipes.find()
+    recipes = list(mongo.db.recipes.find())
+    cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+    favourite_recipes = get_favourite_recipes(session["user"])
+    return render_template("recipes.html", recipes=recipes, cuisines=cuisines, favourite_recipes=favourite_recipes)
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     favourite_recipes = get_favourite_recipes(session["user"])
     return render_template("recipes.html", recipes=recipes, cuisines=cuisines, favourite_recipes=favourite_recipes)

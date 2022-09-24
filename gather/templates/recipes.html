@@ -3,52 +3,76 @@
 
 <h3 class="page-title-responsive">Hey good looking, what you got cooking?</h3>
 
-<div class="row">
-    {% for recipe in recipes %}
-
-    <div class="col s12 m6 xl4">
-        <div class="card hoverable">
-            <div class="card-image">
-                <div class="card-image-url">
-                    <span class="image-url">{{recipe.image_url}}</span>
+<div class="row card-panel">
+    <form action="{{ url_for('search') }}" method="post" class="col s12">
+        <div class="row">
+            <div class="input-field col s12 m8">
+                <i class="fas fa-search prefix"></i>
+                <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                <label for="query">Search Recipes</label>
+            </div>
+            <div class="col s12 m4 center-align search-buttons">
+                <div class="row">
+                    <a href="{{ url_for('get_recipes') }}" class="waves-effect waves-light btn btn-black">Reset</a>
+                    <button type="submit" class="btn waves-effect waves-light gather-colour">
+                        <i class="fas fa-search icon-padding-right"></i> Search
+                    </button>
                 </div>
-                <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
             </div>
-            <div class="card-content">
-                <span class="card-title">{{recipe.recipe_name}}</span>
-                <p class="card-preview">By {{recipe.author}}.</p>
-                <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
-                {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
-                <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
-                {% endif %} {% endfor %}
-            </div>
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
-                <p>Servings: {{recipe.serves}}</p>
-                <p>Takes: {{recipe.duration}} minutes</p>
-                <p>Difficulty Level: {{recipe.difficulty}}</p>
-                <h6>Ingrediants</h6>
-                <div class="string-to-array">{{recipe.ingrediant_list}}</div>
-                <h6>Steps:</h6>
-                <div class="steps-string-to-array">{{recipe.instructions}}</div>
-                <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
-            </div>
-            <div class="recipe-buttons">
-                <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file icon-padding"></i></a>
-                {% if session.user %}
-                    {% for favourite_recipe in favourite_recipes if favourite_recipe._id == recipe._id %}
-                        <a href="{{ url_for('remove_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
-                        {% else %}
-                            <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id) }}" class="inline-inform">
-                                <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
-                            </form>
-                    {% endfor %}
-                {% endif %}
+        </div>   
+    </form>
+</div>
+
+<div class="row">
+    {% if recipes|length > 0 %}
+        {% for recipe in recipes %}
+
+        <div class="col s12 m6 xl4">
+            <div class="card hoverable">
+                <div class="card-image">
+                    <div class="card-image-url">
+                        <span class="image-url">{{recipe.image_url}}</span>
+                    </div>
+                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">{{recipe.recipe_name}}</span>
+                    <p class="card-preview">By {{recipe.author}}.</p>
+                    <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
+                    {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
+                    <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
+                    {% endif %} {% endfor %}
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
+                    <p>Servings: {{recipe.serves}}</p>
+                    <p>Takes: {{recipe.duration}} minutes</p>
+                    <p>Difficulty Level: {{recipe.difficulty}}</p>
+                    <h6>Ingrediants</h6>
+                    <div class="string-to-array">{{recipe.ingrediant_list}}</div>
+                    <h6>Steps:</h6>
+                    <div class="steps-string-to-array">{{recipe.instructions}}</div>
+                    <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
+                </div>
+                <div class="recipe-buttons">
+                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file icon-padding"></i></a>
+                    {% if session.user %}
+                        {% for favourite_recipe in favourite_recipes if favourite_recipe._id == recipe._id %}
+                            <a href="{{ url_for('remove_favourite', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
+                            {% else %}
+                                <form method="POST" action="{{ url_for('add_favourite', recipe_id=recipe._id) }}" class="inline-inform">
+                                    <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
+                                </form>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
 
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p>Oops, no results found!</p>
+    {% endif %}
 </div>
 
 {% endblock %}
