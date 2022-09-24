@@ -312,7 +312,7 @@ def delete_cuisine(cuisine_id):
         return redirect(url_for("get_recipes"))
 
 
-@app.route("/recipe/<recipe_id>/favourite", methods=["GET", "POST"])
+@app.route("/recipe/<recipe_id>/favourite", methods=["POST"])
 def add_favourite(recipe_id):
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -328,8 +328,6 @@ def add_favourite(recipe_id):
 
         flash("New favourite added")
         return redirect(url_for("get_recipes"))
-
-    return render_template("add_favourite.html", recipe=recipe)
 
 
 @app.route("/recipe/<recipe_id>/unfavourite")
