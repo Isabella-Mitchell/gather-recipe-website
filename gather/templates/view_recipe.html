@@ -11,7 +11,7 @@
             <p>By {{recipe.author}}.</p>
             <div class="array-string">Tags: {{recipe.tags}}</div>
             {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
-            <p class="card-preview">{{ cuisine.cuisine_name }}</p>
+            <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
             {% endif %} {% endfor %}
             <h6>Ingrediants</h6>
             <div class="string-to-array">{{recipe.ingrediant_list}}</div>
@@ -20,7 +20,7 @@
             <p>Difficulty Level: {{recipe.difficulty}}</p>
             <h6>Steps:</h6>
             <div class="steps-string-to-array">{{recipe.instructions}}</div>
-            <p>URL: {{recipe.url}}</p>
+            <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
         </div>
         <div class="center-align">
             <button class="btn waves-effect waves-light btn-black" onclick="history.back()"><i class="fa-solid fa-angle-left icon-padding-right"></i> Go Back</button>

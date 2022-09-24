@@ -24,7 +24,7 @@ main {
 nav {
     background-color: #eceff1;
     box-shadow: none;
-    border-bottom: 2px solid #d55d1c;
+    border-bottom: 2px solid #acddd7;
 }
 
 nav ul a {
@@ -65,7 +65,11 @@ body {
 
 .social-links a i {
     font-size: xx-large;
-    color: #d55d1c;
+    color: #d71a2c;
+}
+
+a {
+    color: #d71a2c;
 }
 
 /*--------------------- Index Page Styles --------------------*/
@@ -110,7 +114,7 @@ body {
 
 .page-footer {
     background-color: #eceff1;
-    border-top: 2px solid #93b2da;
+    border-top: 2px solid #acddd7;
     color: #3e3d43;
 }
 
@@ -166,7 +170,7 @@ body {
 }
 
 .holding-image {
-    background-image : url('../images/small-banana-image.jpg');
+    background-image : url('../images/gather-placeholder.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

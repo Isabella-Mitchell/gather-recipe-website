@@ -19,7 +19,7 @@
                 <p class="card-preview">By {{recipe.author}}.</p>
                 <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
                 {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
-                <p class="card-preview">{{ cuisine.cuisine_name }}</p>
+                <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
                 {% endif %} {% endfor %}
             </div>
             <div class="card-reveal">

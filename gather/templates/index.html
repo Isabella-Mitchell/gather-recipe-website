@@ -67,7 +67,7 @@
                     <p class="card-preview">By {{recently_added_recipe.author}}.</p>
                     <div class="array-string card-preview">Tags: {{recently_added_recipe.tags}}</div>
                     {% for cuisine in cuisines %} {% if cuisine.id == recently_added_recipe.cuisine_id | int %}
-                    <p class="card-preview">{{ cuisine.cuisine_name }}</p>
+                    <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
                     {% endif %} {% endfor %}
                 </div>
                 <div class="card-reveal">
@@ -118,14 +118,14 @@
                     <span class="card-title">{{quick_recipe.recipe_name}}</span>
                     <p class="card-preview">By {{quick_recipe.author}}.</p>
                     <div class="array-string card-preview">Tags: {{quick_recipe.tags}}</div>
-                    {% for cuisine in cuisines %} {% if cuisine.id == quick_recipe.cuisine_id | int %}
-                    <p class="card-preview">{{ cuisine.cuisine_name }}</p>
-                    {% endif %} {% endfor %}
+                    <p>Takes: {{quick_recipe.duration}} minutes</p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{quick_recipe.recipe_name}}</span>
+                    {% for cuisine in cuisines %} {% if cuisine.id == quick_recipe.cuisine_id | int %}
+                    <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
+                    {% endif %} {% endfor %}
                     <p>Servings: {{quick_recipe.serves}}</p>
-                    <p>Takes: {{quick_recipe.duration}} minutes</p>
                     <p>Difficulty Level: {{quick_recipe.difficulty}}</p>
                     <h6>Ingrediants</h6>
                     <div class="string-to-array">{{quick_recipe.ingrediant_list}}</div>
