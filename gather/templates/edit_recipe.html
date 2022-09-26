@@ -61,14 +61,14 @@
                     <label for="difficulty">Difficulty</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <input id="duration" name="duration" value="{{ recipe.duration }}" type="number" class="validate" />
+                    <input id="duration" name="duration" value="{{ recipe.duration }}" type="number" class="validate" required/>
                     <label for="duration">Duration (in minutes)</label>
                 </div>
             </div>
             <!--Serving Size (Number)-->
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <input id="serves" name="serves" value="{{ recipe.serves }}" type="number" class="validate" />
+                    <input id="serves" name="serves" value="{{ recipe.serves }}" type="number" class="validate" required/>
                     <label for="serves">Serves</label>
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <!--Tags (Saved as an array on Mongo DB)-->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="tags" name="tags" type="text" class="materialize-textarea array-string">
+                    <textarea id="tags" name="tags" type="text" class="materialize-textarea array-string" required>
                     {{- recipe.tags -}}
 
                     </textarea>
