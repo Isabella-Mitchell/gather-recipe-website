@@ -2,14 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka+One&family=Kalam:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap");
 
-/*--------------------- Font Options (To be deleted) --------------------*/
-
-/* font-family: 'Abril Fatface', cursive;
-font-family: 'Fredoka One', cursive;
-font-family: 'Kalam', cursive;
-font-family: 'Roboto', sans-serif; */
-
-/*--------------------- Base Template Styles --------------------*/
+/*--------------------- Body and Font Styles --------------------*/
 
 body {
     display: flex;
@@ -20,6 +13,26 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+body {
+    background-color: #eceff1;
+    font-family: "Roboto", sans-serif;
+    color: #3e3d43;
+}
+
+a {
+    color: #d71a2c;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.gather-red-text {
+    color: #d71a2c;
+}
+
+/*--------------------- Nav Styles --------------------*/
 
 nav {
     background-color: #eceff1;
@@ -51,11 +64,7 @@ nav .brand-logo {
     padding-top: 10px;
 }
 
-body {
-    background-color: #eceff1;
-    font-family: "Roboto", sans-serif;
-    color: #3e3d43;
-}
+/*--------------------- Flash Messaging Styles --------------------*/
 
 .flashes {
     background-color: rgba(215, 26, 44, 0.2);
@@ -64,6 +73,19 @@ body {
     padding-left: 20px;
     margin-top: 6px;
     margin-bottom: 0;
+    color: #d71a2c;
+}
+
+/*--------------------- Footer Styles --------------------*/
+
+.page-footer {
+    background-color: #eceff1;
+    border-top: 2px solid #acddd7;
+    color: #3e3d43;
+}
+
+.footer-title {
+    font-family: "Fredoka One", cursive;
     color: #d71a2c;
 }
 
@@ -77,8 +99,23 @@ body {
     color: #d71a2c;
 }
 
-a {
-    color: #d71a2c;
+/*--------------------- Page Titles --------------------*/
+
+.page-title {
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+}
+
+.page-title-responsive {
+    font-size: xx-large;
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+}
+
+.page-subtitle {
+    font-family: "Fredoka One", cursive;
+    text-align: center;
+    font-size: x-large;
 }
 
 /*--------------------- Index Page Styles --------------------*/
@@ -115,48 +152,6 @@ a {
     padding-bottom: 40px;
 }
 
-.gather-red-text {
-    color: #d71a2c;
-}
-
-/*--------------------- Font Styles --------------------*/
-
-.text-bold {
-    font-weight: bold;
-}
-
-/*--------------------- Footer Styles --------------------*/
-
-.page-footer {
-    background-color: #eceff1;
-    border-top: 2px solid #acddd7;
-    color: #3e3d43;
-}
-
-.footer-title {
-    font-family: "Fredoka One", cursive;
-    color: #d71a2c;
-}
-
-/*--------------------- Page Titles --------------------*/
-
-.page-title {
-    font-family: "Fredoka One", cursive;
-    text-align: center;
-}
-
-.page-title-responsive {
-    font-size: xx-large;
-    font-family: "Fredoka One", cursive;
-    text-align: center;
-}
-
-.page-subtitle {
-    font-family: "Fredoka One", cursive;
-    text-align: center;
-    font-size: x-large;
-}
-
 /*--------------------- Cards --------------------*/
 
 .card {
@@ -184,6 +179,7 @@ a {
   padding: 4px 0 4px 0;
 }
 
+/*Default image if no image URL is supplied*/
 .holding-image {
     background-image : url('../images/gather-placeholder.jpg');
     background-repeat: no-repeat;
@@ -247,6 +243,7 @@ ol li {
 
 /*--------------------- Media Queries --------------------*/
 
+/*Adds padding to top of social links on bigger screens*/
 @media screen and (min-width: 1024px) {
 
     .social-links {
@@ -255,6 +252,7 @@ ol li {
 
 }
 
+/*Adds padding to top of search bar buttons on bigger screens*/
 @media screen and (min-width: 768px) {
 
     .search-buttons div {
@@ -263,10 +261,20 @@ ol li {
 
 }
 
+/*Center aligns footer content on smaller screens. Also improves spacing around buttons and on recipe cards*/
 @media screen and (max-width: 768px) {
     
     .page-footer {
         text-align: center;
+    }
+
+    .btn {
+        margin: 2px;
+    }
+
+    .card .card-title {
+        font-size: large;
+        font-weight: 400;
     }
 
 }

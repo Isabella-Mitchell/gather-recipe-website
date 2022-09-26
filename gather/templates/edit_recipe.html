@@ -9,7 +9,7 @@
             <!--Recipe Name-->
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="recipe_name" name="recipe_name" value="{{ recipe.recipe_name }}" type="text" class="validate" required />
+                    <input id="recipe_name" name="recipe_name" value="{{ recipe.recipe_name }}" type="text" class="validate" maxlength="50" required />
                     <label for="recipe_name">Recipe Name</label>
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <!--Tags (Saved as an array on Mongo DB)-->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="tags" name="tags" type="text" class="materialize-textarea array-string" required>
+                    <textarea id="tags" name="tags" type="text" class="materialize-textarea array-string" maxlength="50" required>
                     {{- recipe.tags -}}
 
                     </textarea>
