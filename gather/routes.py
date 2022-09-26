@@ -26,7 +26,7 @@ def get_favourite_recipes(username):
 @app.route("/")
 def index():
     recipes = mongo.db.recipes.find()
-    recently_added_recipes = recipes.sort("timestamp").limit(3)
+    recently_added_recipes = recipes.sort("timestamp", -1).limit(3)
     quick_recipes = mongo.db.recipes.find().sort("duration").limit(3)
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     if "user" in session:
