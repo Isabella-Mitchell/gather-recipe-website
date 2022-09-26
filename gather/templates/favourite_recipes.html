@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title">{{favourite_recipe.recipe_name}}</span>
-                    <p class="card-preview">By {{favourite_recipe.author}}.</p>
+                    <p class="card-preview">By {{favourite_recipe.author}}</p>
                     <div class="array-string card-preview">Tags: {{favourite_recipe.tags}}</div>
                     {% for cuisine in cuisines %} {% if cuisine.id == favourite_recipe.cuisine_id | int %}
                     <p class="card-preview">{{ cuisine.cuisine_name }}</p>

@@ -8,7 +8,7 @@
                 <span class="image-url">{{recipe.image_url}}</span>
             </div>
             <h3 class="page-title">{{recipe.recipe_name}}</h3>
-            <p>By {{recipe.author}}.</p>
+            <p>By {{recipe.author}}</p>
             <div class="array-string">Tags: {{recipe.tags}}</div>
             {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
             <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>

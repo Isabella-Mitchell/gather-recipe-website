@@ -64,7 +64,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title">{{recently_added_recipe.recipe_name}}</span>
-                    <p class="card-preview">By {{recently_added_recipe.author}}.</p>
+                    <p class="card-preview">By {{recently_added_recipe.author}}</p>
                     <div class="array-string card-preview">Tags: {{recently_added_recipe.tags}}</div>
                     {% for cuisine in cuisines %} {% if cuisine.id == recently_added_recipe.cuisine_id | int %}
                     <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title">{{quick_recipe.recipe_name}}</span>
-                    <p class="card-preview">By {{quick_recipe.author}}.</p>
+                    <p class="card-preview">By {{quick_recipe.author}}</p>
                     <div class="array-string card-preview">Tags: {{quick_recipe.tags}}</div>
                     <p>Takes: {{quick_recipe.duration}} minutes</p>
                 </div>
