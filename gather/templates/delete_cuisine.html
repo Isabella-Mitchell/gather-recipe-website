@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="page-title">Delete Cuisine</h3>
+
+    <div class="row">
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('delete_cuisine', cuisine_id=cuisine.id) }}">
+            <div class="card-panel">
+            <!-- cuisine name -->
+            <div class="row">
+                <div class="col s12">
+                    <p class="center-align">Are you sure you want to delete <span class="text-bold">{{ cuisine.cuisine_name }}?</span></p>
+                    <p class="center-align">This action is permanent, and it will delete any recipes associated with this cuisine.</p>
+                </div>
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a href="{{ url_for('manage_cuisines') }}" class="btn-large waves-effect waves-light btn-black">
+                        Cancel <i class="fa-solid fa-xmark"></i>
+                    </a>
+                    <button type="submit" class="btn-large waves-effect waves-light gather-colour">
+                        Delete Cuisine <i class="fa-solid fa-trash-can icon-padding"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+{% endblock %}

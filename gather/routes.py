@@ -310,18 +310,21 @@ def edit_cuisine(cuisine_id):
         return redirect(url_for("get_recipes"))
 
 
-@app.route("/cuisine/<int:cuisine_id>/delete")
+@app.route("/cuisine/<int:cuisine_id>/delete", methods=["GET", "POST"])
 def delete_cuisine(cuisine_id):
+
     if "user" not in session or not is_admin(session["user"]):
          flash("You must be admin to manage cuisines!")
          return redirect(url_for("get_recipes"))
 
     try:
         cuisine = Cuisine.query.get_or_404(cuisine_id)
-        db.session.delete(cuisine)
-        db.session.commit()
-        # mongo.db.Cuisine.delete_many({"cuisine_id": str(cuisine_id)})
-        return redirect(url_for("manage_cuisines"))
+        if request.method == "POST":
+            db.session.delete(cuisine)
+            db.session.commit()
+            # mongo.db.Cuisine.delete_many({"cuisine_id": str(cuisine_id)})
+            return redirect(url_for("manage_cuisines"))
+        return render_template("delete_cuisine.html", cuisine=cuisine)
     except:
         return redirect(url_for("get_recipes"))
 
