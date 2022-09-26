@@ -1,11 +1,32 @@
  //Functions
 
 /**
+ * Sets the background colour of the recipe card image based on the recipe's colour code 
+ * */
+ function setRecipeImage() {
+    let recipeImages = document.getElementsByClassName("image-url");
+    let parent
+    let imageUrl
+    for(let i = 0; i < recipeImages.length; i++) {
+        parent = recipeImages[i].parentNode;
+        imageUrl = recipeImages[i].textContent;
+        if (imageUrl != ""){
+            parent.style.backgroundImage = "url(" + imageUrl + ")";
+            parent.style.backgroundRepeat = "no-repeat";
+            parent.style.backgroundSize = "cover";
+            parent.style.backgroundPosition = "center";
+        } else {
+            parent.classList.add("holding-image")
+        }
+    }
+};
+
+/**
  * Used in Edit Recipe form for ingrediants and tags. 
  * Takes data stored as an array in MongoDB and presents it as a string to the user.
  * Uses commas (,) to seperate items
  * */
-function turnArrayIntoString() {
+ function turnArrayIntoString() {
     let arrayContainers = document.getElementsByClassName("array-string");
     let array;
     let removeBrackets;
