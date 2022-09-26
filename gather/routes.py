@@ -242,7 +242,7 @@ def view_recipe(recipe_id):
         return redirect(url_for("get_recipes"))
 
 
-@app.route("/recipe/<recipe_id>/delete")
+@app.route("/recipe/<recipe_id>/delete", methods=["GET", "POST"])
 def delete_recipe(recipe_id):
 
     try:
@@ -252,9 +252,14 @@ def delete_recipe(recipe_id):
             flash("You can only delete your own recipes!")
             return redirect(url_for("get_recipes"))
 
-        mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
-        flash("Recipe successfully deleted")
-        return redirect(url_for("dashboard"))
+        if request.method == "POST":
+
+            mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
+            flash("Recipe successfully deleted")
+            return redirect(url_for("dashboard"))
+
+        return render_template("delete_recipe.html", recipe=recipe)
+    
     except:
         return redirect(url_for("get_recipes"))
 

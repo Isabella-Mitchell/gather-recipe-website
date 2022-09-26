@@ -110,6 +110,12 @@ a {
     color: #d71a2c;
 }
 
+/*--------------------- Font Styles --------------------*/
+
+.text-bold {
+    font-weight: bold;
+}
+
 /*--------------------- Footer Styles --------------------*/
 
 .page-footer {

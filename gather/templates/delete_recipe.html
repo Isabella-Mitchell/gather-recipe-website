@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="page-title">Delete Recipe</h3>
+
+    <div class="row">
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('delete_recipe', recipe_id=recipe._id) }}">
+            <div class="card-panel">
+            <!-- Recipe name -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <p class="center-align">Are you sure you want to delete <span class="text-bold">{{ recipe.recipe_name }}?</span></p>
+                    <p class="center-align">This action is permanent.</p>
+                </div>
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a href="{{ url_for('dashboard') }}" class="btn-large waves-effect waves-light btn-black">
+                        Cancel <i class="fa-solid fa-xmark"></i>
+                    </a>
+                    <button type="submit" class="btn-large waves-effect waves-light gather-colour">
+                        Delete Recipe <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+{% endblock %}
