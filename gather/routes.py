@@ -272,19 +272,16 @@ def manage_cuisines():
 
 @app.route("/cuisine/add", methods=["GET", "POST"])
 def add_cuisine():
-
     if request.method == "POST":
         # checks if cuisine already exists
         existing_cuisine = Cuisine.query.filter(
-            Cuisine.cuisine_name == request.form.get(
-                "cuisine_name").lower()).all()
+            Cuisine.cuisine_name == request.form.get("cuisine_name")).all()
 
         if existing_cuisine:
             flash("Cuisine already exists")
             return redirect(url_for("add_cuisine"))
-    
+        
         cuisine = Cuisine(cuisine_name=request.form.get("cuisine_name"))
-
         db.session.add(cuisine)
         db.session.commit()
         flash("New cuisine added")
@@ -322,7 +319,8 @@ def delete_cuisine(cuisine_id):
         if request.method == "POST":
             db.session.delete(cuisine)
             db.session.commit()
-            # mongo.db.Cuisine.delete_many({"cuisine_id": str(cuisine_id)})
+            mongo.db.recipes.delete_many({"cuisine_id": str(cuisine_id)})
+            flash("Cuisine and associated recipes successfully deleted")
             return redirect(url_for("manage_cuisines"))
         return render_template("delete_cuisine.html", cuisine=cuisine)
     except:
