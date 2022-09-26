@@ -7,7 +7,7 @@
             <div class="card-image-url">
                 <span class="image-url">{{recipe.image_url}}</span>
             </div>
-            <h3 class="page-title">{{recipe.recipe_name}}</h3>
+            <h3 class="page-title-responsive">{{recipe.recipe_name}}</h3>
             <p>By {{recipe.author}}</p>
             <div class="array-string">Tags: {{recipe.tags}}</div>
             {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
