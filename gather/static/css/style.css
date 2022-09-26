@@ -32,14 +32,23 @@ nav ul a {
     font-weight: 400;
 }
 
-nav .brand-logo,
-.mobile-logo {
+nav .brand-logo {
     font-family: "Fredoka One", cursive;
     color: #d71a2c;
 }
 
-.mobile-logo {
-    padding: 0 32px;
+#mobile-logo {
+    font-family: "Fredoka One", cursive;
+    color: #d71a2c;
+    font-size: x-large;
+}
+
+.fa-bars {
+    color: #3e3d43
+}
+
+.sidenav {
+    padding-top: 10px;
 }
 
 body {
