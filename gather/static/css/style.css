@@ -157,6 +157,10 @@ nav .brand-logo {
     padding-bottom: 40px;
 }
 
+.three-across i {
+    font-size: xx-large;
+}
+
 /*--------------------- Cards --------------------*/
 
 .card {
