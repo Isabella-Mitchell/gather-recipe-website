@@ -3,8 +3,9 @@
  /**
   * Test function for Jest testing
   */
- function addition() {
-    return 42;
+ function addition(a, b) {
+    let sum = a + b;
+    return sum;
  };
 
 /**
@@ -155,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setRecipeImage();
 });
 
-/**
+ /**
  * module exports for Jest testing
  */
- module.exports = addition, turnArrayIntoString;
+  module.exports = turnArrayIntoString;

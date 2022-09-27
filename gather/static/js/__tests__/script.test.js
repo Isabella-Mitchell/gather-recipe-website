@@ -1,21 +1,16 @@
+/**
+ * @jest-environment jsdom
+ */
 
-const addition = require("../script");
 const turnArrayIntoString = require("../script");
 
-describe("Recipe Formatting", () => {
-    describe("Turn array into string", () => {
-        test("should return a string seperated by commas from a provided array", () =>{
-            expect(turnArrayIntoString(['a', 'b', 'c'])).toBe("a, b, c");
-        })
-
-    });
+beforeAll(() => {
+    document.body.innerHTML = "<div id='div' class='array-string'>['a', 'b', 'c']</div>";
 });
 
-describe("Calculator", () => {
-    describe("Addition function", () => {
-        test("shouuld return 42 for 20 + 22", () => {
-            expect(addition(20, 22)).toBe(42);
-        });
+describe("DOM tests", () => {
+    test("expects array content to turn into string", () => {
+        turnArrayIntoString();
+        expect(document.getElementById("div").innerHTML).toEqual("a, b, c");
     });
 });
-
