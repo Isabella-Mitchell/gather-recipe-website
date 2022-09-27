@@ -32,6 +32,11 @@ a {
     color: #d71a2c;
 }
 
+/*Applied so logo can be in h1 tag*/
+h1 {
+    margin: 0;
+}
+
 /*--------------------- Nav Styles --------------------*/
 
 nav {
