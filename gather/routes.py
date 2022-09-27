@@ -243,7 +243,7 @@ def edit_recipe(recipe_id):
         if "user" not in session or session["user"] != recipe["author"]:
             flash("You can only edit your own recipes!")
             return redirect(url_for("get_recipes"))
-        
+
         if request.method == "POST":
 
             # Turns user data into an array to be stored in db
@@ -278,7 +278,7 @@ def edit_recipe(recipe_id):
             return redirect(url_for("dashboard"))
     except:
         return redirect(url_for("get_recipes"))
-    
+
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template(
         "edit_recipe.html", recipe=recipe, cuisines=cuisines, 
@@ -315,7 +315,7 @@ def delete_recipe(recipe_id):
             return redirect(url_for("dashboard"))
 
         return render_template("delete_recipe.html", recipe=recipe)
-    
+
     except:
         return redirect(url_for("get_recipes"))
 
@@ -329,7 +329,7 @@ def manage_cuisines():
 
 @app.route("/cuisine/add", methods=["GET", "POST"])
 def add_cuisine():
-    # Adds new cuisine to db and renders add cuisine page
+    """ Adds new cuisine to db and renders add cuisine page """
     if request.method == "POST":
         # checks if cuisine already exists
         existing_cuisine = Cuisine.query.filter(
@@ -338,7 +338,7 @@ def add_cuisine():
         if existing_cuisine:
             flash("Cuisine already exists")
             return redirect(url_for("add_cuisine"))
-        
+
         # Adds new cuisine to db
         cuisine = Cuisine(cuisine_name=request.form.get("cuisine_name"))
         db.session.add(cuisine)
@@ -351,11 +351,11 @@ def add_cuisine():
 
 @app.route("/cuisine/<int:cuisine_id>/edit", methods=["GET", "POST"])
 def edit_cuisine(cuisine_id):
-    # Edits cuisine in db and renders edit cuisine page
+    """ Edits cuisine in db and renders edit cuisine page """
     if "user" not in session or not is_admin(session["user"]):
         flash("You must be admin to manage cuisines!")
         return redirect(url_for("get_recipes"))
-    
+
     try:
         cuisine = Cuisine.query.get_or_404(cuisine_id)
         if request.method == "POST":
@@ -370,7 +370,7 @@ def edit_cuisine(cuisine_id):
 
 @app.route("/cuisine/<int:cuisine_id>/delete", methods=["GET", "POST"])
 def delete_cuisine(cuisine_id):
-    # Deletes cuisine from db and renders confirm delete cuisine page
+    """ Deletes cuisine from db and renders confirm delete cuisine page """
 
     if "user" not in session or not is_admin(session["user"]):
         flash("You must be admin to manage cuisines!")
@@ -392,15 +392,14 @@ def delete_cuisine(cuisine_id):
 
 @app.route("/recipe/<recipe_id>/favourite", methods=["POST"])
 def add_favourite(recipe_id):
-    # adds user favourite to db
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    
+    """ adds user favourite to db """
+
     if request.method == "POST":
-	
+
         favourite = Favourite(
             user_name=session["user"].lower(),
             recipe_id=recipe_id)
-        
+
         # adds user favourite to relational db
         db.session.add(favourite)
         db.session.commit()
@@ -411,7 +410,7 @@ def add_favourite(recipe_id):
 
 @app.route("/recipe/<recipe_id>/unfavourite")
 def remove_favourite(recipe_id):
-    # remove user favourite from db
+    """ remove user favourite from db """
 
     find_favourite = Favourite.query.filter(
         Favourite.recipe_id == (recipe_id)).first()
@@ -428,8 +427,8 @@ def remove_favourite(recipe_id):
 
 
 @app.route("/recipes/favourites")
-def favourite_recipes():
-    # renders user favourites page
+def favourites():
+    """ renders user favourites page """
     if "user" in session:
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
         favourite_recipes = list(get_favourite_recipes(session["user"]))
