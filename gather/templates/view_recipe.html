@@ -4,26 +4,26 @@
 <div class="row">
     <div class="col s12 m8 offset-m2">
         <div class="card-panel">
-            <div class="card-image-url">
+            <div class="card-image-url" title="Image of {{recipe.recipe_name}}">
                 <span class="image-url">{{recipe.image_url}}</span>
             </div>
-            <h3 class="page-title-responsive">{{recipe.recipe_name}}</h3>
+            <h2 class="page-title-responsive">{{recipe.recipe_name}}</h2>
             <p>By {{recipe.author}}</p>
             <div class="array-string">Tags: {{recipe.tags}}</div>
             {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
             <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
             {% endif %} {% endfor %}
-            <h6>Ingrediants</h6>
-            <div class="string-to-array">{{recipe.ingrediant_list}}</div>
             <p>Servings: {{recipe.serves}}</p>
             <p>Takes: {{recipe.duration}} minutes</p>
             <p>Difficulty Level: {{recipe.difficulty}}</p>
-            <h6>Steps:</h6>
+            <h3 class="view-recipe-subtitle">Ingrediants</h3>
+            <div class="string-to-array">{{recipe.ingrediant_list}}</div>
+            <h3 class="view-recipe-subtitle">Steps:</h3>
             <div class="steps-string-to-array">{{recipe.instructions}}</div>
             <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
         </div>
         <div class="center-align">
-            <button class="btn waves-effect waves-light btn-black" onclick="history.back()"><i class="fa-solid fa-angle-left icon-padding-right"></i> Go Back</button>
+            <button class="btn waves-effect waves-light btn-black" onclick="history.back()" aria-label="Go back to previous page"><i class="fa-solid fa-angle-left icon-padding-right"></i> Go Back</button>
         </div>
     </div>
 </div>
