@@ -276,7 +276,7 @@ def edit_recipe(recipe_id):
             mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
             flash("Recipe successfully edited")
             return redirect(url_for("dashboard"))
-    except:
+    except Exception:
         return redirect(url_for("get_recipes"))
 
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
@@ -293,7 +293,7 @@ def view_recipe(recipe_id):
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
         return render_template(
             "view_recipe.html", recipe=recipe, cuisines=cuisines)
-    except:
+    except Exception:
         return redirect(url_for("get_recipes"))
 
 
@@ -316,7 +316,7 @@ def delete_recipe(recipe_id):
 
         return render_template("delete_recipe.html", recipe=recipe)
 
-    except:
+    except Exception:
         return redirect(url_for("get_recipes"))
 
 
@@ -364,7 +364,7 @@ def edit_cuisine(cuisine_id):
             db.session.commit()
             return redirect(url_for("manage_cuisines"))
         return render_template("edit_cuisine.html", cuisine=cuisine)
-    except:
+    except Exception:
         return redirect(url_for("get_recipes"))
 
 
@@ -386,7 +386,7 @@ def delete_cuisine(cuisine_id):
             flash("Cuisine and associated recipes successfully deleted")
             return redirect(url_for("manage_cuisines"))
         return render_template("delete_cuisine.html", cuisine=cuisine)
-    except:
+    except Exception:
         return redirect(url_for("get_recipes"))
 
 
