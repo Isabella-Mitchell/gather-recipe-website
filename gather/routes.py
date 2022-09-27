@@ -11,53 +11,101 @@ difficulty_levels = ["Easy", "More effort", "A Challenge"]
 
 
 def is_admin(username):
+    # Checks if user had admin permissions. 
+    # Can add more usernames to array.
     return username in ["admin", "mit"]
 
 
 def get_favourite_recipes(username):
-    user_favourite_recipes = list(Favourite.query.filter(Favourite.user_name == username))
+    # Returns logged in user's favourite recipes
+    # Finds user's favourites in relational database
+    user_favourite_recipes = list(Favourite.query.filter(
+        Favourite.user_name == username))
     favourite_recipes = []
+    # Finds recipes in non-relational database
     for item in user_favourite_recipes:
-        favourite_recipe = mongo.db.recipes.find_one({"_id": ObjectId(item.recipe_id)})
+        favourite_recipe = mongo.db.recipes.find_one(
+            {"_id": ObjectId(item.recipe_id)})
         favourite_recipes.append(favourite_recipe)
     return favourite_recipes
 
 
+def format_string_to_list(input, has_comma_separator=True):
+    # Formats user input into arrays for storing in db
+    # Used for submit recipe and edit recipe
+    # replaces new lines with commas
+    if has_comma_separator:
+        # for use with comma seperated entries
+        # also replaces new lines in case values C+V in
+        input_remove_new_lines = input.replace("\r\n", ",")
+        input_list = input_remove_new_lines.split(",")
+    else:
+        # for use with new line seperated entries
+        input_list = input.split("\r\n")
+    # remove trailing spaces
+    input_list_stripped = [i.lstrip() for i in input_list]
+    return input_list_stripped
+
+
 @app.route("/")
 def index():
+    # Renders index page
     recipes = mongo.db.recipes.find()
     recently_added_recipes = recipes.sort("timestamp", -1).limit(3)
     quick_recipes = mongo.db.recipes.find().sort("duration").limit(3)
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+    # If user logged in, also finds user favourites
     if "user" in session:
         favourite_recipes = get_favourite_recipes(session["user"])
-        return render_template("index.html", recipes=recipes, cuisines=cuisines, 
-        recently_added_recipes=recently_added_recipes, quick_recipes=quick_recipes,
-        favourite_recipes=favourite_recipes)
+        return render_template(
+            "index.html", recipes=recipes, 
+            cuisines=cuisines, 
+            recently_added_recipes=recently_added_recipes, 
+            quick_recipes=quick_recipes, 
+            favourite_recipes=favourite_recipes)
+    # If user logged out
     else:
-        return render_template("index.html", recipes=recipes, cuisines=cuisines, 
-        recently_added_recipes=recently_added_recipes, quick_recipes=quick_recipes)
+        return render_template(
+            "index.html", recipes=recipes, 
+            cuisines=cuisines, 
+            recently_added_recipes=recently_added_recipes, 
+            quick_recipes=quick_recipes)
 
 
 @app.route("/recipes")
 def get_recipes():
+    # Renders recipes page
+
+    # Checks if user is logged in
+    if "user" not in session:
+        flash("You need to be logged in to view recipes")
+        return redirect(url_for("login"))
+
     recipes = list(mongo.db.recipes.find())
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     favourite_recipes = get_favourite_recipes(session["user"])
-    return render_template("recipes.html", recipes=recipes, cuisines=cuisines, favourite_recipes=favourite_recipes)
+    return render_template(
+        "recipes.html", recipes=recipes, 
+        cuisines=cuisines, 
+        favourite_recipes=favourite_recipes)
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    # Renders search results on find recipes page 
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     favourite_recipes = get_favourite_recipes(session["user"])
-    return render_template("recipes.html", recipes=recipes, cuisines=cuisines, favourite_recipes=favourite_recipes)
+    return render_template(
+        "recipes.html", recipes=recipes, 
+        cuisines=cuisines, 
+        favourite_recipes=favourite_recipes)
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    # Renders register page and allows user to register 
     if request.method == "POST":
         # checks if username already exists
         existing_user = User.query.filter(
@@ -73,7 +121,8 @@ def register():
             user_last_name=request.form.get("last_name").lower(),
             password=generate_password_hash(request.form.get("password"))
         )
-        
+
+        # Add user to databsase
         db.session.add(user)
         db.session.commit()
 
@@ -87,10 +136,11 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    # Renders log in page and allows user to login 
     if request.method == "POST":
         # check if username exists in db
-        existing_user = User.query.filter(User.user_name == 
-            request.form.get("user_name").lower()).all()
+        existing_user = User.query.filter(
+            User.user_name == request.form.get("user_name").lower()).all()
 
         if existing_user:
             print(request.form.get("user_name"))
@@ -114,9 +164,10 @@ def login():
 
     return render_template("login.html")
 
-    
+
 @app.route("/dashboard", methods=["GET", "POST"])
-def dashboard():        
+def dashboard():
+    # Renders users dashboard aka My Recipes page     
     if "user" in session:
         user_recipes = list(mongo.db.recipes.find({"author": session["user"]}))
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
@@ -136,31 +187,26 @@ def logout():
     return redirect(url_for("login"))
 
 
-def format_string_to_list(input, has_comma_separator=True):
-    if has_comma_separator:
-        input_remove_new_lines = input.replace("\r\n", ",")
-        input_list = input_remove_new_lines.split(",")
-    else:
-        input_list = input.split("\r\n")
-    input_list_stripped = [i.lstrip() for i in input_list]
-    return input_list_stripped
-
-
 @app.route("/recipe/add", methods=["GET", "POST"])
 def submit_recipe():
+    # Submits user's recipe to db and renders add recipe page
     if "user" not in session:
         flash("You need to be logged in to submit a recipe")
         return redirect(url_for("get_recipes"))
     
     if request.method == "POST":
 
-        # takes user data and turns it into an array to be stored in MongoDB
+        # Turns user data into an array to be stored in db
+        # Comma seperated entry
         ingrediant_string = request.form.get("ingrediant_list")
         ingrediant_list = format_string_to_list(ingrediant_string)
+        # Comma seperated entry
         tags_string = request.form.get("tags")
         tags_list = format_string_to_list(tags_string)
+        # New line seperated entry
         instructions_string = request.form.get("instructions")
-        instructions_list = format_string_to_list(instructions_string, False)
+        instructions_list = format_string_to_list(
+            instructions_string, False)
 
         recipe = {
             "author": session["user"],
@@ -176,17 +222,20 @@ def submit_recipe():
             "url": request.form.get("url"),
             "timestamp": datetime.datetime.utcnow()
         }
+        # Adds new recipe to db
         mongo.db.recipes.insert_one(recipe)
         flash("Recipe successfully submitted")
         return redirect(url_for("get_recipes"))
 
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    return render_template("submit_recipe.html", 
-    cuisines=cuisines, difficulty_levels=difficulty_levels)
+    return render_template(
+        "submit_recipe.html", cuisines=cuisines, 
+        difficulty_levels=difficulty_levels)
 
 
 @app.route("/recipe/<recipe_id>/edit", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
+    # Edit's user's recipe and renders edit recipe page
 
     try:
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -197,13 +246,17 @@ def edit_recipe(recipe_id):
         
         if request.method == "POST":
 
-            # takes user data and turns it into an array to be stored in MongoDB
+            # Turns user data into an array to be stored in db
+            # Comma seperated entry
             ingrediant_string = request.form.get("ingrediant_list")
             ingrediant_list = format_string_to_list(ingrediant_string)
+            # Comma seperated entry
             tags_string = request.form.get("tags")
             tags_list = format_string_to_list(tags_string)
+            # New line seperated entry
             instructions_string = request.form.get("instructions")
-            instructions_list = format_string_to_list(instructions_string, False)
+            instructions_list = format_string_to_list(
+                instructions_string, False)
 
             edit = {
                 "author": session["user"],
@@ -219,6 +272,7 @@ def edit_recipe(recipe_id):
                 "url": request.form.get("url"),
                 "timestamp": datetime.datetime.utcnow()
             }
+            # Adds new recipe to db
             mongo.db.recipes.replace_one({"_id": ObjectId(recipe_id)}, edit)
             flash("Recipe successfully edited")
             return redirect(url_for("dashboard"))
@@ -233,6 +287,7 @@ def edit_recipe(recipe_id):
 
 @app.route("/recipe/<recipe_id>/view", methods=["GET"])
 def view_recipe(recipe_id):
+    # renders View Recipe page
     try:
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
@@ -244,6 +299,7 @@ def view_recipe(recipe_id):
 
 @app.route("/recipe/<recipe_id>/delete", methods=["GET", "POST"])
 def delete_recipe(recipe_id):
+    # Deletes user's recipe and renders confirm delete page
 
     try:
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
@@ -253,7 +309,7 @@ def delete_recipe(recipe_id):
             return redirect(url_for("get_recipes"))
 
         if request.method == "POST":
-
+            # Deletes user's recipe from db
             mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
             flash("Recipe successfully deleted")
             return redirect(url_for("dashboard"))
@@ -266,12 +322,14 @@ def delete_recipe(recipe_id):
 
 @app.route("/cuisines")
 def manage_cuisines():
+    # Renders manage cuisines page
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template("cuisines.html", cuisines=cuisines)
 
 
 @app.route("/cuisine/add", methods=["GET", "POST"])
 def add_cuisine():
+    # Adds new cuisine to db and renders add cuisine page
     if request.method == "POST":
         # checks if cuisine already exists
         existing_cuisine = Cuisine.query.filter(
@@ -281,6 +339,7 @@ def add_cuisine():
             flash("Cuisine already exists")
             return redirect(url_for("add_cuisine"))
         
+        # Adds new cuisine to db
         cuisine = Cuisine(cuisine_name=request.form.get("cuisine_name"))
         db.session.add(cuisine)
         db.session.commit()
@@ -292,13 +351,15 @@ def add_cuisine():
 
 @app.route("/cuisine/<int:cuisine_id>/edit", methods=["GET", "POST"])
 def edit_cuisine(cuisine_id):
+    # Edits cuisine in db and renders edit cuisine page
     if "user" not in session or not is_admin(session["user"]):
-         flash("You must be admin to manage cuisines!")
-         return redirect(url_for("get_recipes"))
+        flash("You must be admin to manage cuisines!")
+        return redirect(url_for("get_recipes"))
     
     try:
         cuisine = Cuisine.query.get_or_404(cuisine_id)
         if request.method == "POST":
+            # Edits cuisine in db
             cuisine.cuisine_name = request.form.get("cuisine_name")
             db.session.commit()
             return redirect(url_for("manage_cuisines"))
@@ -309,14 +370,16 @@ def edit_cuisine(cuisine_id):
 
 @app.route("/cuisine/<int:cuisine_id>/delete", methods=["GET", "POST"])
 def delete_cuisine(cuisine_id):
+    # Deletes cuisine from db and renders confirm delete cuisine page
 
     if "user" not in session or not is_admin(session["user"]):
-         flash("You must be admin to manage cuisines!")
-         return redirect(url_for("get_recipes"))
+        flash("You must be admin to manage cuisines!")
+        return redirect(url_for("get_recipes"))
 
     try:
         cuisine = Cuisine.query.get_or_404(cuisine_id)
         if request.method == "POST":
+            # deletes cuisine from db
             db.session.delete(cuisine)
             db.session.commit()
             mongo.db.recipes.delete_many({"cuisine_id": str(cuisine_id)})
@@ -329,7 +392,7 @@ def delete_cuisine(cuisine_id):
 
 @app.route("/recipe/<recipe_id>/favourite", methods=["POST"])
 def add_favourite(recipe_id):
-
+    # adds user favourite to db
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     
     if request.method == "POST":
@@ -337,7 +400,8 @@ def add_favourite(recipe_id):
         favourite = Favourite(
             user_name=session["user"].lower(),
             recipe_id=recipe_id)
-
+        
+        # adds user favourite to relational db
         db.session.add(favourite)
         db.session.commit()
 
@@ -347,9 +411,10 @@ def add_favourite(recipe_id):
 
 @app.route("/recipe/<recipe_id>/unfavourite")
 def remove_favourite(recipe_id):
+    # remove user favourite from db
 
     find_favourite = Favourite.query.filter(
-    Favourite.recipe_id == (recipe_id)).first()
+        Favourite.recipe_id == (recipe_id)).first()
 
     if find_favourite:
         favourite = Favourite.query.get_or_404(find_favourite.id)
@@ -364,7 +429,13 @@ def remove_favourite(recipe_id):
 
 @app.route("/recipes/favourites")
 def favourite_recipes():
+    # renders user favourites page
     if "user" in session:
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
         favourite_recipes = list(get_favourite_recipes(session["user"]))
-    return render_template("favourite_recipes.html", favourite_recipes=favourite_recipes, cuisines=cuisines)
+        return render_template(
+            "favourite_recipes.html", favourite_recipes=favourite_recipes,
+            cuisines=cuisines)
+
+    flash("You need to be logged in to view favourite recipes")
+    return redirect(url_for("login"))
