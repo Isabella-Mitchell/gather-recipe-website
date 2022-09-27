@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% block content %}
 
-<h3 class="page-title-responsive">{{ session['user'] }}'s favourite recipes</h3>
+<h2 class="page-title-responsive">{{ session['user'] }}'s favourite recipes</h2>
 
 {% if favourite_recipes|length > 0 %}
     <div class="row">
@@ -11,13 +11,13 @@
         <div class="col s12 m6 xl4">
             <div class="card hoverable">
                 <div class="card-image">
-                    <div class="card-image-url">
+                    <div class="card-image-url" title="Image of {{favourite_recipe.recipe_name}}">
                         <span class="image-url">{{favourite_recipe.image_url}}</span>
                     </div>
-                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View" aria-label="Quick view {{favourite_recipe.recipe_name}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </div>
                 <div class="card-content">
-                    <span class="card-title">{{favourite_recipe.recipe_name}}</span>
+                    <h5><span class="card-title">{{favourite_recipe.recipe_name}}</span></h5>
                     <p class="card-preview">By {{favourite_recipe.author}}</p>
                     <div class="array-string card-preview">Tags: {{favourite_recipe.tags}}</div>
                     {% for cuisine in cuisines %} {% if cuisine.id == favourite_recipe.cuisine_id | int %}
@@ -36,8 +36,8 @@
                     <p>URL: <a href="{{favourite_recipe.url}}" target="_blank">{{favourite_recipe.url}}</a></p>
                 </div>
                 <div class="recipe-buttons">
-                    <a href="{{ url_for('view_recipe', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file icon-padding"></i></a>
-                    <a href="{{ url_for('remove_favourite', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
+                    <a href="{{ url_for('view_recipe', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe" aria-label="View recipe for {{favourite_recipe.recipe_name}}">View <i class="fa-regular fa-file icon-padding"></i></a>
+                    <a href="{{ url_for('remove_favourite', recipe_id=favourite_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite" aria-label="Remove {{favourite_recipe.recipe_name}} from favourite recipes">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
                 </div>
             </div>
         </div>
@@ -45,8 +45,8 @@
         {% endfor %}
     </div>
     {% else %}
-    <div class="row">
-        <p>Add some favourites!</p>
+    <div class="row center-align">
+        <p>You haven't got any favourites yet! Find recipes to add to your favourites.</p>
     </div>
     {% endif %}
 

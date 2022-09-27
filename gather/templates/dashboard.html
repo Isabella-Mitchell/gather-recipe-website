@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="page-title-responsive">{{ session['user'] }}'s recipes</h3>
+    <h2 class="page-title-responsive">{{ session['user'] }}'s recipes</h2>
 
     <div class="row">
         <div class="col s12 center-align">
@@ -16,13 +16,13 @@
         <div class="col s12 m6 xl4">
             <div class="card hoverable">
                 <div class="card-image">
-                    <div class="card-image-url">
+                    <div class="card-image-url" title="Image of {{recipe.recipe_name}}">
                         <span class="image-url">{{recipe.image_url}}</span>
                     </div>
-                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View" aria-label="Quick view {{recipe.recipe_name}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </div>
                 <div class="card-content">
-                    <span class="card-title">{{recipe.recipe_name}}</span>
+                    <h5><span class="card-title">{{recipe.recipe_name}}</span></h5>
                     <p class="card-preview">By {{recipe.author}}</p>
                     <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
                     {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
@@ -42,9 +42,9 @@
                 </div>
                 <div class="recipe-buttons">
                     {% if session.user|lower == recipe.author|lower %}
-                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-solid fa-magnifying-glass icon-padding"></i></a>
-                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Edit Recipe">Edit <i class="fa-solid fa-pen-to-square icon-padding"></i></a>
-                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Delete Recipe">Delete <i class="fa-solid fa-trash-can icon-padding"></i></a>
+                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe" aria-label="View recipe for {{recipe.recipe_name}}">View <i class="fa-solid fa-magnifying-glass icon-padding"></i></a>
+                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Edit Recipe" aria-label="Edit recipe for {recipe.recipe_name}}">Edit <i class="fa-solid fa-pen-to-square icon-padding"></i></a>
+                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Delete Recipe" aria-label="Delete recipe for {{recipe.recipe_name}}">Delete <i class="fa-solid fa-trash-can icon-padding"></i></a>
                     {% endif %}
                 </div>
             </div>
@@ -53,8 +53,8 @@
         {% endfor %}
     </div>
     {% else %}
-    <div class="row">
-        <p>Add some recipes!</p>
+    <div class="row center-align">
+        <p>Nothing to see here... Time to add some recipes!</p>
     </div>
     {% endif %}
 

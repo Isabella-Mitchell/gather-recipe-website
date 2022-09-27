@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="page-title-responsive">Manage Cuisines</h3>
+    <h2 class="page-title-responsive">Manage Cuisines</h2>
 
     <div class="row">
         <div class="col s12 center-align">
@@ -14,7 +14,7 @@
         <div class="col s12 m6 xl4">
             <div class="card cuisine-card center-align">
                 <div class="card-content">
-                    <span class="card-title">{{ cuisine.cuisine_name }}</span>
+                    <h3><span class="card-title">{{ cuisine.cuisine_name }}</span></h3>
                 </div>
                 <div class="card-action">
                     <a href="{{ url_for('edit_cuisine', cuisine_id=cuisine.id) }}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Edit Cuisine">Edit <i class="fa-solid fa-pen-to-square icon-padding"></i></a>
