@@ -19,14 +19,14 @@
                 <div class="container">
                     <div class="nav-wrapper">
                         <a href="{{ url_for('index') }}" class="brand-logo">Gather</a>
-                        <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                        <a href="#" data-target="mobile-nav-bar" class="sidenav-trigger right" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></a>
                         <ul class="right hide-on-med-and-down">
                             {% if session.user %}
                             <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
                             <li><a href="{{ url_for('dashboard') }}">My Recipes</a></li>
                             <li><a href="{{ url_for('favourite_recipes') }}">My Favourites</a></li>
                             <!--change so not just mit-->
-                                {% if session.user|lower == "mit"|lower %}
+                                {% if session.user|lower == "mit"|lower or "admin"|lower %}
                                 <li><a href="{{ url_for('manage_cuisines') }}">Manage Cuisines</a></li>
                                 {% endif %}
                             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
@@ -40,7 +40,7 @@
             </nav>
 
             <!--mobile navbar - sourced from materialize-->
-            <ul class="sidenav" id="mobile-demo">
+            <ul class="sidenav" id="mobile-nav-bar">
                 <li><a href="{{ url_for('index') }}" id="mobile-logo">Gather</a></li>
                 {% if session.user %}
                 <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>

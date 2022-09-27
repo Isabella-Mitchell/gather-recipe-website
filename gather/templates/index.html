@@ -3,7 +3,7 @@
 
 </div>
 
-<div class="jumbotron">
+<div class="jumbotron" title="Gather recipe website">
     <div class="jumbatron-overlay"></div>
     <div class="jumbatron-content">
         <h2 class="page-title-responsive">All your favourite recipes</h2>
@@ -44,7 +44,7 @@
                 <h4 class="page-title gather-red-text">Save</h4>
                 <p>Add to favourites and easily access your go-to recipes.</p>
                 {% if session.user %}
-                <a href="{{ url_for('favourite_recipes') }}" class="btn waves-effect waves-light gather-colour">Go To My Favourites</a>
+                <a href="{{ url_for('favourite_recipes') }}" class="btn waves-effect waves-light gather-colour">See Favourites</a>
                 {% endif %}
             </div>
             </div>
@@ -57,10 +57,10 @@
         <div class="col s12 m6 xl4">
             <div class="card hoverable">
                 <div class="card-image">
-                    <div class="card-image-url">
+                    <div class="card-image-url" title="Image of {{recently_added_recipe.recipe_name}}">
                         <span class="image-url">{{recently_added_recipe.image_url}}</span>
                     </div>
-                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View" aria-label="Quick view {{recently_added_recipe.recipe_name}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </div>
                 <div class="card-content">
                     <span class="card-title">{{recently_added_recipe.recipe_name}}</span>
@@ -82,13 +82,13 @@
                     <p>URL: <a href="{{recently_added_recipe.url}}" target="_blank">{{recently_added_recipe.url}}</a></p>
                 </div>
                 <div class="recipe-buttons">
-                    <a href="{{ url_for('view_recipe', recipe_id=recently_added_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file"></i></a>
+                    <a href="{{ url_for('view_recipe', recipe_id=recently_added_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe" aria-label="View recipe for {{recently_added_recipe.recipe_name}}">View <i class="fa-regular fa-file"></i></a>
                     {% if session.user %}
                         {% for favourite_recipe in favourite_recipes if favourite_recipe._id == recently_added_recipe._id %}
-                        <a href="{{ url_for('remove_favourite', recipe_id=recently_added_recipe_id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
+                        <a href="{{ url_for('remove_favourite', recipe_id=recently_added_recipe_id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite" aria-label="Remove {{recently_added_recipe.recipe_name}} from favourite recipes">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
                             {% else %}
                             <form method="POST" action="{{ url_for('add_favourite', recipe_id=recently_added_recipe._id) }}" class="inline-inform">
-                                <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
+                                <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe" aria-label="Add {{recently_added_recipe.recipe_name}} to favourite recipes">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
                             </form>
                         {% endfor %}
                     {% else %}
@@ -109,10 +109,10 @@
         <div class="col s12 m6 xl4">
             <div class="card hoverable">
                 <div class="card-image">
-                    <div class="card-image-url">
+                    <div class="card-image-url" title="Image of {{quick_recipe.recipe_name}}">
                         <span class="image-url">{{quick_recipe.image_url}}</span>
                     </div>
-                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View" aria-label="Quick view {{quick_recipe.recipe_name}}"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </div>
                 <div class="card-content">
                     <span class="card-title">{{quick_recipe.recipe_name}}</span>
@@ -134,13 +134,13 @@
                     <p>URL: <a href="{{quick_recipe.url}}" target="_blank">{{quick_recipe.url}}</a></p>
                 </div>
                 <div class="recipe-buttons">
-                    <a href="{{ url_for('view_recipe', recipe_id=quick_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe">View <i class="fa-regular fa-file"></i></a>
+                    <a href="{{ url_for('view_recipe', recipe_id=quick_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe" aria-label="View recipe for {{quick_recipe.recipe_name}}">View <i class="fa-regular fa-file"></i></a>
                     {% if session.user %}
                         {% for favourite_recipe in favourite_recipes if favourite_recipe._id == quick_recipe._id %}
-                        <a href="{{ url_for('remove_favourite', recipe_id=quick_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
+                        <a href="{{ url_for('remove_favourite', recipe_id=quick_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite" aria-label="Remove {{quick_recipe.recipe_name}} from favourite recipes">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
                             {% else %}
                             <form method="POST" action="{{ url_for('add_favourite', recipe_id=quick_recipe._id) }}" class="inline-inform">
-                                <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
+                                <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="favourite Recipe" aria-label="Add {{quick_recipe.recipe_name}} to favourite recipes">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
                             </form>
                         {% endfor %}
                     {% else %}

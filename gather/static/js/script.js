@@ -1,7 +1,8 @@
  //Functions
 
 /**
- * Sets the background colour of the recipe card image based on the recipe's colour code 
+ * Sets the background image of the recipe card image based on the provided image URL
+ * If no image url is provided, sets the holding image 
  * */
  function setRecipeImage() {
     let recipeImages = document.getElementsByClassName("image-url");
