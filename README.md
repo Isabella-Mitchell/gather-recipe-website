@@ -1,108 +1,285 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Gather Online Recipe Journal
 
-Welcome Isabella-Mitchell,
+## Milestone Project 3 - Backend Development
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+<h2 align="center"><img src="gather/static/readme/images/gather-mockup.jpg"></h2>
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+* Gather is a recipe website which allows users to submit their own recipes, as well as view those submitted by other members. There is the option to ‘favourite’ recipes so that the user can quickly and easily find their favourite recipes. The website design is responsive so it can be used on any device.
 
-## Gitpod Reminders
+* This is my Milestone Project 3 submission for Code Institute's Diploma in Web Application Development course. My website uses both relational and non-relational databases, features full CRUD functionality and is built using technologies that I have learnt including HTML, CSS, JavaScript, Python, Flask and PostgreSQL.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Live Project
 
-`python3 -m http.server`
+[View the live project here.](https://https://gather-recipe-website.herokuapp.com/)
 
-A blue button should appear to click: _Make Public_,
+## Repository
 
-Another blue button should appear to click: _Open Browser_.
+[View the live project here.](https://github.com/Isabella-Mitchell/gather-recipe-website)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+# Table of Contents
 
-A blue button should appear to click: _Make Public_,
+To Complete
 
-Another blue button should appear to click: _Open Browser_.
+# User Experience
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## User stoires
 
-To log into the Heroku toolbelt CLI:
+### First-time Users
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+* As a first-time user, I want the landing page of the website to explain the purpose of the website and allow me to preview the content.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+* As a first-time user, I want to be able to register for an account.
 
-------
+* As a first-time user, I want the website to work on any device.
 
-## Release History
+### Returning Users
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+* As a returning user, I want to be able to log in to my account.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+* As a returning user, I want to be able to create/ view/ edit/ delete my own recipes.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+* As a returning user, I want to be able to view other user’s recipes.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+* As a returning user, I want to be able to favourite recipes and have a view where I can easily see all my favourite recipes in one place. I also want to be able to unfavourite recipes to remove them from this view.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+* As a returning user, I want recipes to include useful information such as a title, ingredient list, instructions broken down into steps, time to make, difficulty level, cuisine, serving size, tags, link to a URL and an image. 
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+* As a returning user, I want to be able to get a quick overview of a recipe, but also view that recipe on its own page.
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+* As a returning user, I want to be able to search for recipes, to make it quicker to find recipes with a certain word in their name, tags or ingredient list.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+* As a returning user, I want to be able to access and use the website on any device.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+### Buisness Owner
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+* As a business owner, I want users to be able to create, edit and delete their own recipes, but not those of any other user.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+* As a business owner, I want the adding, editing and deleting of cuisines to be limited to admin or those with permission. 
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+* As a business owner, I want it to be as easy as possible for users to submit recipes, e.g. they can copy and paste an ingredients list in.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+* As a business owner, I want the website to function and look good on any device.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+## Design
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+### Overview
 
-------
+- The website design is playful, colourful and youthful. The name ‘Gather’ refers to the website’s purpose as a way of ‘gathering’ recipes. It also refers to the way that mealtimes are social, and encourage people to gather together. I looked at the design of cookbooks and kitchen interiors for inspiration. Gather’s aesthetic is simple yet full of character, inviting and easy to use.
 
-## FAQ about the uptime script
+### Colour
+<h2 align="center"><img src="gather/static/readme/images/gather-colour-palette.jpg"></h2>
 
-**Why have you added this script?**
+- Gather uses a simple colour scheme of white, light grey and dark grey with pops of turquoise and red. The background is light grey, with a top and bottom border in turquoise, distinguishing the top nav bar and the bottom footer sections. I have used cards with a white background for areas of dense text for improved legibility. The logo, social icons and anchor links are in the website’s distinctive ‘gather red’ colour. Buttons are either in dark grey or gather-red.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+### Typography
 
-**How will this affect me?**
+- Headings are in Fredoka One with cursive as a fallback font. As a big, round, bold font, the sparing use of Fredoka One brings a playful touch to the whole website. The body is in Roboto with sans-serif as a fallback font. This means the text will be easy to read on all device sizes.
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+### Imagery 
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+- I have not used much imagery on the website, as users can upload their own recipe photos. There is a splash image on the landing page to set the tone of the website. The background is a similar colour to the turquoise of the colour scheme.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+### Icons
 
-**So….?**
+- I have used icons on buttons on the website to enhance the text that states the button’s action. 
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+# Wireframes
 
-**Can I opt out?**
+- [View my wireframes in PDF form here](gather/static/readme/wireframes/gather-wireframe.pdf).
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+# Features
+
+## All Pages
+
+### Nav Bar
+
+<h2 align="center"><img src="gather/static/readme/images/.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/nav-bar-logged-out.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/nav-bar-admin-logged-in.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/nav-bar-non-admin-logged-in.jpg"></h2>
+
+- The nav bar presents different options whether the user is logged in or logged out or an administrator.
+
+- The links change colour on hover, to signal to the user which link they have the mouse over.
+
+- The logo links back to the main landing page.
+
+- The nav bar turns into a slide-out menu on smaller screen sizes
+
+### Footer 
+
+<h2 align="center"><img src="gather/static/readme/images/footer.jpg"></h2>
+
+- The footer includes the website’s name and a brief description. 
+
+- It also features icons with links out to social media. These windows open in a new tab. The icons feature ARIA labels for accessibility best practices.
+
+### Flash Messages
+
+<h2 align="center"><img src="gather/static/readme/images/flash-message.jpg"></h2>
+
+- Flash messages appear to confirm when a user has completed an action. E.g. they have logged in or out, they have added, edited or deleted a recipe, or they have added or removed a favoruite recipe.
+
+- The styling of the flash messages is inkeeping with the rest of the site. They alert the user but are not too distracting to ensure a good user experience.
+
+## Index (Landing Page)
+
+## Register/ Log In Pages
+
+## Find Recipes
+
+## View Recipe
+
+## My Recipes (Dashboard)
+
+## Submit/ Edit Recipe
+
+## Favourite Recipes
+
+## Manage Cuisine
+
+## Add/ Edit Cuisine
+
+## Delete Recipe/ Cuisine
+
+# Future Features
+
+To complete
+
+# Data Model
+
+To complete
+
+# Technologies Used
+
+## Languages Used
+
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+
+- [CSS3](https://en.wikipedia.org/wiki/CSS)
+
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+
+- [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
+
+## Frameworks Libraries and Programs
+
+- Heroku - deplayment and database
+
+- Materialise CSS
+
+- Flask
+
+- MongoDB
+
+- Jinja
+
+- [jQuery](https://jquery.com/)
+  - I used jQuery to reduce the amount of code I needed to manipulate the DOM in the game. jQuery is also used by Bootstrap.
+
+- [Google Fonts](https://fonts.google.com/)
+  - One font was imported from google fonts. Baskervville for the headings.
+  
+- [Font awesome](https://fontawesome.com/)
+  - I used icons from font awesome to create the round score indicators and social media icons.
+
+- [Git](https://git-scm.com/)
+  - Git was used as a version control in the terminal.
+
+- [Github](https://github.com/)
+  - Github was used to create and store the project repository.
+
+- [Gitpod](https://gitpod.io/)
+  - Gitpod was used to create my files and where I wrote the code.
+
+- [Balsamiq](https://balsamiq.com/)
+  - Balsamiq was used to create Wireframes for the project during the initial planning stage.
+
+- [Techsini](https://techsini.com/multi-mockup/)
+  - Techsini was used to help check responsiveness and take screenshots of the page at different screen sizes.
+
+- [Adobe Photoshop](https://www.adobe.com/ie/products/photoshop.html)
+  - Photoshop was used to resize images for the website.
+
+- [TinyPNG](https://tinypng.com/)
+  - TinyPNG was used to compress images for a faster loading time.
+
+- [WebFormatter](https://webformatter.com/html)
+  - WebFormatter was used to help beautify the code.
+
+- [Google Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
+  - Google Chrome's Dev Tools were used while building the project to test responsiveness and for debugging.
+
+- Web accessibility tool (testing)
+
+- Schema mock up genorator
+
+# Testing
+
+- Please refer [here](TESTING.md) for more information on testing of the Gather website
+
+# Deployment
+
+## Creating a Gitpod Workspace
+
+The project was created in Gitpod using the Code Institute Gitpod Full Template using these steps:
+
+1. Log in to GitHub and go to the [Code Institute student template for Gitpod](https://github.com/Code-Institute-Org/gitpod-full-template)
+2. Click 'Use this Template' next to the Green Gitpod button.
+3. Add a repository name and click 'Create reposiory from template'.
+4. This will create a copy of the template in your own repository. Now you can click the green 'Gitpod' button to open a workspace in Gitpod.
+
+## Heroku
+
+To complete
+
+## Forking the GitHub Repository
+
+Forks are used to propose changes to someone else's project or to use someone else's project as a starting point for your own idea. By forking the GitHub Repository you make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original repository.
+
+To Fork a Github Repository:
+
+1. Log in to GitHub and go to the [GitHub Repository](https://github.com/Isabella-Mitchell/gather-recipe-website)
+2. Locate the Fork button in the top-right corner of the page, click Fork.
+3. You should now have a copy of the original repository in your GitHub account.
+
+## Making a Local Clone
+
+You will now have a fork of the repository, but you don't have the files in that repository locally on your computer.
+
+To make a local clone:
+
+1. Log in to GitHub and go to the [GitHub Repository](https://github.com/Isabella-Mitchell/gather-recipe-website)
+2. Above the list of files, click  Code.
+3. To clone the repository using HTTPS, under "Clone with HTTPS", click the 'Copy' icon. To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click Use SSH, then click the 'Copy' icon. To clone a repository using GitHub CLI, click Use GitHub CLI, then click the 'Copy' icon.
+4. Open Git Bash.
+5. Change the current working directory to the location where you want the cloned directory.
+6. Type git clone, and then paste the URL you copied earlier. It will look like this, with your GitHub AE username instead of YOUR-USERNAME:
 
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 ```
 
-**Anything more?**
+7. Press Enter. Your local clone will be created.
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+```
+$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+> Cloning into `gather-recipe-website`...
+> remote: Counting objects: 10, done.
+> remote: Compressing objects: 100% (8/8), done.
+> remove: Total 10 (delta 1), reused 10 (delta 1)
+> Unpacking objects: 100% (10/10), done.
+```
 
----
+Click [Here](https://docs.github.com/en/github-ae@latest/get-started/quickstart/fork-a-repo) for the GitHub quick start guide with images and more detailed explanations of the above process.
 
-Happy coding!
+# Credits
+
+To complete
+
+## Code
+
+## Content
+
+## Media
