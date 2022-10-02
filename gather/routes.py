@@ -373,6 +373,8 @@ def edit_cuisine(cuisine_id):
             return redirect(url_for("manage_cuisines"))
         return render_template("edit_cuisine.html", cuisine=cuisine)
     except Exception:
+        flash(
+            "There was an issue editing that Cuisine name.")
         return redirect(url_for("get_recipes"))
 
 

@@ -365,6 +365,10 @@ To Complete
 
 - As I have used the same Recipe Card format within multiple templates, I could refactor this code and use a "snippet" to reduce the number of times this code is repeated.
 
+### More detailed Try Except exception clauses
+
+- I would like to add more detailed exception clauses to my Try Except statements. I have used a catch-all clause for simplicty.
+
 # Data Model
 
 - [View my Database structure in PDF form here](gather/static/readme/databases/gather-database-schema.pdf).

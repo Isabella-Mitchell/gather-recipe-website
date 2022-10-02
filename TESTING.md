@@ -61,6 +61,14 @@ I used the Lighthouse reports in Google Developer Tools to examine the pages of 
 - Best Practices 
 - SEO
 
+<h2 align="center"><img src="gather/static/testing/images/lighthouse-index-mobile.jpg"></h2>
+
+- Gather website scored well in all areas on mobile except for performance. This could be improved by saving images in next gen formats and eliminating unused Javascript. The JS scripts are present on the base template and used by other pages.
+
+<h2 align="center"><img src="gather/static/testing/images/lighthouse-index-desktop.jpg"></h2>
+
+- Gather website scored well in all areas on desktop. The Quick View functionality, which uses anchor links without a href caused the SEO score to be lower than desired. 
+
 # Browser Compatibility
 
 The site was tested in Google Chrome, Microsoft Edge and Mozilla Firefox on desktop.
@@ -230,12 +238,22 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 
 * Buttons have been tested and proven to work.
 * I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* I've tested having no recipes, and the correct messaging appears.
 
 ## Submit/ Edit Recipe
 
 <h2 align="center"><img src="gather/static/readme/images/submit-recipe.jpg"></h2>
 
 <h2 align="center"><img src="gather/static/readme/images/edit-recipe.jpg"></h2>
+
+* Buttons and forms have been tested and proven to work.
+* I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* I've tested trying to access this page as a different logged in user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* I've tested editing the recipe ID in the URL. I was redirected back to the Find Recipes page.
+
+## Delete Recipe
+
+<h2 align="center"><img src="gather/static/readme/images/delete-recipe.jpg"></h2>
 
 * Buttons and forms have been tested and proven to work.
 * I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
@@ -249,12 +267,34 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 * Buttons have been tested to work.
 * The user is not able to favourite the same recipe mutliple time without unfavouriting it in between.
 * I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* I've tested having no favourite recipes, and the correct messaging appears.
 
 ## Manage Cuisines 
 
+<h2 align="center"><img src="gather/static/readme/images/manage-cuisines-admin-view.jpg"></h2>
+
+* Buttons have been tested to work.
+* I've tested trying to access this page as a non-admin user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+
 ## Add/ Edit Cuisines
 
-## Delete Recipe/ Cuisines
+<h2 align="center"><img src="gather/static/readme/images/add-cuisine.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/edit-cuisine.jpg"></h2>
+
+* Buttons have been tested to work.
+* I've tested trying to access these pages as a non-admin user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* I've tested editing the recipe ID in the URL. If I change it to a different number it redirects back to the Find Recipes page. However if I edit it to make an invalid URL then this throws an error (See Unresolved Bugs)
+* I've tested trying to add the same cuisine name twice. I was not able to. I was redirected and flash message appeared informing me that name already exists.
+* I've tested trying to edit a cuisine name to be the same as another cuisine name. I was redirected and flash message appeared informing me that there was an issue.
+
+## Delete Cuisine
+
+<h2 align="center"><img src="gather/static/readme/images/delete-cuisine.jpg"></h2>
+
+* Buttons have been tested to work.
+* I've tested trying to access these pages as a non-admin user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* I've tested editing the recipe ID in the URL. If I change it to a different number it redirects back to the Find Recipes page. However if I edit it to make an invalid URL then this throws an error (See Unresolved Bugs)
 
 # Automated Testing
 
@@ -264,6 +304,20 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 
 ## Resolved
 
+- Heroku DB issue. Resolved by resetting DB
+
+- Errors happening because scripts are running on everypage. Resolved with If statement.
+
+- Bug when trying to add exisiting cusine. I had followed adding an exisiting user logic. Bug caused by .lower() clause. I have removed. Does mean admin could add duplicate cusinies with different capitalisations. Bug to fix in the future. 
+
 ## Unresolved
+
+- Admin button permissions nav bar
+
+- 404 from Cuisine functions
+
+- Console.log error for testing
+
+- 
 
 Back to [README.md](/README.md#testing)
