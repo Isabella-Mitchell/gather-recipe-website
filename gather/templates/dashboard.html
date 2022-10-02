@@ -1,62 +1,71 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
-    <h2 class="page-title-responsive">{{ session['user'] }}'s recipes</h2>
+<h2 class="page-title-responsive">{{ session['user'] }}'s recipes</h2>
 
-    <div class="row">
-        <div class="col s12 center-align">
-            <a href="{{ url_for('submit_recipe') }}" class="btn gather-colour">Submit a Recipe <i class="fa-solid fa-plus icon-padding"></i></a>
-        </div>
+<div class="row">
+    <div class="col s12 center-align">
+        <a href="{{ url_for('submit_recipe') }}" class="btn gather-colour">Submit a Recipe <i class="fa-solid fa-plus icon-padding"></i></a>
     </div>
+</div>
 
-    {% if user_recipes|length > 0 %}
-    <div class="row">
-        {% for recipe in user_recipes %}
+{% if user_recipes|length > 0 %}
+<div class="row">
+    {% for recipe in user_recipes %}
 
-        <div class="col s12 m6 xl4">
-            <div class="card hoverable">
-                <div class="card-image">
-                    <div class="card-image-url" title="Image of {{recipe.recipe_name}}">
-                        <span class="image-url">{{recipe.image_url}}</span>
-                    </div>
-                    <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+    <div class="col s12 m6 xl4">
+        <div class="card hoverable">
+            <div class="card-image">
+                <div class="card-image-url" title="Image of {{recipe.recipe_name}}">
+                    <span class="image-url">{{recipe.image_url}}</span>
                 </div>
-                <div class="card-content">
-                    <h5><span class="card-title">{{recipe.recipe_name}}</span></h5>
-                    <p class="card-preview">By {{recipe.author}}</p>
-                    <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
-                    {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
-                    <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
-                    {% endif %} {% endfor %}
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
-                    <p>Servings: {{recipe.serves}}</p>
-                    <p>Takes: {{recipe.duration}} minutes</p>
-                    <p>Difficulty Level: {{recipe.difficulty}}</p>
-                    <h6>Ingrediants</h6>
-                    <div class="string-to-array">{{recipe.ingrediant_list}}</div>
-                    <h6>Steps:</h6>
-                    <div class="steps-string-to-array">{{recipe.instructions}}</div>
-                    <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
-                </div>
-                <div class="recipe-buttons">
-                    {% if session.user|lower == recipe.author|lower %}
-                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe" aria-label="View recipe for {{recipe.recipe_name}}">View <i class="fa-solid fa-magnifying-glass icon-padding"></i></a>
-                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Edit Recipe" aria-label="Edit recipe for {recipe.recipe_name}}">Edit <i class="fa-solid fa-pen-to-square icon-padding"></i></a>
-                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Delete Recipe" aria-label="Delete recipe for {{recipe.recipe_name}}">Delete <i class="fa-solid fa-trash-can icon-padding"></i></a>
-                    {% endif %}
-                </div>
+                <a class="btn-floating halfway-fab waves-effect waves-light gather-colour activator tooltipped" data-position="bottom" data-tooltip="Quick View"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
+            <div class="card-content">
+                <h5><span class="card-title">{{recipe.recipe_name}}</span></h5>
+                <p class="card-preview">By {{recipe.author}}</p>
+                <div class="array-string card-preview">Tags: {{recipe.tags}}</div>
+                {% for cuisine in cuisines %} {% if cuisine.id == recipe.cuisine_id | int %}
+                <p class="card-preview">Cuisine: {{ cuisine.cuisine_name }}</p>
+                {% endif %} {% endfor %}
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4"><i class="fa-solid fa-xmark right"></i>{{recipe.recipe_name}}</span>
+                <p>Servings: {{recipe.serves}}</p>
+                <p>Takes: {{recipe.duration}} minutes</p>
+                <p>Difficulty Level: {{recipe.difficulty}}</p>
+                <h6>Ingrediants</h6>
+                <div class="string-to-array">{{recipe.ingrediant_list}}</div>
+                <h6>Steps:</h6>
+                <div class="steps-string-to-array">{{recipe.instructions}}</div>
+                <p>URL: <a href="{{recipe.url}}" target="_blank">{{recipe.url}}</a></p>
+            </div>
+            <div class="recipe-buttons">
+                {% if session.user|lower == recipe.author|lower %}
+                <a href="{{ url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe" aria-label="View recipe for {{recipe.recipe_name}}">
+                    View <i class="fa-solid fa-magnifying-glass icon-padding"></i>
+                </a>
+                <a href="{{ url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Edit Recipe" aria-label="Edit recipe for {recipe.recipe_name}}">
+                    Edit <i class="fa-solid fa-pen-to-square icon-padding"></i>
+                </a>
+                <a
+                    href="{{ url_for('delete_recipe', recipe_id=recipe._id)}}"
+                    class="waves-effect waves-light btn btn-black tooltipped"
+                    data-position="bottom"
+                    data-tooltip="Delete Recipe"
+                    aria-label="Delete recipe for {{recipe.recipe_name}}"
+                >
+                    Delete <i class="fa-solid fa-trash-can icon-padding"></i>
+                </a>
+                {% endif %}
             </div>
         </div>
-
-        {% endfor %}
     </div>
-    {% else %}
-    <div class="row center-align">
-        <p>Nothing to see here... Time to add some recipes!</p>
-    </div>
-    {% endif %}
 
+    {% endfor %}
+</div>
+{% else %}
+<div class="row center-align">
+    <p>Nothing to see here... Time to add some recipes!</p>
+</div>
+{% endif %} {% endblock %}
 
-{% endblock %}

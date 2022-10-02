@@ -21,7 +21,7 @@
                 <div class="container">
                     <div class="nav-wrapper">
                         <h1><a href="{{ url_for('index') }}" class="brand-logo">Gather</a></h1>
-                        <a href="#" data-target="mobile-nav-bar" class="sidenav-trigger left" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></a>
+                        <a href="#" data-target="mobile-nav-bar" class="sidenav-trigger left" aria-controls="mobile-nav-bar" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></a>
                         <ul class="right hide-on-med-and-down">
                             {% if session.user %}
                                 <li><a href="{{ url_for('get_recipes') }}">Find Recipes</a></li>
@@ -89,20 +89,20 @@
                         <p>Submit, share and save your favourite recipes.</p>
                     </div>
                     <div class="col l4 offset-l2 s12">
-                    <div class="social-links">
-                            <a target="_blank" href="https://www.facebook.com">
-                                <i class="fa-brands fa-facebook-square" aria-hidden="true"></i>
-                                <span class="sr-only">Facebook</span>
-                            </a>
-                            <a target="_blank" href="https://twitter.com">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                                <span class="sr-only">Twitter</span>
-                            </a>
-                            <a target="_blank" href="https://www.instagram.com">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                                <span class="sr-only">Instagram</span>
-                            </a>
-                    </div>
+                        <div class="social-links">
+                                <a target="_blank" href="https://www.facebook.com">
+                                    <i class="fa-brands fa-facebook-square" aria-hidden="true"></i>
+                                    <span class="sr-only">Facebook</span>
+                                </a>
+                                <a target="_blank" href="https://twitter.com">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    <span class="sr-only">Twitter</span>
+                                </a>
+                                <a target="_blank" href="https://www.instagram.com">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                    <span class="sr-only">Instagram</span>
+                                </a>
+                        </div>
                     </div>
                 </div>
             </div>
