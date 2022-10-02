@@ -127,23 +127,151 @@ To Complete
 
 <h2 align="center"><img src="gather/static/readme/images/landing-page-logged-in-admin.jpg"></h2>
 
+- The purpose of the Gather website landing page is to explain the purpose of the website. It does this with an eye-catching jumbatron with a tag line and a 'three-across' explainer section with icons. 
+
+- There are big red call-to-action buttons on the page, making the next step clear and easy to the user.
+
+- Once a users are logged in, the buttons on the landing page change. This means that the page is still useful for a returning user, as it directs them to different pages within the website.
+
+### Landing Page Recipe Cards
+
+- Another purpose of the landing page is to give the user a feel of the content they can access if they sign up and register. These are displayed as "featured collections" on the homepage. These include "Recently Added Recipes" and "Quick Recipes". Recently Added Recipes will change often, which will help keen the landing page looking fresh.
+
+<h2 align="center"><img src="gather/static/readme/images/index-page-recipe-cards.jpg"></h2>
+
+- The user can quick-view and view these recipes (see these features in more detail below) If the user if logged out, the Favourite button is replaced with a Call to action. 
+
 ## Register/ Log In Pages
+
+<h2 align="center"><img src="gather/static/readme/images/sign-up-page.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/log-in-page.jpg"></h2>
+
+- The Register and Log in pages both feature forms, a large red submit button, and a link to the other page incase a user is in the wrong place. E.g. on the Register Page, it says "Already Registered? Log in here."
+
+- The Register form features input fields for Username, First Name, Last Name and Password. All fields are required.
+
+- The Log in form features input fields for Username and Password. All fields are required.
+
+- The User's password is hashed for security.
+
+<h2 align="center"><img src="gather/static/readme/images/exsisting-username-flash-message.jpg"></h2>
+
+- Each Username must be unique, so when a new user registers, their entered username is checked. If it already exists, a flash message informs the user to try another username.
+
+<h2 align="center"><img src="gather/static/readme/images/flash-message-no-account.jpg"></h2>
+
+- If incorrect log in details are provided, then a flash message informs the user that the Username and/or password is incorrect.
 
 ## Find Recipes
 
+<h2 align="center"><img src="gather/static/readme/images/find-recipes-page.jpg"></h2>
+
+- The purpose of this page is to show the users all recipes. This includes their own recipes and those submitted by other users.
+
+- From this page, users can search recipes, quick-view recipes, view recipes, and favourite recipes.
+
+- The user's own recipes appear in the same way as peer submitted recipes. I chose to do this to keep the format neat. User's can manage their own recipes from their 'My Recipe' page.
+
+### Search Recipes
+
+- The search feature uses a Mongo DB's index. This returns search results based on the recipe name, recipe tags and ingrediant list.
+
+<h2 align="center"><img src="gather/static/readme/images/search-no-results.jpg"></h2>
+
+- If no results are found, then a message appears to inform the user.
+
+## Quick View Recipe
+
+<h2 align="center"><img src="gather/static/readme/images/quick-view-recipe.jpg"></h2>
+
+- The quick-view expands the information on the card, that the user can scroll through without navigating away from the page. 
+
+- The quick-view is accessed by pressing the red button with a magnifying glass icon. There is a tooltip that appears when the button is hovered over and an Aria Label for screenreaders. 
+
+- I included this feature to help keep the recipe cards neat and consistent. The intital information that the user can see is the recipe image (if provided), a title, the author, tags, and the cuisine.
+
+- If the user wants to learn something else about a recipe, e.g. how long it takes, or how many servings it makes, then they can use quick view to access this information.
+
+- Then, if a user wants to open a recipe to follow along or print out, they can use the View Recipe option.
+
 ## View Recipe
+
+<h2 align="center"><img src="gather/static/readme/images/view-recipe.jpg"></h2>
+
+- The View Recipe page presents the Recipe in a clear and easy to read or follow format.
+
+- Ingrediants are shown in an unordered list.
+
+- Steps are shown in an ordered list.
+
+- There is a back button at the bottom of the page which saves the user neaeing to use their browser back button.
 
 ## My Recipes (Dashboard)
 
+<h2 align="center"><img src="gather/static/readme/images/my-recipes-logged-in.jpg"></h2>
+
+- The My Recipes page is where the user can submit, view and manage their own recipes. 
+
+- While building the project I was calling it the Dashboard and I have used this term in the code, so this is why I describe it as both My Recipes and Dashboard.
+
+- As with other pages, I have used icons, tooltips and Aria labels on buttons, so that it's clear to a user what the buttons do.
+
 ## Submit/ Edit Recipe
 
+<h2 align="center"><img src="gather/static/readme/images/submit-recipe.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/edit-recipe.jpg"></h2>
+
+- The submit and edit recipe pages both feature forms and red submit buttons. The edit page also features a cancel button which directs the user back to to their My Recipes page.
+
+- Input fields include
+  - Recipe name (required - text - max 50 characters)
+  - Cuisine (selected from dropdown - required)
+  - Ingrediant list (required - text - comma seperated)
+  - Instructions (required - text - new line seperated)
+  - Difficulty (selected from dropdown - required)
+  - Duration in minutes (number - required)
+  - Serves (number - required)
+  - Image URL (text)
+  - Tags (required - text - max 50 character - comma seperated)
+  - URL (text)
+
+- All inputs are validated and feature labels
+
+- When a user goes to edit a recipe, the content appears in the relevant input fields.
+
+### Recipe form considerations
+
+- It was difficult to get the right balance between making it easy for users to submit recipes, and making sure the recipes were well presented on the website.
+
+- I decided that I wanted to store the Ingrediants List, Instructions and Tags as arrays in Mongo DB.
+
+- I decided the best way to do this was to make the user enter the Ingrediants List and Tags as comma seperated lists, and the Instructions and a new line seperated list.
+
+- This is because, while developing the site, I found it most convieant to copy and paste recipes in from other websites. That's why I decided to create single text-area inputs for the ingrediants list and instructions list, as opposed to making the user enter each item individually. 
+
+- This solution is not ideal, as it leaves a lot of trust in the user to correctly input recipes, so that they are clear and legible to other users. I have increased speed and ease, at the cost of making the system fool-proof.
+
+- As the ingrediants list input is a text area, I have removed the ability to enter a new line, to encourage the user to use commas.
+
+- However, the user can still copy and paste text in as seperate lines into the ingrediants field instead of using commas. This feature was useful for development, however I have not made this apparent to the user so to the keep the form clear and simple. So I would consider removing this feature in a real-world application.
+
 ## Favourite Recipes
+
+
 
 ## Manage Cuisine
 
 ## Add/ Edit Cuisine
 
 ## Delete Recipe/ Cuisine
+
+## Error Handling
+
+- If there is an error, e.g. the recipe id in the page URL is changed, then the user will be redirected back to the Find Recipes page. Logged-out-users will be directed to the log in page, as they cannot access the Find Recipes page.
+
+- Session cookie deleted
 
 # Future Features
 

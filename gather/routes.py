@@ -111,7 +111,8 @@ def register():
             User.user_name == request.form.get("user_name").lower()).all()
 
         if existing_user:
-            flash("Username already exists")
+            flash(
+                "Username already exists. Please try a different username")
             return redirect(url_for("register"))
 
         user = User(
