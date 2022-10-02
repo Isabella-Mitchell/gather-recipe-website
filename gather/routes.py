@@ -323,6 +323,10 @@ def delete_recipe(recipe_id):
 @app.route("/cuisines")
 def manage_cuisines():
     """Renders manage cuisines page"""
+    if "user" not in session or not is_admin(session["user"]):
+        flash("You must be admin to manage cuisines!")
+        return redirect(url_for("get_recipes"))
+        
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template("cuisines.html", cuisines=cuisines)
 
