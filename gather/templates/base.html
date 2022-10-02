@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/e4ffee1eee.js" crossorigin="anonymous"></script>
         <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
         {% block styles %} {% endblock %}
         <title>Gather Recipe Website</title>
-        <meta name="description" content="Gather is a recipe website where users can submit, share and save their favourite recipes" />
-        <meta name="keywords" content="recipes, food, cooking, recipe ideas, favourite, dinner, lunch, breakfast" />
+        <meta name="description" content="Gather is a recipe website where users can submit, share and save their favourite recipes">
+        <meta name="keywords" content="recipes, food, cooking, recipe ideas, favourite, dinner, lunch, breakfast">
     </head>
     <body>
         <header>
@@ -64,7 +64,7 @@
             </ul>
         </header>
 
-        <section>
+        <div>
             <div class="container">
                 <!--flash message-->
                 {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
@@ -73,7 +73,7 @@
                 </div>
                 {% endfor %} {% endif %} {% endwith %}
             </div>
-        </section>
+        </div>
 
         <main>
             <div class="container">
