@@ -18,7 +18,43 @@
 
 # Table of Contents
 
-To Complete
+## Contents
+- [User experience](#user-experience)
+  * [User Stories](#user-stories)
+    + [First-time Users](#first-time-users)
+    + [Returning Users](#returning-users)
+    + [Business Owner](#business-owner)
+- [Design](#design)
+  + [Overview](#overview)
+  + [Colour Scheme](#colour-scheme)
+  + [Typography](#typography)
+  + [Imagery and Aesthetics](#imagery-and-aesthetics)
+  + [Icons](#icons)
+  + [Cards](#cards)
+- [Wireframes](#wireframes)
+- [Features](#features)
+  + [All Pages Features](#all-pages-features)
+  + [Index (Landing Page) Features](#index-landing-page-features)
+
+  
+  + [Game Page Features](#game-page-features)
+  + [Sightings Page Features](#sightings-page-features)
+  + [Future Features](#future-features)
+- [Technologies used](#technologies-used)
+  + [Languages Used](#languages-used)
+  + [Frameworks Libraries and Programs](#frameworks-libraries-and-programs)
+  + [Application Programming Interface (API's)](#application-programming-interface-apis)
+- [Testing](#testing)
+- [Deployment](#deployment)
+  + [Creating a Gitpod Workspace](#creating-a-gitpod-workspace)
+  + [GitHub Pages](#github-pages)
+  + [Forking the GitHub Repository](#forking-the-github-repository)
+  + [Making a Local Clone](#making-a-local-clone)
+- [Credits](#credits)
+  + [Code](#code)
+  + [Media](#media)
+  + [Content](#content)
+  + [Acknowledgements](#acknowledgements)
 
 # User Experience
 
@@ -93,7 +129,7 @@ To Complete
 
 # Features
 
-## All Pages
+## All Pages Features
 
 ### Nav Bar
 
@@ -127,7 +163,7 @@ To Complete
 
 - The styling of the flash messages is inkeeping with the rest of the site. They alert the user but are not too distracting to ensure a good user experience.
 
-## Index (Landing Page)
+## Index (Landing Page) Features
 
 <h2 align="center"><img src="gather/static/readme/images/landing-page-logged-out.jpg"></h2>
 

@@ -1,13 +1,13 @@
 # Testing
-# To Complete
 
 The Gather recipe website has been tested using the following methods:
 - [Code Validation](#code-validation)
     - [W3C HTML Validator](#w3c-html-validator) 
     - [W3C CSS Validator](#w3c-css-validator)
     - [JSHINT Javascript Code Quality Tool](#jshint-javascript-code-quality-tool)
-    - [PEP8 Python Validator](#pep8-python-validator)
+    - [Python Validation using Gitpod](python-validation-using-gitpod)
 - [A11y Color Contrast Accessibility Checker](#a11y-color-contrast-accessibility-checker)
+- [Wave Webaim Accessibility Checker](#wave-webaim-accessibility-checker)
 - [Lighthouse](#lighthouse)
 - [Responsiveness](#responsiveness)
 - [Browser Compatibility](#browser-compatibility)
@@ -26,19 +26,30 @@ The Gather recipe website has been tested using the following methods:
 
 ## W3C HTML Validator
 
-- The Gather website passed all tests using the [W3C HTML](https://validator.w3.org/) Validator tool
+<h2 align="center"><img src="gather/static/testing/images/html-index-validate.jpg"></h2>
+
+- The Gather website landing page passed all tests using the [W3C HTML](https://validator.w3.org/) Validator tool
 
 ## W3C CSS Validator
+
+<h2 align="center"><img src="gather/static/testing/images/css-validate.jpg"></h2>
 
 - The Gather website passed all tests using the [W3C CSS](https://jigsaw.w3.org/css-validator/) Validator tool
 
 ## JSHINT Javascript Code Quality Tool
 
-[JSHint](https://jshint.com/)
+<h2 align="center"><img src="gather/static/testing/images/jshint-script.jpg"></h2>
+<h2 align="center"><img src="gather/static/testing/images/jshint-jquery.jpg"></h2>
 
-## PEP8 Python Validator
+- The Gather website passed all tests using the [JSHint](https://jshint.com/) Validator tool
 
-http://pep8online.com/
+## Python Validation using Gitpod
+
+<h2 align="center"><img src="gather/static/testing/images/python-errors.jpg"></h2>
+
+- Errors and warnings highlighted by Gitpod included:
+    - Scope_session errors. From looking online, this is not actually an error. I could add code to stop this showing as an error
+    - Too general exceptions. See future features.
 
 # A11y Color Contrast Accessibility Checker
 
@@ -298,9 +309,19 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 
 # Automated Testing
 
+- To Complete
+
+## Python Testing
+
+## Javascript Testing
+
 # Peer Review
 
+- To Complete
+
 # Bugs
+
+- To Complete
 
 ## Resolved
 
@@ -317,7 +338,5 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 - 404 from Cuisine functions
 
 - Console.log error for testing
-
-- 
 
 Back to [README.md](/README.md#testing)

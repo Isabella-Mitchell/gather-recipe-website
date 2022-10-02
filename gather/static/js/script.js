@@ -1,21 +1,13 @@
  //Functions
 
- /**
-  * Test function for Jest testing
-  */
- function addition(a, b) {
-    let sum = a + b;
-    return sum;
- };
-
 /**
  * Sets the background image of the recipe card image based on the provided image URL
  * If no image url is provided, sets the holding image 
  * */
  function setRecipeImage() {
     let recipeImages = document.getElementsByClassName("image-url");
-    let parent
-    let imageUrl
+    let parent;
+    let imageUrl;
     for(let i = 0; i < recipeImages.length; i++) {
         parent = recipeImages[i].parentNode;
         imageUrl = recipeImages[i].textContent;
@@ -25,10 +17,10 @@
             parent.style.backgroundSize = "cover";
             parent.style.backgroundPosition = "center";
         } else {
-            parent.classList.add("holding-image")
+            parent.classList.add("holding-image");
         }
     }
-};
+}
 
 /**
  * Used in Edit Recipe form for ingrediants and tags. 
@@ -43,10 +35,10 @@
     for(let i = 0; i < arrayContainers.length; i++) {
         array = arrayContainers[i].textContent;  
         removeBrackets = array.replace(/\[|\]/g, '');
-        string = removeBrackets.replace(/['"]+/g, '')
-        arrayContainers[i].textContent = string
+        string = removeBrackets.replace(/['"]+/g, '');
+        arrayContainers[i].textContent = string;
     }
-};
+}
 
 /**
  * Used in Edit Recipe form for instructions
@@ -65,10 +57,10 @@ function turnStepsArrayIntoString() {
         removeBrackets = array.replace(/\[|\]/g, '');
         string = removeBrackets.replace(/['"]+/g, ';');
         replaceCommas = string.replaceAll(";, ;", '\r\n');
-        removeColons = replaceCommas.replaceAll(";", '')
+        removeColons = replaceCommas.replaceAll(";", '');
         arrayContainers[i].textContent = removeColons;
     }
-};
+}
 
 
 /**
@@ -109,7 +101,7 @@ function makeOL(array) {
  * Calls the makeUL function to show array as an unordered list on the recipe cards
  * */
 function turnStringIntoArray() {
-    let stringContainers = document.getElementsByClassName("string-to-array")
+    let stringContainers = document.getElementsByClassName("string-to-array");
     let string;
     let removeBrackets;
     let removeQuotes;
@@ -117,12 +109,12 @@ function turnStringIntoArray() {
     for(let i=0; i<stringContainers.length; i++) {
         string = stringContainers[i].textContent;
         removeBrackets = string.replace(/\[|\]/g, '');
-        removeQuotes = removeBrackets.replace(/['"]+/g, '')
+        removeQuotes = removeBrackets.replace(/['"]+/g, '');
         array = removeQuotes.split(", ");
-        stringContainers[i].textContent = ""
+        stringContainers[i].textContent = "";
         stringContainers[i].appendChild(makeUL(array));
     }
-};
+}
 
 /**
  * Used on Recipe Cards on various pages on website
@@ -131,7 +123,7 @@ function turnStringIntoArray() {
  * Calls makeOIL function to show array as an ordered list
  * */
 function turnStepsStringIntoArray() {
-    let stringContainers = document.getElementsByClassName("steps-string-to-array")
+    let stringContainers = document.getElementsByClassName("steps-string-to-array");
     let string;
     let removeBrackets;
     let removeQuotes;
@@ -140,13 +132,13 @@ function turnStepsStringIntoArray() {
         string = stringContainers[i].textContent;
         removeBrackets = string.replace(/\[|\]/g, '');
         // removes outer quotes that still appear
-        removeQuotes = removeBrackets.slice(1, -1)
+        removeQuotes = removeBrackets.slice(1, -1);
         array = removeQuotes.split("', '");
         // Add the contents
-        stringContainers[i].textContent = ""
+        stringContainers[i].textContent = "";
         stringContainers[i].appendChild(makeOL(array));
     }
-};
+}
 
 document.addEventListener("DOMContentLoaded", function() { 
     turnArrayIntoString();
