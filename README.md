@@ -229,6 +229,10 @@ To Complete
 
 - This page is only shows recipes submitted by that user. If a user tries to edit or delete recipes that they are not the author of, they will see a flash message informing them and be redirected to the find recipes page.
 
+<h2 align="center"><img src="gather/static/readme/images/no-user-recipes.jpg"></h2>
+
+- If the user has no recipes, then a message appears to inform the user.
+
 ## Submit/ Edit Recipe
 
 <h2 align="center"><img src="gather/static/readme/images/submit-recipe.jpg"></h2>
@@ -252,6 +256,8 @@ To Complete
 - All inputs are validated and feature labels
 
 - When a user goes to edit a recipe, the content appears in the relevant input fields.
+
+- If a recipe image URL is not provided, then a defualt colour swatch is used.
 
 ### Recipe form considerations
 
@@ -278,6 +284,10 @@ To Complete
 - Users can also favourite their own recipe if they choose.
 
 - User's can favourite recipes simply by clicking the 'Favourite Recipe' button. Once a recipe is favourited, this is replaced by an 'Unfavourite recipe' button. Clicking this will remove the recipe from the User's favourites.
+
+<h2 align="center"><img src="gather/static/readme/images/no-user-favourites.jpg"></h2>
+
+- If the user has no favourite recipes, then a message appears to inform the user.
 
 ## Manage Cuisines
 
@@ -357,7 +367,7 @@ To Complete
 
 # Data Model
 
-To complete
+- [View my Database structure in PDF form here](gather/static/readme/databases/gather-database-schema.pdf).
 
 # Technologies Used
 
@@ -373,24 +383,29 @@ To complete
 
 ## Frameworks Libraries and Programs
 
-- Heroku - deplayment and database
+- [Heroku](https://id.heroku.com/login)
+  - Heroku is the deployment source I used for this project. I'm also using it for the Postgres relational database
 
-- Materialise CSS
+- [MongoDB](https://www.mongodb.com/)
+    - I'm using MongoDB for my non-relational database.
 
-- Flask
+- [Flask](https://flask.palletsprojects.com/en/2.2.x/templating/)
+  - Templating language I've used with Python to add logic to my html templates.
 
-- MongoDB
+- [Jinja](https://jinja.palletsprojects.com/en/3.0.x/)
+  - Templating language I've used with Python to add logic to my html templates.
 
-- Jinja
+- [Materialize CSS](https://materializecss.com/)
+  - Front-end library with HTML, CSS and Javascript based componants. I used features including Nav bar, Cards, Buttons and Forms.
 
 - [jQuery](https://jquery.com/)
-  - I used jQuery to reduce the amount of code I needed to manipulate the DOM in the game. jQuery is also used by Bootstrap.
+  - I used jQuery to add functionality to MaterialiseCSS componants.
 
 - [Google Fonts](https://fonts.google.com/)
-  - One font was imported from google fonts. Baskervville for the headings.
+  - Two fonts are imported from google fonts.
   
 - [Font awesome](https://fontawesome.com/)
-  - I used icons from font awesome to create the round score indicators and social media icons.
+  - I used icons from font awesome on buttons.
 
 - [Git](https://git-scm.com/)
   - Git was used as a version control in the terminal.
@@ -420,8 +435,13 @@ To complete
   - Google Chrome's Dev Tools were used while building the project to test responsiveness and for debugging.
 
 - [Wave Webaim](https://wave.webaim.org/)
+  - Tool used to check accessibility of website
 
-- Schema mock up genorator
+- [dbdiagram](https://dbdiagram.io/)
+  - Tool used to mock up database structure diagram.
+
+- [Unsplash](https://unsplash.com/)
+  - Unsplash was used to source the jumbatron imager.
 
 # Testing
 
@@ -437,10 +457,6 @@ The project was created in Gitpod using the Code Institute Gitpod Full Template 
 2. Click 'Use this Template' next to the Green Gitpod button.
 3. Add a repository name and click 'Create reposiory from template'.
 4. This will create a copy of the template in your own repository. Now you can click the green 'Gitpod' button to open a workspace in Gitpod.
-
-## Heroku
-
-To complete
 
 ## Forking the GitHub Repository
 
@@ -482,12 +498,55 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 
 Click [Here](https://docs.github.com/en/github-ae@latest/get-started/quickstart/fork-a-repo) for the GitHub quick start guide with images and more detailed explanations of the above process.
 
-# Credits
+## Creating an application with Heroku
 
-To complete
+You will need to deploy the application using Heroku.
+
+1. Create a requirements.txt file by typing ``` pip3 freeze --local > requirements.txt ``` into the Gitpod CLI. Ensure this is added to your .gitignore file.
+2. Create a Procfile by typing ```echo web: python app.py > Procfile```. Open it and ensure it doesn't have a new line, as this can create errors. Ensure it starts with a capital P.
+3. Add and commit these files to Github.
+4. Go to [Heroku](https://dashboard.heroku.com/apps). Log in or create an account
+5. Click the 'New' button and click 'Create new app'.
+6. Enter a unique name for your project with no capital letters or spaces and select your region. Click 'Create App'.
+7. Inside your project, go to the Resources tab and create a Heroku Postgres Database
+8. Inside your project, go to the 'Settings' tab. Scroll down and click 'Reveal Config Vars'.
+9. Add in the following variables
+  - IP : 0.0.0.0
+  - PORT : 5000
+  - MONGO_DBNAME : Your MongoDB database name
+  - MONGO_URI : This can be found on MongoDB by going to Clusters, Connect, Connect to your application
+  - SECRET_KEY : Your secret key
+10. Deploy your project by going to the Deploy tab and choose 'Connect to Github'
+11. Find your repository name and select Connect.
+12. To connect your Heroku database, go to 'More' in the top right and select run console. Enter ```python3``` to access the python intepreter.
+13. Then type ```From gather import db```. Then type ```db.create_all()```. You can then exit the console.
+
+# Credits
 
 ## Code
 
+- Materalize CSS: I used this library throughout the project. Particularly for the nav bar, cards, forms and buttons.
+
+- Code Institute: I referred to lessons and source code from Code Institute's Web Application Development course. I sourced the User Authentification and Search bar functionality from the Task Manager Walk Through Project.
+
 ## Content
 
+- [BBC Good Food](https://www.bbcgoodfood.com/): I used this exisiting recipe platform to help me plan the user experience and features of the website. I also sourced many recipes from this website.
+
 ## Media
+
+- Credit for the Jumbatron image goes to [Ella Olsson](https://unsplash.com/@ellaolsson) sourced from Unsplash.
+
+## Acknowledgements
+
+- Thank you to my Mentor Akshat Garg for helpful feedback, industry insights and recommended tools.
+
+- Thank you to fellow Code Institute students/ alumni for participating in the peer code review. Thank you to my family for manually testing the website and for feedback.
+
+- Thank you to the Code Institute London Community for their encouragement and technical support.
+
+- Thank you to the tutors and staff at Code Institute for their support.
+
+Please note this is a personal project. This website is purely for the sake of the developer's portfolio and not for public consumption.
+
+Isabella Mitchell, 2022.
