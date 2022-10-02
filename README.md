@@ -83,6 +83,10 @@ To Complete
 
 - I have used icons on buttons on the website to enhance the text that states the button’s action. 
 
+### Cards
+
+- I have used Materialize CSS card componants for displaying recipes and forms. This makes the content stand out from the website background. It also neatly presents the various recipes, brining a sense of harmony and consistency to the website.
+
 # Wireframes
 
 - [View my wireframes in PDF form here](gather/static/readme/wireframes/gather-wireframe.pdf).
@@ -279,8 +283,6 @@ To Complete
 
 <h2 align="center"><img src="gather/static/readme/images/manage-cuisines-admin-view.jpg"></h2>
 
-<h2 align="center"><img src="gather/static/readme/images/non-admin-cuisines-flash-message.jpg"></h2>
-
 - This page lists all the available cuisines in alphabetical order. It gives the admin user the option to add, edit or delete cuisines.
 
 <h2 align="center"><img src="gather/static/readme/images/non-admin-cuisines-flash-message.jpg"></h2>
@@ -303,15 +305,55 @@ To Complete
 
 ## Delete Recipe/ Cuisines
 
+<h2 align="center"><img src="gather/static/readme/images/delete-recipe.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/delete-cuisine.jpg"></h2>
+
+- If a user clicks on a 'Delete Recipe' or 'Delete Cuisine', they will be taken to this page to confirm the deletion. This is extra step to stop users accidentally deleting things.
+
+- Cuisines are set up with a cascade delete effect. So any recipes with that cuisine will also be deleted. This is made clear on the delete cuisine page.
+
+- There is a cancel button on each page.
+
 ## Error Handling
 
 - If there is an error, e.g. the recipe id in the page URL is changed, then the user will be redirected back to the Find Recipes page. Logged-out-users will be directed to the log in page, as they cannot access the Find Recipes page.
 
-- Session cookie deleted
+- If the user's session cookie deleted, then they will be logged out and unable to access logged-in features.
 
 # Future Features
 
-To complete
+## User Experience Features 
+
+### Filter by cuisine
+
+- The search functionality does not search by cuisine name as these are not stored in Mongo DB. I would also like to add a filter to the Find Recipes page that filters by cuisine name.
+
+### More “Featured Collections”
+
+- I feel the index page would be improved by having more featured collections such as Most Favourited or Fewest Ingrediants.
+
+### Confirm delete modal rather than a page
+
+- I feel a modal would be better here. I made a page for ease.
+
+### Further improvements to submit/ edit recipe forms
+
+- As explained in the Features section, I feel there is more I could do to improve the UX of inputting a recipe. For example, there could be a format button which would correctly format the user's input. Or a live preview so that the user can see how their input will look on the site.
+
+### Make a confirm password input 
+
+- This would help the user ensure they haven't made a typo in their desired password.
+
+### Add edit/ delete user account functionality
+
+- This would allow the user to edit their username or password, or delete their account.
+
+## Development Features
+
+### Make recipe card snippet to reduce code repition
+
+- As I have used the same Recipe Card format within multiple templates, I could refactor this code and use a "snippet" to reduce the number of times this code is repeated.
 
 # Data Model
 
