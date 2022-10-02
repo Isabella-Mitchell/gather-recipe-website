@@ -326,7 +326,7 @@ def manage_cuisines():
     if "user" not in session or not is_admin(session["user"]):
         flash("You must be admin to manage cuisines!")
         return redirect(url_for("get_recipes"))
-        
+
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
     return render_template("cuisines.html", cuisines=cuisines)
 
@@ -334,6 +334,10 @@ def manage_cuisines():
 @app.route("/cuisine/add", methods=["GET", "POST"])
 def add_cuisine():
     """ Adds new cuisine to db and renders add cuisine page """
+    if "user" not in session or not is_admin(session["user"]):
+        flash("You must be admin to manage cuisines!")
+        return redirect(url_for("get_recipes"))
+
     if request.method == "POST":
         # checks if cuisine already exists
         existing_cuisine = Cuisine.query.filter(

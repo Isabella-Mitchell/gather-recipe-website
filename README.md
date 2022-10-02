@@ -117,7 +117,9 @@ To Complete
 
 <h2 align="center"><img src="gather/static/readme/images/flash-message.jpg"></h2>
 
-- Flash messages appear to confirm when a user has completed an action. E.g. they have logged in or out, they have added, edited or deleted a recipe, or they have added or removed a favoruite recipe.
+- Flash messages appear to confirm when a user has completed an action. E.g. they have logged in or out, they have added, edited or deleted a recipe, or they have added or removed a favourite recipe.
+
+- Flash messages are also used to inform the user when they do not have access to a page. E.g. a non-admin user is trying to access an admin-only page.
 
 - The styling of the flash messages is inkeeping with the rest of the site. They alert the user but are not too distracting to ensure a good user experience.
 
@@ -217,6 +219,12 @@ To Complete
 
 - As with other pages, I have used icons, tooltips and Aria labels on buttons, so that it's clear to a user what the buttons do.
 
+<h2 align="center"><img src="gather/static/readme/images/edit-own-recipes-flash-message.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/delete-recipe-flash.jpg"></h2>
+
+- This page is only shows recipes submitted by that user. If a user tries to edit or delete recipes that they are not the author of, they will see a flash message informing them and be redirected to the find recipes page.
+
 ## Submit/ Edit Recipe
 
 <h2 align="center"><img src="gather/static/readme/images/submit-recipe.jpg"></h2>
@@ -259,13 +267,41 @@ To Complete
 
 ## Favourite Recipes
 
+<h2 align="center"><img src="gather/static/readme/images/favourite-recipes.jpg"></h2>
 
+- This feature allows the user to add recipes to their My Favourites page. This would be useful if their is another user's recipe that they like, and would like to "bookmark" it so they can find it easily, and save them having to look through the Find Recipes page.
 
-## Manage Cuisine
+- Users can also favourite their own recipe if they choose.
 
-## Add/ Edit Cuisine
+- User's can favourite recipes simply by clicking the 'Favourite Recipe' button. Once a recipe is favourited, this is replaced by an 'Unfavourite recipe' button. Clicking this will remove the recipe from the User's favourites.
 
-## Delete Recipe/ Cuisine
+## Manage Cuisines
+
+<h2 align="center"><img src="gather/static/readme/images/manage-cuisines-admin-view.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/non-admin-cuisines-flash-message.jpg"></h2>
+
+- This page lists all the available cuisines in alphabetical order. It gives the admin user the option to add, edit or delete cuisines.
+
+<h2 align="center"><img src="gather/static/readme/images/non-admin-cuisines-flash-message.jpg"></h2>
+
+- This page is only visible to admin users. If a non-admin is logged in and tries to access this page or tries to access the submit, edit or delete a cuisine pages, they will see a flash message informing them and be redirected to the find recipes page.
+
+## Add/ Edit Cuisines
+
+<h2 align="center"><img src="gather/static/readme/images/add-cuisine.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/edit-cuisine.jpg"></h2>
+
+- The add and edit cuisine pages feature a form with a single input field for Cuisine Name and a red submit button. The edit button also features a cancel button.
+
+<h2 align="center"><img src="gather/static/readme/images/exsisting-cuisine.jpg"></h2>
+
+- Each cuisine name must be unique, and is checked before commiting to the database. If the user enters an exsisting cuisine name, a flash message appears informing them.
+
+- Like the Manage Cuisines page, a flash message appears if a non-admin user tries to access this page.
+
+## Delete Recipe/ Cuisines
 
 ## Error Handling
 
