@@ -434,9 +434,6 @@ To Complete
 - [Google Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
   - Google Chrome's Dev Tools were used while building the project to test responsiveness and for debugging.
 
-- [Wave Webaim](https://wave.webaim.org/)
-  - Tool used to check accessibility of website
-
 - [dbdiagram](https://dbdiagram.io/)
   - Tool used to mock up database structure diagram.
 

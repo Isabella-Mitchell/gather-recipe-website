@@ -7,9 +7,9 @@ The Gather recipe website has been tested using the following methods:
     - [W3C CSS Validator](#w3c-css-validator)
     - [JSHINT Javascript Code Quality Tool](#jshint-javascript-code-quality-tool)
     - [PEP8 Python Validator](#pep8-python-validator)
+- [A11y Color Contrast Accessibility Checker](#a11y-color-contrast-accessibility-checker)
 - [Lighthouse](#lighthouse)
 - [Responsiveness](#responsiveness)
-- [A11y Color Contrast Accessibility Checker](#a11y-color-contrast-accessibility-checker)
 - [Browser Compatibility](#browser-compatibility)
 - [Testing User Stories](#testing-user-stories)
     - [First Time User](#first-time-user)
@@ -26,11 +26,11 @@ The Gather recipe website has been tested using the following methods:
 
 ## W3C HTML Validator
 
-The Gather website passed all tests using the [W3C HTML](https://validator.w3.org/) Validator tool
+- The Gather website passed all tests using the [W3C HTML](https://validator.w3.org/) Validator tool
 
 ## W3C CSS Validator
 
-The Gather website passed all tests using the [W3C CSS](https://jigsaw.w3.org/css-validator/) Validator tool
+- The Gather website passed all tests using the [W3C CSS](https://jigsaw.w3.org/css-validator/) Validator tool
 
 ## JSHINT Javascript Code Quality Tool
 
@@ -40,6 +40,19 @@ The Gather website passed all tests using the [W3C CSS](https://jigsaw.w3.org/cs
 
 http://pep8online.com/
 
+# A11y Color Contrast Accessibility Checker
+
+<h2 align="center"><img src="gather/static/testing/images/a11y-colour-contrast-check.jpg"></h2>
+
+- The index page was tested using the [A11y Color Contrast Accessibility Checker](https://color.a11y.com/) and no colour contrast issues were found. The same colour palette is used across the site.
+
+# Wave Webaim Accessibility Checker
+
+<h2 align="center"><img src="gather/static/testing/images/wave-accessibility-checker.jpg"></h2>
+
+- The index page was tested using the [Wave Webaim](https://wave.webaim.org/) accessibility checker and no serious issues were found. 
+- The Errors found refer to the fake URLs I've entered for recipe placeholders. The Colour contrast error refers to hidden labels for the Social Media icons.
+
 # Lighthouse
 
 I used the Lighthouse reports in Google Developer Tools to examine the pages of the website for the following
@@ -47,8 +60,6 @@ I used the Lighthouse reports in Google Developer Tools to examine the pages of 
 - Accessibility
 - Best Practices 
 - SEO
-
-# A11y Color Contrast Accessibility Checker
 
 # Browser Compatibility
 
@@ -89,8 +100,6 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
     - The website footer also features the website's name and a description of its purpose.
 
 <h2 align="center"><img src="gather/static/readme/images/landing-page-logged-out.jpg"></h2>
-
-
 
 * As a first-time user, I want to be able to register for an account.
      - There is a sign up page. These can be accessed from the nav bar and also from Call-to-action buttons on the landing page.
@@ -164,6 +173,88 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
     - The website functions and looks good on any device size.
 
 # Manual Testing
+
+## Nav Bar
+
+<h2 align="center"><img src="gather/static/readme/images/nav-bar-non-admin-logged-in.jpg"></h2>
+
+* The main navigation buttons have been tested and proven to work
+* User permissions have been tested and proven to work
+
+## Footer
+
+<h2 align="center"><img src="gather/static/readme/images/footer.jpg"></h2>
+
+* Social links in the footer have been tested and proven to work
+
+## Flash Messages
+
+<h2 align="center"><img src="gather/static/readme/images/flash-message.jpg"></h2>
+
+* Flash messages show and disappear as desired
+
+## Index Page
+
+<h2 align="center"><img src="gather/static/readme/images/landing-page-logged-out.jpg"></h2>
+
+* Buttons have been tested and proven to work
+* User permissions showing the correct buttons have been tested and proven to work
+
+## Register/ Log In Pages
+
+<h2 align="center"><img src="gather/static/readme/images/sign-up-page.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/log-in-page.jpg"></h2>
+
+* Buttons, forms and links have been tested and proven to work
+* I've tested using a non-unique username. I was not able to and a flash message appeared
+* I've tested logging in with incorrect details. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+
+## Find Recipes
+
+<h2 align="center"><img src="gather/static/readme/images/find-recipes-page.jpg"></h2>
+
+* Buttons have been tested and proven to work.
+* I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* Search has been tested and proven to work, both returning some results and no results.
+
+## View Recipe
+
+<h2 align="center"><img src="gather/static/readme/images/view-recipe.jpg"></h2>
+
+* Buttons have been tested and proven to work.
+* I've tested editing the recipe ID in the URL. I was redirected back to the Find Recipes page.
+
+## My Recipes (Dashboard)
+
+<h2 align="center"><img src="gather/static/readme/images/my-recipes-logged-in.jpg"></h2>
+
+* Buttons have been tested and proven to work.
+* I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+
+## Submit/ Edit Recipe
+
+<h2 align="center"><img src="gather/static/readme/images/submit-recipe.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/edit-recipe.jpg"></h2>
+
+* Buttons and forms have been tested and proven to work.
+* I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* I've tested trying to access this page as a different logged in user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+* I've tested editing the recipe ID in the URL. I was redirected back to the Find Recipes page.
+
+## Favourite Recipes
+
+<h2 align="center"><img src="gather/static/readme/images/favourite-recipes.jpg"></h2>
+
+* Buttons have been tested to work.
+* The user is not able to favourite the same recipe mutliple time without unfavouriting it in between.
+* I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
+
+## Manage Cuisines 
+
+## Add/ Edit Cuisines
+
+## Delete Recipe/ Cuisines
 
 # Automated Testing
 
