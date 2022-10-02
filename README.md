@@ -93,8 +93,6 @@ To Complete
 
 ### Nav Bar
 
-<h2 align="center"><img src="gather/static/readme/images/.jpg"></h2>
-
 <h2 align="center"><img src="gather/static/readme/images/nav-bar-logged-out.jpg"></h2>
 <h2 align="center"><img src="gather/static/readme/images/nav-bar-admin-logged-in.jpg"></h2>
 <h2 align="center"><img src="gather/static/readme/images/nav-bar-non-admin-logged-in.jpg"></h2>
@@ -124,6 +122,10 @@ To Complete
 - The styling of the flash messages is inkeeping with the rest of the site. They alert the user but are not too distracting to ensure a good user experience.
 
 ## Index (Landing Page)
+
+<h2 align="center"><img src="gather/static/readme/images/landing-page-logged-out.jpg"></h2>
+
+<h2 align="center"><img src="gather/static/readme/images/landing-page-logged-in-admin.jpg"></h2>
 
 ## Register/ Log In Pages
 
@@ -211,7 +213,7 @@ To complete
 - [Google Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
   - Google Chrome's Dev Tools were used while building the project to test responsiveness and for debugging.
 
-- Web accessibility tool (testing)
+- [Wave Webaim](https://wave.webaim.org/)
 
 - Schema mock up genorator
 
