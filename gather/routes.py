@@ -15,14 +15,6 @@ def is_admin(username):
     return username in ["admin", "mit"]
 
 
-# def get_user_favourites(username):
-#     """Returns logged in user's favourite recipes"""
-#     # Finds user's favourites in relational database
-#     user_favourite_recipes = list(Favourite.query.filter(
-#         Favourite.user_name == username))
-#     return user_favourite_recipes
-
-
 def get_favourite_recipes(username):
     """Returns logged in user's favourite recipes"""
     # Finds user's favourites in relational database
@@ -64,11 +56,6 @@ def remove_all_favourites(recipe_id):
             favourite = Favourite.query.get_or_404(item.id)
             db.session.delete(favourite)
             db.session.commit()
-            print("succseess")
-        else:
-            print("error")
-    else:
-        print("no favs found")
 
 
 @app.route("/")
@@ -420,16 +407,15 @@ def delete_cuisine(cuisine_id):
             # Finds list of recipes in Mongo db to be deleted
             recipes_to_delete = list(
                 mongo.db.recipes.find({"cuisine_id": str(cuisine_id)}))
-            print(recipes_to_delete)
             # iterating through list, getting the id. converterting to string
             for recipe in recipes_to_delete:
                 recipe_id = str(recipe.get("_id"))
-                print(type(recipe_id))
                 # removing all favourites
                 remove_all_favourites(recipe_id)
             # cascade delete recipes
             mongo.db.recipes.delete_many({"cuisine_id": str(cuisine_id)})
-            flash("Cuisine and associated recipes and favourites successfully deleted")
+            flash(
+                "Cuisine, recipes and favourites successfully deleted")
             return redirect(url_for("manage_cuisines"))
         return render_template("delete_cuisine.html", cuisine=cuisine)
     except Exception:
@@ -441,8 +427,6 @@ def add_favourite(recipe_id):
     """ adds user favourite to db """
 
     if request.method == "POST":
-
-        print(type(recipe_id))
 
         favourite = Favourite(
             user_name=session["user"].lower(),
@@ -479,7 +463,6 @@ def remove_favourite(recipe_id):
 def favourites():
     """renders user favourites page"""
     if "user" in session:
-        
         try:
             cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
             favourite_recipes = list(get_favourite_recipes(session["user"]))
@@ -489,7 +472,6 @@ def favourites():
         except Exception:
             flash("An error occured. Please contact the website administrator")
             return redirect(url_for("dashboard"))
-
 
     flash("You need to be logged in to view favourite recipes")
     return redirect(url_for("login"))

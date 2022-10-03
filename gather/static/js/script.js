@@ -151,4 +151,6 @@ document.addEventListener("DOMContentLoaded", function() {
  /**
  * module exports for Jest testing
  */
+
+var module = module || {};
 module.exports = turnArrayIntoString;

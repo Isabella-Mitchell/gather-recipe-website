@@ -575,6 +575,8 @@ You will need to deploy the application using Heroku.
 
 - Code Institute: I referred to lessons and source code from Code Institute's Web Application Development course. I sourced the User Authentification and Search bar functionality from the Task Manager Walk Through Project.
 
+- Stack Overflow: [Bug fix to stop testing export showing as error in browser](https://stackoverflow.com/questions/66349868/jest-unit-testing-module-export-error-in-browser-console)
+
 ## Content
 
 - [BBC Good Food](https://www.bbcgoodfood.com/): I used this exisiting recipe platform to help me plan the user experience and features of the website. I also sourced many recipes from this website.
