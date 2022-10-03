@@ -168,7 +168,6 @@ def login():
             User.user_name == request.form.get("user_name").lower()).all()
 
         if existing_user:
-            print(request.form.get("user_name"))
             # ensure hashed password matches user input
             if check_password_hash(
                     existing_user[0].password, request.form.get("password")):
@@ -416,35 +415,24 @@ def delete_cuisine(cuisine_id):
         cuisine = Cuisine.query.get_or_404(cuisine_id)
         if request.method == "POST":
             # deletes cuisine from db
-            # db.session.delete(cuisine)
-            # db.session.commit()
-
-            # makes array with recipe objects to be deleted
+            db.session.delete(cuisine)
+            db.session.commit()
+            # Finds list of recipes in Mongo db to be deleted
             recipes_to_delete = list(
                 mongo.db.recipes.find({"cuisine_id": str(cuisine_id)}))
             print(recipes_to_delete)
-
+            # iterating through list, getting the id. converterting to string
             for recipe in recipes_to_delete:
-                print(recipe)
-
-            
-            # iterating through list, filtering by id. Printing.
-            # for recipe in recipes_to_delete:
-            #     recipe_id = recipe.get("_id")
-            #     print(recipe_id)
-            #    favourites_to_delete = list(Favourite.query.get_or_404(
-            #        Favourite.recipe_id == recipe_id))
-            #    for item in favourites_to_delete:
-            #        print(item)
-            # to add - delete favourite recipes
+                recipe_id = str(recipe.get("_id"))
+                print(type(recipe_id))
+                # removing all favourites
+                remove_all_favourites(recipe_id)
             # cascade delete recipes
-            # mongo.db.recipes.delete_many({"cuisine_id": str(cuisine_id)})
-            # flash("Cuisine and associated recipes successfully deleted")
-            flash("Testing New route - Ensure return")
+            mongo.db.recipes.delete_many({"cuisine_id": str(cuisine_id)})
+            flash("Cuisine and associated recipes and favourites successfully deleted")
             return redirect(url_for("manage_cuisines"))
         return render_template("delete_cuisine.html", cuisine=cuisine)
     except Exception:
-        flash("Exception occured")
         return redirect(url_for("get_recipes"))
 
 
@@ -453,6 +441,8 @@ def add_favourite(recipe_id):
     """ adds user favourite to db """
 
     if request.method == "POST":
+
+        print(type(recipe_id))
 
         favourite = Favourite(
             user_name=session["user"].lower(),
@@ -496,8 +486,8 @@ def favourites():
             return render_template(
                 "favourite_recipes.html", favourite_recipes=favourite_recipes,
                 cuisines=cuisines)
-        except:
-            flash("An error occured")
+        except Exception:
+            flash("An error occured. Please contact the website administrator")
             return redirect(url_for("dashboard"))
 
 
