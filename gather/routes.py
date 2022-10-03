@@ -471,7 +471,8 @@ def remove_favourite(recipe_id):
     """ remove user favourite from db """
 
     find_favourite = Favourite.query.filter(
-        Favourite.recipe_id == (recipe_id)).first()
+        Favourite.recipe_id == (recipe_id), Favourite.user_name == (
+            session["user"])).first()
 
     if find_favourite:
         favourite = Favourite.query.get_or_404(find_favourite.id)
