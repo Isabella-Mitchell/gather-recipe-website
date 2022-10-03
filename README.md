@@ -10,7 +10,7 @@
 
 ## Live Project
 
-[View the live project here.](https://https://gather-recipe-website.herokuapp.com/)
+[View the live project here.](https://gather-recipe-website.herokuapp.com/)
 
 ## Repository
 
@@ -35,21 +35,30 @@
 - [Features](#features)
   + [All Pages Features](#all-pages-features)
   + [Index (Landing Page) Features](#index-landing-page-features)
-
-  
-  + [Game Page Features](#game-page-features)
-  + [Sightings Page Features](#sightings-page-features)
-  + [Future Features](#future-features)
+  + [Register/ Log In Pages Features](#-register-log-in-pages-features)
+  + [Find Recipes Page Features](#find-recipes-page-features)
+  + [View Recipe Page Features](#view-recipe-page-features)
+  + [My Recipes (Dashboard) Page Features](#my-recipes-dashboard-page-features)
+  + [Submit/ Edit Recipe Page Features](#submit-edit-recipe-page-features)
+  + [Favourite Recipes Page Features](#favourite-recipes-page-features)
+  + [Manage Cuisines Page Features](#manage-cuisines-page-features)
+  + [Add/ Edit Cuisines Pages Features](#add-edit-cuisines-pages-features)
+  + [Delete Recipe/ Cuisines Pages Features](#delete-recipe-cuisines-pages-features)
+  + [Error Handling](#error-handling)
+- [Future Features](#future-features)
+  + [User Experience Features](#user-experience-features)
+  + [Development Features](#development-features)
+- [Data Model](#data-model)
 - [Technologies used](#technologies-used)
   + [Languages Used](#languages-used)
   + [Frameworks Libraries and Programs](#frameworks-libraries-and-programs)
-  + [Application Programming Interface (API's)](#application-programming-interface-apis)
 - [Testing](#testing)
 - [Deployment](#deployment)
   + [Creating a Gitpod Workspace](#creating-a-gitpod-workspace)
   + [GitHub Pages](#github-pages)
   + [Forking the GitHub Repository](#forking-the-github-repository)
   + [Making a Local Clone](#making-a-local-clone)
+  + [Creating an application with Heroku](#creating-an-application-with-heroku)
 - [Credits](#credits)
   + [Code](#code)
   + [Media](#media)
@@ -183,7 +192,7 @@
 
 - The user can quick-view and view these recipes (see these features in more detail below) If the user if logged out, the Favourite button is replaced with a Call to action. 
 
-## Register/ Log In Pages
+## Register/ Log In Pages Features
 
 <h2 align="center"><img src="gather/static/readme/images/sign-up-page.jpg"></h2>
 
@@ -205,7 +214,7 @@
 
 - If incorrect log in details are provided, then a flash message informs the user that the Username and/or password is incorrect.
 
-## Find Recipes
+## Find Recipes Page Features
 
 <h2 align="center"><img src="gather/static/readme/images/find-recipes-page.jpg"></h2>
 
@@ -237,7 +246,7 @@
 
 - Then, if a user wants to open a recipe to follow along or print out, they can use the View Recipe option.
 
-## View Recipe
+## View Recipe Page Features
 
 <h2 align="center"><img src="gather/static/readme/images/view-recipe.jpg"></h2>
 
@@ -249,7 +258,7 @@
 
 - There is a back button at the bottom of the page which saves the user neaeing to use their browser back button.
 
-## My Recipes (Dashboard)
+## My Recipes (Dashboard) Page Features
 
 <h2 align="center"><img src="gather/static/readme/images/my-recipes-logged-in.jpg"></h2>
 
@@ -269,7 +278,7 @@
 
 - If the user has no recipes, then a message appears to inform the user.
 
-## Submit/ Edit Recipe
+## Submit/ Edit Recipe Page Features
 
 <h2 align="center"><img src="gather/static/readme/images/submit-recipe.jpg"></h2>
 
@@ -311,7 +320,7 @@
 
 - However, the user can still copy and paste text in as seperate lines into the ingrediants field instead of using commas. This feature was useful for development, however I have not made this apparent to the user so to the keep the form clear and simple. So I would consider removing this feature in a real-world application.
 
-## Favourite Recipes
+## Favourite Recipes Page Features
 
 <h2 align="center"><img src="gather/static/readme/images/favourite-recipes.jpg"></h2>
 
@@ -325,7 +334,7 @@
 
 - If the user has no favourite recipes, then a message appears to inform the user.
 
-## Manage Cuisines
+## Manage Cuisines Page Features
 
 <h2 align="center"><img src="gather/static/readme/images/manage-cuisines-admin-view.jpg"></h2>
 
@@ -335,7 +344,7 @@
 
 - This page is only visible to admin users. If a non-admin is logged in and tries to access this page or tries to access the submit, edit or delete a cuisine pages, they will see a flash message informing them and be redirected to the find recipes page.
 
-## Add/ Edit Cuisines
+## Add/ Edit Cuisines Pages Features
 
 <h2 align="center"><img src="gather/static/readme/images/add-cuisine.jpg"></h2>
 
@@ -349,7 +358,7 @@
 
 - Like the Manage Cuisines page, a flash message appears if a non-admin user tries to access this page.
 
-## Delete Recipe/ Cuisines
+## Delete Recipe/ Cuisines Pages Features
 
 <h2 align="center"><img src="gather/static/readme/images/delete-recipe.jpg"></h2>
 
