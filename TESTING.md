@@ -30,6 +30,10 @@ The Gather recipe website has been tested using the following methods:
 
 - The Gather website landing page passed all tests using the [W3C HTML](https://validator.w3.org/) Validator tool
 
+<h2 align="center"><img src="gather/static/testing/images/html-5-warning.jpg"></h2>
+
+- The Gather website log in page showed some errors as the form fields have self closing tags. This is something I will look into avoiding in future projects.
+
 ## W3C CSS Validator
 
 <h2 align="center"><img src="gather/static/testing/images/css-validate.jpg"></h2>
