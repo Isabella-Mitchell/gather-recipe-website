@@ -15,6 +15,14 @@ def is_admin(username):
     return username in ["admin", "mit"]
 
 
+# def get_user_favourites(username):
+#     """Returns logged in user's favourite recipes"""
+#     # Finds user's favourites in relational database
+#     user_favourite_recipes = list(Favourite.query.filter(
+#         Favourite.user_name == username))
+#     return user_favourite_recipes
+
+
 def get_favourite_recipes(username):
     """Returns logged in user's favourite recipes"""
     # Finds user's favourites in relational database
@@ -44,6 +52,23 @@ def format_string_to_list(user_input, has_comma_separator=True):
     # remove trailing spaces
     input_list_stripped = [i.lstrip() for i in input_list]
     return input_list_stripped
+
+
+def remove_all_favourites(recipe_id):
+    """Used by recipe delete"""
+    find_favourites = list(Favourite.query.filter(
+        Favourite.recipe_id == (recipe_id)).all())
+
+    if find_favourites:
+        for item in find_favourites:
+            favourite = Favourite.query.get_or_404(item.id)
+            db.session.delete(favourite)
+            db.session.commit()
+            print("succseess")
+        else:
+            print("error")
+    else:
+        print("no favs found")
 
 
 @app.route("/")
@@ -311,6 +336,7 @@ def delete_recipe(recipe_id):
         if request.method == "POST":
             # Deletes user's recipe from db
             mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
+            remove_all_favourites(recipe_id)
             flash("Recipe successfully deleted")
             return redirect(url_for("dashboard"))
 
@@ -390,13 +416,35 @@ def delete_cuisine(cuisine_id):
         cuisine = Cuisine.query.get_or_404(cuisine_id)
         if request.method == "POST":
             # deletes cuisine from db
-            db.session.delete(cuisine)
-            db.session.commit()
-            mongo.db.recipes.delete_many({"cuisine_id": str(cuisine_id)})
-            flash("Cuisine and associated recipes successfully deleted")
+            # db.session.delete(cuisine)
+            # db.session.commit()
+
+            # makes array with recipe objects to be deleted
+            recipes_to_delete = list(
+                mongo.db.recipes.find({"cuisine_id": str(cuisine_id)}))
+            print(recipes_to_delete)
+
+            for recipe in recipes_to_delete:
+                print(recipe)
+
+            
+            # iterating through list, filtering by id. Printing.
+            # for recipe in recipes_to_delete:
+            #     recipe_id = recipe.get("_id")
+            #     print(recipe_id)
+            #    favourites_to_delete = list(Favourite.query.get_or_404(
+            #        Favourite.recipe_id == recipe_id))
+            #    for item in favourites_to_delete:
+            #        print(item)
+            # to add - delete favourite recipes
+            # cascade delete recipes
+            # mongo.db.recipes.delete_many({"cuisine_id": str(cuisine_id)})
+            # flash("Cuisine and associated recipes successfully deleted")
+            flash("Testing New route - Ensure return")
             return redirect(url_for("manage_cuisines"))
         return render_template("delete_cuisine.html", cuisine=cuisine)
     except Exception:
+        flash("Exception occured")
         return redirect(url_for("get_recipes"))
 
 
@@ -438,13 +486,19 @@ def remove_favourite(recipe_id):
 
 @app.route("/recipes/favourites")
 def favourites():
-    """ renders user favourites page """
+    """renders user favourites page"""
     if "user" in session:
-        cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-        favourite_recipes = list(get_favourite_recipes(session["user"]))
-        return render_template(
-            "favourite_recipes.html", favourite_recipes=favourite_recipes,
-            cuisines=cuisines)
+        
+        try:
+            cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
+            favourite_recipes = list(get_favourite_recipes(session["user"]))
+            return render_template(
+                "favourite_recipes.html", favourite_recipes=favourite_recipes,
+                cuisines=cuisines)
+        except:
+            flash("An error occured")
+            return redirect(url_for("dashboard"))
+
 
     flash("You need to be logged in to view favourite recipes")
     return redirect(url_for("login"))
