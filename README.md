@@ -414,6 +414,10 @@
 
 - I would like to add more detailed exception clauses to my Try Except statements. I have used a catch-all clause for simplicty.
 
+### More Automated Testing
+
+- I would like to add more automated tests for my Python and Javascript files. This would mean that developers who work on the website in the future can add new features and be sure they are not breaking the code.
+
 # Data Model
 
 - [View my Database structure in PDF form here](gather/static/readme/databases/gather-database-schema.pdf).
@@ -575,7 +579,13 @@ You will need to deploy the application using Heroku.
 
 - Code Institute: I referred to lessons and source code from Code Institute's Web Application Development course. I sourced the User Authentification and Search bar functionality from the Task Manager Walk Through Project.
 
-- Stack Overflow: [Bug fix to stop testing export showing as error in browser](https://stackoverflow.com/questions/66349868/jest-unit-testing-module-export-error-in-browser-console)
+- Stack Overflow: I referred to Stack Overflow articles throughout the project. I used a line of code from this [Bug fix to stop testing export showing as error in browser article](https://stackoverflow.com/questions/66349868/jest-unit-testing-module-export-error-in-browser-console), [creating a UL from a JS array](https://stackoverflow.com/questions/11128700/create-a-ul-and-fill-it-based-on-a-passed-array) and [how to disable the enter key being used in a textarea](https://stackoverflow.com/questions/6714202/how-can-i-disable-the-enter-key-on-my-textarea).
+
+- W3Schools: I referred to guides on [Python MongoDB](https://www.w3schools.com/python/python_mongodb_getstarted.asp) amongst others.
+
+- Geekflare: I referred to this walkthrough on [Python Unit Testing](https://geekflare.com/unit-testing-with-python-unittest/).
+
+- Documentation. I referred to this documentation provided by [Python](https://docs.python.org/3/library/exceptions.html), [Jest](https://jestjs.io/docs/getting-started), [MongoDB](https://www.mongodb.com/docs/manual/reference/method/ObjectId.valueOf/) amongst others.
 
 ## Content
 
@@ -589,7 +599,7 @@ You will need to deploy the application using Heroku.
 
 - Thank you to my Mentor Akshat Garg for helpful feedback, industry insights and recommended tools.
 
-- Thank you to fellow Code Institute students/ alumni for participating in the peer code review. Thank you to my family for manually testing the website and for feedback.
+- Thank you to Christopher Undritz for participating in the peer code review on the Code Institute Slack channel. Thank you to my family for manually testing the website and for feedback.
 
 - Thank you to the Code Institute London Community for their encouragement and technical support.
 

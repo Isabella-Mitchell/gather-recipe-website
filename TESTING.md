@@ -274,6 +274,7 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 * I've tested trying to access this page as a logged out user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
 * I've tested trying to access this page as a different logged in user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
 * I've tested editing the recipe ID in the URL. I was redirected back to the Find Recipes page.
+* I've tested favouriting a recipe, and then deleting the recipe. The favourite was also deleted.
 
 ## Favourite Recipes
 
@@ -310,18 +311,33 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 * Buttons have been tested to work.
 * I've tested trying to access these pages as a non-admin user. I was not able to. I was redirected and flash message appeared informing me I did not have permission.
 * I've tested editing the recipe ID in the URL. If I change it to a different number it redirects back to the Find Recipes page. However if I edit it to make an invalid URL then this throws an error (See Unresolved Bugs)
+* I have tested out the cascade delete feature for recipes and for favoruites.
 
 # Automated Testing
 
-- To Complete
+- Please note I only added Automated Testing at the end of the project. Not all features are tested. See more in my Future Features section.
 
-## Python Testing
+## Python Tests
 
-## Javascript Testing
+- I have set up a test to check the is_admin function. This functiona allows for multiple user names to be given admin permissions.
+
+- I have set up a test to check that format_string_to_list function. This function formats user input into arrays for storing in MongoDB
+
+- I have only tested functions that do not require a mock database.
+
+## Javascript Tests
+
+- I have created a test to check the turnArrayIntoString function. This function takes the array from MongoDB, and uses Javascript to present it as a string on the page.
 
 # Peer Review
 
-- To Complete
+- In the final stages of the project, I submitted the site for Peer Review by fellow students and alumni at Code Institute via Slack.
+
+- Feedback was positive on the appearance of the website. On a suggestion I updated the three-across section on the landing page to make it look better on iPad. It was also suggested I could increase the margin on the view recipe page on iPad. I took it into consideration but I decided not to do this.
+
+- Peer testing demonstrated that I had overlooked testing some possible situations relating to favouriting and deleting recipes. These included:
+    - If a user favourites a user's recipe, and then that user deletes the recipe
+    - If a user favourites a recipe with a specific cuisine ID, and then that cuisine is deleted by admin.
 
 # Bugs
 
@@ -335,12 +351,14 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 
 - Bug when trying to add exisiting cusine. I had followed adding an exisiting user logic. Bug caused by .lower() clause. I have removed. Does mean admin could add duplicate cusinies with different capitalisations. Bug to fix in the future. 
 
+- 
+
+- Console.log error for testing
+
 ## Unresolved
 
 - Admin button permissions nav bar
 
 - 404 from Cuisine functions
-
-- Console.log error for testing
 
 Back to [README.md](/README.md#testing)
