@@ -24,8 +24,9 @@ def get_recipe_from_id(recipe_id):
 def get_favourite_recipes():
     """Returns logged in user's favourite recipes"""
     # Will return empty string for index page is user not logged in
-    username = session["user"]
-    if not username:
+    if "user" in session:
+        username = session["user"]
+    else:
         return []
     # Finds user's favourites in relational database
     user_favourite_recipes = list(Favourite.query.filter(
