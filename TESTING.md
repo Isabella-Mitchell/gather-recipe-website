@@ -122,7 +122,7 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
     - There are some featured recipes so the user can preview content without logging in.
     - The website footer also features the website's name and a description of its purpose.
 
-<h2 align="center"><img src="gather/static/readme/images/landing-page-logged-out.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/index-page-logged-out.jpg"></h2>
 
 * As a first-time user, I want to be able to register for an account.
      - There is a sign up page. These can be accessed from the nav bar and also from Call-to-action buttons on the landing page.
@@ -139,7 +139,7 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 * As a returning user, I want to be able to log in to my account.
     - There is a log in page. This can accessed from the nav bar. There is also a link at the bottom of the sign up page.
 
-<h2 align="center"><img src="gather/static/readme/images/landing-page-logged-in-admin.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/index-page-logged-in-admin.jpg"></h2>
 
 * As a returning user, I want to be able to create/ view/ edit/ delete my own recipes.
     - Logged in users have a My Recipes page where they can manage their recipes
@@ -212,13 +212,13 @@ I also personally tested the website on iPhone 11, iPad Pro 2nd Generation, Dell
 
 ## Flash Messages
 
-<h2 align="center"><img src="gather/static/readme/images/flash-message.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/flash-message-blue.jpg"></h2>
 
 * Flash messages show and disappear as desired
 
 ## Index Page
 
-<h2 align="center"><img src="gather/static/readme/images/landing-page-logged-out.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/index-page-logged-out.jpg"></h2>
 
 * Buttons have been tested and proven to work
 * User permissions showing the correct buttons have been tested and proven to work
