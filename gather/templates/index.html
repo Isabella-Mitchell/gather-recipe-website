@@ -86,7 +86,7 @@
                     <a href="{{ url_for('view_recipe', recipe_id=recently_added_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="View Recipe" aria-label="View recipe for {{recently_added_recipe.recipe_name}}">View <i class="fa-regular fa-file"></i></a>
                     {% if session.user %}
                         {% for favourite_recipe in favourite_recipes if favourite_recipe._id == recently_added_recipe._id %}
-                        <a href="{{ url_for('remove_favourite', recipe_id=recently_added_recipe_id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite" aria-label="Remove {{recently_added_recipe.recipe_name}} from favourite recipes">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
+                        <a href="{{ url_for('remove_favourite', recipe_id=recently_added_recipe._id)}}" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Remove Favourite" aria-label="Remove {{recently_added_recipe.recipe_name}} from favourite recipes">Unfavourite <i class="fa-solid fa-star icon-padding"></i></a>
                             {% else %}
                             <form method="POST" action="{{ url_for('add_favourite', recipe_id=recently_added_recipe._id) }}" class="inline-inform">
                                 <button type="submit" class="waves-effect waves-light btn btn-black tooltipped" data-position="bottom" data-tooltip="Favourite Recipe" aria-label="Add {{recently_added_recipe.recipe_name}} to favourite recipes">Favourite <i class="fa-regular fa-star icon-padding"></i></button>
