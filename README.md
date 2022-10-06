@@ -14,7 +14,7 @@
 
 ## Repository
 
-[View the live project here.](https://github.com/Isabella-Mitchell/gather-recipe-website)
+[Find the project repository here.](https://github.com/Isabella-Mitchell/gather-recipe-website)
 
 # Table of Contents
 
@@ -372,7 +372,9 @@
 
 ## Error Handling
 
-- If there is an error, e.g. the recipe id in the page URL is changed, then the user will be redirected back to the Find Recipes page. Logged-out-users will be directed to the log in page, as they cannot access the Find Recipes page.
+- In most instances if there is an error, e.g. the recipe id in the page URL is changed, then the user will be redirected back to the Find Recipes page. Logged-out-users will be directed to the log in page, as they cannot access the Find Recipes page.
+
+- There is an unresolved bug if the page URL is changed on the edit or delete Cuisine page, then the Execption clause will not trigger. See the unresolved bug section.
 
 - If the user's session cookie deleted, then they will be logged out and unable to access logged-in features.
 
@@ -620,6 +622,8 @@ You will need to deploy the application using Heroku.
 - Thank you to the Code Institute London Community for their encouragement and technical support.
 
 - Thank you to the tutors and staff at Code Institute for their support.
+
+- Thank you to Ben Smith at City of Bristol College for his support.
 
 Please note this is a personal project. This website is purely for the sake of the developer's portfolio and not for public consumption.
 
