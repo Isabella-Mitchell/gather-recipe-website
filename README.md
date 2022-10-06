@@ -384,6 +384,10 @@
 
 - The search functionality does not search by cuisine name as these are not stored in Mongo DB. I would also like to add a filter to the Find Recipes page that filters by cuisine name.
 
+### Tags are clickable and act as a filter
+
+- The tags are used within the search function so they are searchable. However they could be used in further ways, such as being clickable and showing other recipes with the same tag.
+
 ### More “Featured Collections”
 
 - I feel the index page would be improved by having more featured collections such as Most Favourited or Fewest Ingrediants.
@@ -396,13 +400,25 @@
 
 - As explained in the Features section, I feel there is more I could do to improve the UX of inputting a recipe. For example, there could be a format button which would correctly format the user's input. Or a live preview so that the user can see how their input will look on the site.
 
+### Add a print recipe button to the View Recipe page
+
+- I could add a print recipe button, which would open the page as a printable format in the printer dialog box.
+
 ### Make a confirm password input 
 
 - This would help the user ensure they haven't made a typo in their desired password.
 
-### Add edit/ delete user account functionality
+### Add edit/ delete user account functionality including reset password
 
 - This would allow the user to edit their username or password, or delete their account.
+
+### Contact admin button
+
+- I could add a contact admin button, to notify admin if there is an error out of hours.
+
+### Add Private and Public comments
+
+- Users could add private comments (e.g. their own notes from having tried making the recipe) and/or public comments to let other users know helpful tips or reviews.
 
 ## Development Features
 
