@@ -164,7 +164,7 @@
 
 ### Flash Messages
 
-<h2 align="center"><img src="gather/static/readme/images/flash-message.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/flash-message-blue.jpg"></h2>
 
 - Flash messages appear to confirm when a user has completed an action. E.g. they have logged in or out, they have added, edited or deleted a recipe, or they have added or removed a favourite recipe.
 

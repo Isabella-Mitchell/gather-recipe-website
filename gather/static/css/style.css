@@ -72,13 +72,13 @@ nav .brand-logo {
 /*--------------------- Flash Messaging Styles --------------------*/
 
 .flashes {
-    background-color: rgba(215, 26, 44, 0.2);
+    background-color: rgba(172, 221, 215, 0.5);
     border-radius: 6px;
     display: flex;
     padding-left: 20px;
     margin-top: 6px;
     margin-bottom: 0;
-    color: #d71a2c;
+    color: #244C4C;
 }
 
 /*--------------------- Footer Styles --------------------*/
