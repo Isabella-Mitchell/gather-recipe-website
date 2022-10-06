@@ -15,6 +15,12 @@ def is_admin(username):
     return username in ["admin", "mit"]
 
 
+def get_recipe_from_id(recipe_id):
+    """Finds recipe in Mongo DB using Recipe ID."""
+    return mongo.db.recipes.find_one(
+            {"_id": ObjectId(recipe_id)})
+
+
 def get_favourite_recipes(username):
     """Returns logged in user's favourite recipes"""
     # Finds user's favourites in relational database
@@ -23,8 +29,7 @@ def get_favourite_recipes(username):
     favourite_recipes = []
     # Finds recipes in non-relational database
     for item in user_favourite_recipes:
-        favourite_recipe = mongo.db.recipes.find_one(
-            {"_id": ObjectId(item.recipe_id)})
+        favourite_recipe = get_recipe_from_id(item.recipe_id)
         favourite_recipes.append(favourite_recipe)
     return favourite_recipes
 
@@ -249,7 +254,7 @@ def edit_recipe(recipe_id):
     """Edit's user's recipe and renders edit recipe page"""
 
     try:
-        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        recipe = get_recipe_from_id(recipe_id)
 
         if "user" not in session or session["user"] != recipe["author"]:
             flash("You can only edit your own recipes!")
@@ -300,7 +305,7 @@ def edit_recipe(recipe_id):
 def view_recipe(recipe_id):
     """renders View Recipe page"""
     try:
-        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        recipe = get_recipe_from_id(recipe_id)
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
         return render_template(
             "view_recipe.html", recipe=recipe, cuisines=cuisines)
@@ -313,7 +318,7 @@ def delete_recipe(recipe_id):
     """Deletes user's recipe and renders confirm delete page"""
 
     try:
-        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        recipe = get_recipe_from_id(recipe_id)
 
         if "user" not in session or session["user"] != recipe["author"]:
             flash("You can only delete your own recipes!")
