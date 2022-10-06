@@ -291,3 +291,15 @@ ol li {
     }
 
 }
+
+/*Truncates URL on view recipe page on smaller screen sizes*/
+@media screen and (max-width: 375px) {
+    .url {
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        display: inline-block;
+    }
+}
