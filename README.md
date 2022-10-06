@@ -174,9 +174,9 @@
 
 ## Index (Landing Page) Features
 
-<h2 align="center"><img src="gather/static/readme/images/landing-page-logged-out.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/index-page-logged-out.jpg"></h2>
 
-<h2 align="center"><img src="gather/static/readme/images/landing-page-logged-in-admin.jpg"></h2>
+<h2 align="center"><img src="gather/static/readme/images/index-page-logged-in-admin.jpg"></h2>
 
 - The purpose of the Gather website landing page is to explain the purpose of the website. It does this with an eye-catching jumbatron with a tag line and a 'three-across' explainer section with icons. 
 
