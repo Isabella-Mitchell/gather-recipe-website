@@ -21,8 +21,12 @@ def get_recipe_from_id(recipe_id):
             {"_id": ObjectId(recipe_id)})
 
 
-def get_favourite_recipes(username):
+def get_favourite_recipes():
     """Returns logged in user's favourite recipes"""
+    # Will return empty string for index page is user not logged in
+    username = session["user"]
+    if not username:
+        return []
     # Finds user's favourites in relational database
     user_favourite_recipes = list(Favourite.query.filter(
         Favourite.user_name == username))
@@ -57,8 +61,7 @@ def remove_all_favourites(recipe_id):
         Favourite.recipe_id == (recipe_id)).all())
 
     if find_favourites:
-        for item in find_favourites:
-            favourite = Favourite.query.get_or_404(item.id)
+        for favourite in find_favourites:
             db.session.delete(favourite)
             db.session.commit()
 
@@ -70,22 +73,13 @@ def index():
     recently_added_recipes = recipes.sort("timestamp", -1).limit(3)
     quick_recipes = mongo.db.recipes.find().sort("duration").limit(3)
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    # If user logged in, also finds user favourites
-    if "user" in session:
-        favourite_recipes = get_favourite_recipes(session["user"])
-        return render_template(
-            "index.html", recipes=recipes,
-            cuisines=cuisines,
-            recently_added_recipes=recently_added_recipes,
-            quick_recipes=quick_recipes,
-            favourite_recipes=favourite_recipes)
-    # If user logged out
-    else:
-        return render_template(
-            "index.html", recipes=recipes,
-            cuisines=cuisines,
-            recently_added_recipes=recently_added_recipes,
-            quick_recipes=quick_recipes)
+    favourite_recipes = get_favourite_recipes()
+    return render_template(
+        "index.html", recipes=recipes,
+        cuisines=cuisines,
+        recently_added_recipes=recently_added_recipes,
+        quick_recipes=quick_recipes,
+        favourite_recipes=favourite_recipes)
 
 
 @app.route("/recipes")
@@ -99,7 +93,7 @@ def get_recipes():
 
     recipes = list(mongo.db.recipes.find())
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    favourite_recipes = get_favourite_recipes(session["user"])
+    favourite_recipes = get_favourite_recipes()
     return render_template(
         "recipes.html", recipes=recipes,
         cuisines=cuisines,
@@ -112,7 +106,7 @@ def search():
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
     cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-    favourite_recipes = get_favourite_recipes(session["user"])
+    favourite_recipes = get_favourite_recipes()
     return render_template(
         "recipes.html", recipes=recipes,
         cuisines=cuisines,
@@ -187,7 +181,7 @@ def dashboard():
     if "user" in session:
         user_recipes = list(mongo.db.recipes.find({"author": session["user"]}))
         cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-        favourite_recipes = get_favourite_recipes(session["user"])
+        favourite_recipes = get_favourite_recipes()
         return render_template(
             "dashboard.html", user_recipes=user_recipes,
             cuisines=cuisines, favourite_recipes=favourite_recipes)
@@ -470,7 +464,7 @@ def favourites():
     if "user" in session:
         try:
             cuisines = list(Cuisine.query.order_by(Cuisine.cuisine_name).all())
-            favourite_recipes = list(get_favourite_recipes(session["user"]))
+            favourite_recipes = list(get_favourite_recipes())
             return render_template(
                 "favourite_recipes.html", favourite_recipes=favourite_recipes,
                 cuisines=cuisines)
