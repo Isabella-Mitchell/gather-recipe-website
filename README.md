@@ -8,9 +8,11 @@
 
 * This is my Milestone Project 3 submission for Code Institute's Diploma in Web Application Development course. My website uses both relational and non-relational databases, features full CRUD functionality and is built using technologies that I have learnt including HTML, CSS, JavaScript, Python, Flask and PostgreSQL.
 
-## Live Project
+## Live Project (Offline)
 
-[View the live project here.](https://gather-recipe-website.herokuapp.com/)
+The live project demo is no longer available.
+
+[When it was online, you could find it here.](https://gather-recipe-website.herokuapp.com/)
 
 ## Repository
 
